@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Sign Up</title>
+	 <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
+     <link rel= 'icon' type= 'image/ico' href = 'banka-icon.png' />
+     <link rel= 'stylesheet' type = 'text/css' href = 'styles2.css'>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	</head>
+	<body>
+		<div class = 'topnav' id = 'myTopnav'>
+			<a id = 'logo' href = 'index.html'>BANKA</a>
+		</div>
+		<div class = 'wrapper'>
+		<div class = 'sign-up'>
+			<h2>Sign Up Here</h2>
+			<input type = 'text' placeholder = 'Firstname'><br><br>
+			<input type = 'text' placeholder = 'Lastname'><br><br>
+			<input type = 'text' placeholder = 'Email'><br><br>
+			<input type = 'text' placeholder = 'Password'><br><br>
+  			<div class = 'submit-div'>
+  			<button class = 'submit' onclick = "location.href = 'profile.html'">Sign Up</button>
+  			</div><br>
+  			<p>Already a user?<a href = 'sign-in.html'> Sign In</a></p>
+		</div>
+		</div>
+		<footer>
+		</p>Copyright 2019</p>
+		</footer>
+		<script src = 'banka.js'></script>
+		<script>
+			function myFunction() {
+  				var x = document.getElementById("myTopnav");
+  				if (x.className === "topnav") {
+   				 x.className += " responsive";
+  				} else {
+   			 x.className = "topnav";
+  				}
+}
+		</script>
+	</body>
+</html>
