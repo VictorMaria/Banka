@@ -119,7 +119,7 @@ const transactionHistory = () => {
 									<p><strong>25 March, 2019  12:30</strong><br>
 										<strong>Credit N600, 000</strong><br>
 										<strong>March Salary</strong><br>
-										<strong>N2, 400, 000</strong><br>
+										<strong>Balance N2, 400, 000</strong><br>
 									</p>
 								</div><br>
 								<div class = 'transaction'>
