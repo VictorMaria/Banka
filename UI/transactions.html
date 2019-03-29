@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Transactions</title>
+	 <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
+     <link rel= 'icon' type= 'image/ico' href = 'banka-icon.png' />
+     <link rel= 'stylesheet' type = 'text/css' href = 'transactions.css'>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	</head>
+	<body>
+		<div class = 'topnav' id = 'myTopnav'>
+			<a id = 'logo' href = 'index.html'>BANKA</a>
+            <a href = 'bank-accounts.html'>Bank Accounts</a>
+            <a href = 'transactions.html' class = 'active'>Transactions</a>
+			<a href = 'sign-in.html'>Sign Out</a>
+			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    			<i class="fa fa-bars"></i>
+  			</a>
+		</div>
+		<div class = 'second-bar'>
+			<a href = 'profile.html'>My Profile</a>
+			<a href = 'new-transaction.html'>New Transaction</a>
+		</div>
+		<div class = 'wrapper'>
+                
+                <div class = 'topic'><h2>Transaction History</h2></div><br>
+                
+                    <div class = 'transaction'>
+                        <p><strong>25 March, 2019  12:30</strong><br>
+                            <strong>John Kamali</strong><br>
+                            <strong>Account Number  20190300001</strong><br>
+                            <strong>Credit N600, 000</strong><br>
+                            <strong>March Salary</strong><br>
+                            <strong>N2, 400, 000</strong><br>
+                        </p>
+                    </div><br>
+                    <div class = 'transaction'>
+                        <p><strong>25 February, 2019  12:30</strong><br>
+                            <strong>John Kamali</strong><br>
+                            <strong>Account Number  20190300001</strong><br>
+                            <strong>Credit N600, 000</strong><br>
+                            <strong>Febrary Salary</strong><br>
+                            <strong>Balance N1, 800, 000</strong>
+                        </p>
+                    </div><br>
+                    <div class = 'transaction'>
+                        <p><strong>25 January, 2019  12:20</strong><br>
+                            <strong>John Kamali</strong><br>
+                            <strong>Account Number  20190300001</strong><br>
+                            <strong>Credit N600, 000</strong><br>
+                            <strong>January Salary</strong><br>
+                            <strong>Balance N1, 200, 000</strong>
+                        </p>
+                    </div><br>
+                    <div class = 'transaction'>
+                        <p><strong>20 December, 2018  12:30</strong><br>
+                            <strong>John Kamali</strong><br>
+                            <strong>Account Number  20190300001</strong><br>
+                            <strong>Credit N600, 000</strong><br>
+                            <strong>December Salary</strong><br>
+                            <strong>Balance N600, 000 </strong>
+                        </p>
+                    </div><br>
+            </div>
+		</div>
+		<footer>
+			<p><a href = 'user-accounts.html'>Admin</a></p>
+			<p><a href = 'bank-accounts.html'>Staff</a></p>
+			</p>Copyright 2019</p>
+		</footer>
+		<script>
+			function myFunction() {
+  				var x = document.getElementById("myTopnav");
+  				if (x.className === "topnav") {
+   				 x.className += " responsive";
+  				} else {
+   			 x.className = "topnav";
+  				}
+}
+		</script>
+	</body>
+</html>
