@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Profile</title>
+	 <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
+     <link rel = 'icon' type= 'image/ico' href = 'banka-icon.png' />
+     <link rel = 'stylesheet' type = 'text/css' href = 'styles-for-profile.css'>
+     <link rel = 'stylesheet' href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+	</head>
+	<body>
+		<div class = 'topnav' id = 'myTopnav'>
+			<a id = 'logo' href = 'index.html'>BANKA</a>
+			<a href = 'profile.html' class = 'active' >Profile</a>
+			<a href = 'sign-in.html'>Sign Out</a>
+			<a href = 'javascript:void(0);' class = 'icon' onclick = 'myFunction()'>
+    			<i class = 'fa fa-bars'></i>
+  			</a>
+		</div>
+		<div class = 'wrapper'>
+			<div class = 'tabs'>
+							<div class = 'avi'><img src = 'ninja-avi.jpg'></img></div><br><br>
+						<button id = 'basic-info' onclick = 'myBasicInfo()'>Basic Info</button><br>
+						<button id = 'banking-info' onclick = 'myBankingInfo()'>Bank Info</button><br>
+						<button id = 'transaction-history' onclick = 'myTransactionHistory()'>Transactions</button>
+			    </div>
+  				<div class = 'display' id = 'display'>
+							<h1>John Kamali</h1>
+						<div class = 'topic'><h2>Basic Information</h2></div>
+						<div class = 'main-body'>	
+                    <p>Firstname<br>
+                        <strong>John</strong><br>
+                        Lastname<br>
+                        <strong>Kamali</strong><br>
+                        Email<br>
+												<strong>jkamali@mail.com</strong><br>
+									</p>	
+			    </div>
+			</div>
+		</div>
+		<footer>
+			<p><a href = 'user-accounts.html'>Admin</a></p>
+			<p><a href = 'bank-accounts.html'>Staff</a></p>
+		</p>Copyright 2019</p>
+		</footer>
+		<script src = 'banka.js'></script>
+		<script>
+			function myFunction() {
+  				var x = document.getElementById('myTopnav');
+  				if (x.className === 'topnav') {
+   				 x.className += " responsive";
+  				} else {
+   			 x.className = 'topnav';
+  				}
+}
+	</script>
+	</body>
+</html>
