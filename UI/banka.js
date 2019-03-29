@@ -300,7 +300,7 @@ const finish = () => {
 
 	if (selectedOption === 'Select Transaction Type')
 		{
-			alert('Please Select Transaction type');
+			alert('Please Select Transaction Type');
 	} else if (selectedOption === 'Credit'){
 		wrapperDiv.innerHTML = `<div class = 'message-board'>
 										<h4>Credit Transaction Successful</h4>
@@ -321,7 +321,7 @@ const create = () => {
 
 	if (selectedOption === 'Select User Type')
 		{
-			alert('Please Select User type');
+			alert('Please Select User Type');
 	} else if (selectedOption === 'Staff'){
 		wrapperDiv.innerHTML = `<div class = 'message-board'>
 										<h4>New Staff Created</h4>
