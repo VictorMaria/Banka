@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>User Account</title>
+	 <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
+     <link rel= 'icon' type= 'image/ico' href = 'banka-icon.png' />
+     <link rel= 'stylesheet' type = 'text/css' href = 'styles-for-one.css'>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	</head>
+	<body>
+		<div class = 'topnav' id = 'myTopnav'>
+			<a id = 'logo' href = 'index.html'>BANKA</a>
+			<a href = 'profile.html'>Profile</a>
+			<a href = 'bank-accounts-admin-view.html'>Bank Accounts</a>
+			<a href = 'sign-in.html'>Sign Out</a>
+			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    			<i class="fa fa-bars"></i>
+  			</a>
+		</div>
+		<div class = 'second-bar'>
+			<a href = 'user-accounts.html'>User Accounts</a>
+			<a href = 'new-admin-staff-account.html'>New admin/Staff</a>
+		</div>
+		<div class = 'wrapper'>
+			<div class = 'tabs'>
+					<button id = 'basic-info' onclick = 'basicInfo()'>Basic Info</button><br>
+					<button id = 'manage' onclick = 'manage()'>Manage</button>
+			</div>
+			<div class = 'display' id = 'display'>
+				<h1>John Kamali</h1>
+				<div class = 'topic'><h2>Basic Information</h2></div>
+				<div class = 'main-body'>
+				<p>Firstname</p>
+				<p><strong>John</strong></p>
+				<p>Lastname</p>
+				<p><strong>Kamali</strong></p>
+				<p><strong>jkamali@mail.com</strong></p>
+				<p><strong>Active</strong><p>
+			</div>
+			</div>
+		</div>
+		<footer>
+			<p><a href = 'user-accounts.html'>Admin</a></p>
+			<p><a href = 'bank-accounts.html'>Staff</a></p>
+			</p>Copyright 2019</p>
+		</footer>
+		<script src = 'banka.js'></script>
+		<script>
+			function myFunction() {
+  				var x = document.getElementById("myTopnav");
+  				if (x.className === "topnav") {
+   				 x.className += " responsive";
+  				} else {
+   			 x.className = "topnav";
+  				}
+}
+		</script>
+	</body>
+</html>
