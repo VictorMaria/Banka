@@ -312,3 +312,27 @@ describe('Signing in', () => {
       });
   });
 });
+
+// Tests for fetching a specific user
+describe('Fetching a specific user', () => {
+  it('Fetching a specific and non existing user should return an error', (done) => {
+    api.get('/api/v1/users/12')
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'User not found');
+        done();
+      });
+  });
+  it('Fetching a speciific and existing user should return an object of key-pair values', (done) => {
+    api.get('/api/v1/users/1')
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.equal((res.body.data.id), 1);
+        assert.equal((res.body.data.firstName), 'Victor');
+        assert.equal((res.body.data.lastName), 'Ajayi');
+        assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
+        assert.equal((res.body.data.type), 'client');
+        done();
+      });
+  });
+});

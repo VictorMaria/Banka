@@ -32,6 +32,13 @@ const user = {
     const signInResponse = userModel.signIn(req.body);
     return res.status(200).send({ status: 200, data: signInResponse });
   },
+  getUser(req, res) {
+    const checkUser = userModel.getUser(req.params.id);
+    if (!checkUser) {
+      return res.status(404).send({ status: 404, error: 'User not found' });
+    }
+    return res.status(200).send({ status: 200, data: checkUser });
+  },
 
 };
 
