@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 import { assert } from 'chai';
 import supertest from 'supertest';
+import path from 'path';
 
 const api = supertest('http://localhost:3000');
 
@@ -332,6 +333,52 @@ describe('Fetching a specific user', () => {
         assert.equal((res.body.data.lastName), 'Ajayi');
         assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
         assert.equal((res.body.data.type), 'client');
+        done();
+      });
+  });
+});
+const photoLocation = path.join(__dirname, './henrydanger.jpg');
+const fileLocation = path.join(__dirname, './Harmattan nights.pdf');
+
+describe('Uploading profile photo', () => {
+  it('A non user attempting to upload a profile photo should throw an error', (done) => {
+    api.post('/api/v1/users/12/profilephotos')
+      .attach('profilePhoto', photoLocation)
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'User not found');
+        done();
+      });
+  });
+
+  it('Uploading nothing should throw an error', (done) => {
+    api.post('/api/v1/users/1/profilephotos')
+      .attach('profilePhoto', '')
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), 'Select an Image');
+        done();
+      });
+  });
+
+  it('Uploading a file asides an image should throw an error', (done) => {
+    api.post('/api/v1/users/1/profilephotos')
+      .attach('profilePhoto', fileLocation)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), 'Select an Image');
+        done();
+      });
+  });
+
+  it('A successful upload should return an object of key-pair values', (done) => {
+    api.post('/api/v1/users/1/profilephotos')
+      .attach('profilePhoto', photoLocation)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.equal((res.body.data.id), 1);
+        assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
+        assert.include((res.body.data.profilePhoto), 'henrydanger');
         done();
       });
   });
