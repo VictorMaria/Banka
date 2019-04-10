@@ -38,5 +38,19 @@ class User {
   checkForEmail(data) {
     return this.users.find(u => u.email === (data.email).toLowerCase());
   }
+
+  signIn(data) {
+    const user = this.users.find(u => u.email === (data.email).toLowerCase());
+    const userToken = helper.generateToken(user.id, user.isAdmin);
+    const response = {
+      token: userToken,
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      type: user.type,
+    };
+    return response;
+  }
 }
 export default new User();
