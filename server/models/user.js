@@ -52,5 +52,20 @@ class User {
     };
     return response;
   }
+
+  // eslint-disable-next-line consistent-return
+  getUser(id) {
+    const user = this.users.find(u => u.id === parseInt(id, 10));
+    if (user) {
+      return {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        type: user.type,
+        profilePhoto: user.profilePhoto,
+      };
+    }
+  }
 }
 export default new User();
