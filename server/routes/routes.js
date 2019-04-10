@@ -1,4 +1,3 @@
-import express from 'express';
 import bodyParser from 'body-parser';
 import home from './home';
 import user from './user';

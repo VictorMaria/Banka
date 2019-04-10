@@ -39,7 +39,20 @@ const user = {
     }
     return res.status(200).send({ status: 200, data: checkUser });
   },
-
+  quickCheck(req, res, next) {
+    const checkUser = userModel.quickCheck(req.params.id);
+    if (!checkUser) {
+      return res.status(404).send({ status: 404, error: 'User not found' });
+    }
+    return next();
+  },
+  uploadProfilePhoto(req, res) {
+    const response = userModel.uploadProfilePhoto(req.params.id, req.file);
+    if (response === 'Select an Image') {
+      return res.status(400).send({ status: 400, error: 'Select an Image' });
+    }
+    return res.status(200).send({ status: 200, data: response });
+  },
 };
 
 export default user;

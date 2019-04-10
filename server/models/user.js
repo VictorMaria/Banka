@@ -67,5 +67,27 @@ class User {
       };
     }
   }
+
+  // eslint-disable-next-line consistent-return
+  quickCheck(id) {
+    const user = this.users.find(u => u.id === parseInt(id, 10));
+    if (user) {
+      return true;
+    }
+  }
+
+  uploadProfilePhoto(id, file) {
+    const user = this.users.find(u => u.id === parseInt(id, 10));
+    if (!file) {
+      return 'Select an Image';
+    }
+    user.profilePhoto = file.path;
+    const response = {
+      id: user.id,
+      email: user.email,
+      profilePhoto: user.profilePhoto,
+    };
+    return response;
+  }
 }
 export default new User();
