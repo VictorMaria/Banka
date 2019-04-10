@@ -194,3 +194,121 @@ describe('Signing up', () => {
       });
   });
 });
+
+// Test for sign in
+const missingEmailSignIn = {
+  password: 'bankas',
+};
+const missingPasswordSignIn = {
+  email: 'VICTOR.ABAYOMI@outlook.com',
+};
+
+const emptyEmailSignIn = {
+  email: '',
+  password: 'bankas',
+};
+const emptyPasswordSignIn = {
+  email: 'VICTOR.ABAYOMI@outlook.com',
+  password: '',
+};
+
+const invalidEmailSignIn = {
+  email: 'VICTOR.ABAYOMIoutlook.com',
+  password: 'bankas',
+};
+
+const nonExistingUser = {
+  email: 'Victor@outlook.com',
+  password: 'bankas',
+};
+
+const wrongPasswordSignIn = {
+  email: 'VICTOR.ABAYOMI@outlook.com',
+  password: 'banka',
+};
+
+const correctSignInDetails = {
+  email: 'VICTOR.ABAYOMI@outlook.com',
+  password: 'bankas',
+};
+
+describe('Signing in', () => {
+  it('Should return an error for missing email field', (done) => {
+    api.post('/api/v1/auth/signin')
+      .send(missingEmailSignIn)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"email" is required`);
+        done();
+      });
+  });
+  it('Should return an error for missing password field', (done) => {
+    api.post('/api/v1/auth/signin')
+      .send(missingPasswordSignIn)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"password" is required`);
+        done();
+      });
+  });
+  it('Should return an error for empty email field', (done) => {
+    api.post('/api/v1/auth/signin')
+      .send(emptyEmailSignIn)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"email" is not allowed to be empty`);
+        done();
+      });
+  });
+  it('Should return an error for empty password field', (done) => {
+    api.post('/api/v1/auth/signin')
+      .send(emptyPasswordSignIn)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"password" is not allowed to be empty`);
+        done();
+      });
+  });
+  it('Should return an error for an invalid email', (done) => {
+    api.post('/api/v1/auth/signin')
+      .send(invalidEmailSignIn)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"email" must be a valid email`);
+        done();
+      });
+  });
+
+  it('Should return an error for a non existing user', (done) => {
+    api.post('/api/v1/auth/signin')
+      .send(nonExistingUser)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), 'Incorrect Email');
+        done();
+      });
+  });
+  it('Should return an error for a wrong password', (done) => {
+    api.post('/api/v1/auth/signin')
+      .send(wrongPasswordSignIn)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), 'Incorrect Password');
+        done();
+      });
+  });
+  it('A successful sign in should return an object of key-pair values', (done) => {
+    api.post('/api/v1/auth/signin')
+      .send(correctSignInDetails)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body.data), 'token');
+        assert.equal((res.body.data.id), 1);
+        assert.equal((res.body.data.firstName), 'Victor');
+        assert.equal((res.body.data.lastName), 'Ajayi');
+        assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
+        assert.equal((res.body.data.type), 'client');
+        done();
+      });
+  });
+});
