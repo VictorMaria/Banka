@@ -397,3 +397,25 @@ describe('Activating or deactivating a bank account', () => {
       });
   });
 });
+
+// Tests for checking account balance of a specific bank account
+describe('Checking bank account balance', () => {
+  it('Attempting to check the balance of a non existent account should return a 404 error', (done) => {
+    api.get('/api/v1/accounts/20190022/balance')
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'Bank Account not found');
+        done();
+      });
+  });
+
+  it('Checking balance for an exisiting bank account should return correct balance in an object', (done) => {
+    api.get('/api/v1/accounts/2019001/balance')
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.equal((res.body.data.accountNumber), '2019001');
+        assert.equal((res.body.data.accountBalance), '200.00');
+        done();
+      });
+  });
+});

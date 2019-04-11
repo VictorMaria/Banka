@@ -6,5 +6,6 @@ const router = express.Router();
 router.post('/accounts', account.createBankAccount);
 router.get('/accounts/:accountNumber', account.findBankAccount);
 router.patch('/accounts/:accountNumber', account.activateDeactivate);
+router.get('/accounts/:accountNumber/balance', account.checkBalance);
 
 export default router;

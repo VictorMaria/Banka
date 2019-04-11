@@ -56,7 +56,7 @@ class Account {
 
   activateDeactivate(accountNumber) {
     const bankAccount = this.bankAccounts.find(b => b.accountNumber === accountNumber);
-    if (bankAccount.status === 'dormant' || bankAccount.status ==='draft') {
+    if (bankAccount.status === 'dormant' || bankAccount.status === 'draft') {
       bankAccount.status = 'active';
     } else {
       bankAccount.status = 'dormant';
@@ -65,6 +65,17 @@ class Account {
       accountNumber: bankAccount.accountNumber,
       status: bankAccount.status,
     };
+  }
+
+  checkBalance(accountNumber) {
+    const bankAccount = this.bankAccounts.find(b => b.accountNumber === accountNumber);
+    return {
+      accountNumber: bankAccount.accountNumber,
+      firstName: bankAccount.firstName,
+      lastName: bankAccount.lastName,
+      type: bankAccount.type,
+      accountBalance: bankAccount.balance.toFixed(2),
+    }
   }
 }
 
