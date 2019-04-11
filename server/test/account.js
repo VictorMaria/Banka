@@ -419,3 +419,167 @@ describe('Checking bank account balance', () => {
       });
   });
 });
+
+// Tests for credit transactions
+
+const emptyCashier = {
+  cashier: '',
+  amount: '100.00',
+  remark: 'Monthly Interest',
+};
+
+const missingCashier = {
+  amount: '100.00',
+  remark: 'Monthly Interest',
+};
+
+const wrongCashier = {
+  cashier: 'w',
+  amount: '100.00',
+  remark: 'Monthly Interest',
+};
+
+const wrongAmountPattern = {
+  cashier: 1,
+  amount: '100.000',
+  remark: 'Monthly Interest',
+};
+
+const missingAmount = {
+  cashier: 1,
+  remark: 'Monthly Interest',
+};
+
+const emptyRemark = {
+  cashier: 1,
+  amount: '100.00',
+  remark: '',
+};
+
+const missingRemark = {
+  cashier: 1,
+  amount: '100.00',
+};
+
+const lengthyRemark = {
+  cashier: 1,
+  amount: '100.00',
+  remark: 'This is a lengthy remark for a transaction',
+};
+
+const completeCreditDetails = {
+  cashier: 1,
+  amount: '1000.00',
+  remark: 'Monthly Interest',
+};
+
+describe('Credit transcactions', () => {
+  it('Should return an error for empty cashier field', (done) => {
+    api.post('/api/v1/transactions/2019001/credit')
+      .send(emptyCashier)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"cashier" must be a number`)
+        done();
+      });
+  });
+
+  it('Should return an error for missing cashier field', (done) => {
+    api.post('/api/v1/transactions/2019001/credit')
+      .send(missingCashier)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"cashier" is required`);
+        done();
+      });
+  });
+
+  it('Should return an error for wrong cashier input type', (done) => {
+    api.post('/api/v1/transactions/2019001/credit')
+      .send(wrongCashier)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"cashier" must be a number`);
+        done();
+      });
+  });
+
+  it('Should return an error for wrong  amount format', (done) => {
+    api.post('/api/v1/transactions/2019001/credit')
+      .send(wrongAmountPattern)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"amount" with value "100.000" fails to match the required pattern: /^[0-9]+\\.[0-9]{2}$/`);
+        done();
+      });
+  });
+
+  it('Should return an error stating amount field is required', (done) => {
+    api.post('/api/v1/transactions/2019001/credit')
+      .send(missingAmount)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"amount" is required`);
+        done();
+      });
+  });
+
+
+  it('Should return an error for empty remark field', (done) => {
+    api.post('/api/v1/transactions/2019001/credit')
+      .send(emptyRemark)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"remark" is not allowed to be empty`);
+        done();
+      });
+  });
+
+  it('Should return an error stating remark field is required', (done) => {
+    api.post('/api/v1/transactions/2019001/credit')
+      .send(missingRemark)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"remark" is required`);
+        done();
+      });
+  });
+
+  it('Should return an error for a remark of more than 25 characters', (done) => {
+    api.post('/api/v1/transactions/2019001/credit')
+      .send(lengthyRemark)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"remark" length must be less than or equal to 25 characters long`);
+        done();
+      });
+  });
+
+  it('Attempting to credit a non existent account should return a 404 error', (done) => {
+    api.post('/api/v1/transactions/20190012/credit')
+      .send(completeCreditDetails)
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'Bank Account not found');
+        done();
+      });
+  });
+
+  it('Attempting to credit an existing account should return correct account balance and key-pair values in an object', (done) => {
+    api.post('/api/v1/transactions/2019001/credit')
+      .send(completeCreditDetails)
+      .end((err, res) => {
+        assert.equal((res.body.status), 201);
+        assert.equal((res.body.data.accountNumber), '2019001');
+        assert.equal((res.body.data.transactionType), 'Credit');
+        assert.equal((res.body.data.amount), '1000.00');
+        assert.equal((res.body.data.accountBalance), '1200.00');
+        assert.property((res.body.data), 'transactionId');
+        assert.property((res.body.data), 'transactionDate');
+        assert.property((res.body.data), 'amount');
+        assert.property((res.body.data), 'cashier');
+        assert.property((res.body.data), 'remark');
+        done();
+      });
+  });
+});
