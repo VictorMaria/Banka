@@ -335,3 +335,65 @@ describe('Creating a bank acocunt', () => {
       });
   });
 });
+
+// Test for fetching a specific bank account
+
+describe('Fetching a specific bank account', () => {
+  it('Should return an error for a non existent bank account', (done) => {
+    api.get('/api/v1/accounts/20190022')
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'Bank Account not found');
+        done();
+      });
+  });
+
+  it('Should return an object with key-value pairs for an existing bank account', (done) => {
+    api.get('/api/v1/accounts/2019001')
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body), 'status');
+        assert.property((res.body.data), 'firstName');
+        assert.property((res.body.data), 'firstName');
+        assert.property((res.body.data), 'lastName');
+        assert.property((res.body.data), 'email');
+        assert.property((res.body.data), 'type');
+        assert.property((res.body.data), 'openingBalance');
+        assert.property((res.body.data), 'balance');
+        done();
+      });
+  });
+});
+
+// Tests for activating or deactivating a bank account
+
+describe('Activating or deactivating a bank account', () => {
+  it('Attempting to activate or deactivate a non existent account should return a 404 error', (done) => {
+    api.patch('/api/v1/accounts/20190022')
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'Bank Account not found');
+        done();
+      });
+  });
+
+  it('Activating a bank account should return an object with key-value pairs', (done) => {
+    api.patch('/api/v1/accounts/2019001')
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.equal((res.body.data.accountNumber), '2019001');
+        assert.equal((res.body.data.status), 'active');
+        done();
+      });
+  });
+
+  it('Deactivating a bank account should return an object with key-value pairs', (done) => {
+    api.patch('/api/v1/accounts/2019001')
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.equal((res.body.data.accountNumber), '2019001');
+        assert.equal((res.body.data.status), 'dormant');
+        done();
+      });
+  });
+});
