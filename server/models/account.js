@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 class Account {
   constructor() {
     this.bankAccounts = [];
@@ -36,6 +37,34 @@ class Account {
       balance: bankAccount.balance.toFixed(2),
     };
     return response;
+  }
+
+  findBankAccount(accountNumber) {
+    const bankAccount = this.bankAccounts.find(b => b.accountNumber === accountNumber);
+    if (bankAccount) {
+      return {
+        accountNumber: bankAccount.accountNumber,
+        firstName: bankAccount.firstName,
+        lastName: bankAccount.lastName,
+        email: bankAccount.email,
+        type: bankAccount.type,
+        openingBalance: bankAccount.openingBalance,
+        balance: bankAccount.balance.toFixed(2),
+      };
+    }
+  }
+
+  activateDeactivate(accountNumber) {
+    const bankAccount = this.bankAccounts.find(b => b.accountNumber === accountNumber);
+    if (bankAccount.status === 'dormant' || bankAccount.status ==='draft') {
+      bankAccount.status = 'active';
+    } else {
+      bankAccount.status = 'dormant';
+    }
+    return {
+      accountNumber: bankAccount.accountNumber,
+      status: bankAccount.status,
+    };
   }
 }
 
