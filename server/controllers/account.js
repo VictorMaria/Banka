@@ -47,5 +47,20 @@ const account = {
     const creditAccount = accountModel.creditAccount(req.params.accountNumber, req.body);
     return res.status(201).send({ status: 201, data: creditAccount });
   },
+  debitAccount(req, res) {
+    const bankAccount = accountModel.findBankAccount(req.params.accountNumber);
+    if (!bankAccount) {
+      return res.status(404).send({ status: 404, error: 'Bank Account not found' });
+    }
+    const result = Joi.validate(req.body, transactionSchema);
+    if (result.error) {
+      return res.status(400).send({ status: 400, error: result.error.details[0].message });
+    }
+    const debitAccount = accountModel.debitAccount(req.params.accountNumber, req.body);
+    if (debitAccount === 'Insufficient Funds') {
+      return res.status(400).send({ status: 400, error: debitAccount });
+    }
+    return res.status(201).send({ status: 201, data: debitAccount });
+  },
 };
 export default account;
