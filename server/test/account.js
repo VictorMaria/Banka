@@ -712,3 +712,34 @@ describe('Debit transcactions', () => {
       });
   });
 });
+
+// Tests for deleting a specific bank account
+describe('Deleting a bank account', () => {
+
+  it('Attempting to delete a non existing bank account should return a 404 message', (done) => {
+    api.delete('/api/v1/accounts/201900')
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'Bank Account not found');
+        done();
+      });
+  });
+
+  it('Deleting a bank accout should return a message about the action', (done) => {
+    api.delete('/api/v1/accounts/2019002')
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.equal((res.body.message), 'Bank Account 2019002 Successfully Deleted');
+        done();
+      });
+  });
+
+  it('Accesing a deleted bank account should return a 404 message', (done) => {
+    api.get('/api/v1/accounts/2019002')
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'Bank Account not found');
+        done();
+      });
+  });
+});

@@ -9,5 +9,6 @@ router.patch('/accounts/:accountNumber', account.activateDeactivate);
 router.get('/accounts/:accountNumber/balance', account.checkBalance);
 router.post('/transactions/:accountNumber/credit', account.creditAccount);
 router.post('/transactions/:accountNumber/debit', account.debitAccount);
+router.delete('/accounts/:accountNumber', account.deleteBankAccount);
 
 export default router;

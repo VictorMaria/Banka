@@ -129,6 +129,14 @@ class Account {
     sendEmailNotification(bankAccount.email, emailSubject, transaction.transactionType, transaction.transactionDate, transaction.amount, transaction.remark, transaction.accountBalance);
     return transaction;
   }
+
+  deleteBankAccount(accountNumber) {
+    const bankAccount = this.bankAccounts.find(b => b.accountNumber === accountNumber);
+    const index = this.bankAccounts.indexOf(bankAccount);
+    this.bankAccounts.splice(index, 1);
+    const message = `Bank Account ${accountNumber} Successfully Deleted`;
+    return message;
+  }
 }
 
 export default new Account();

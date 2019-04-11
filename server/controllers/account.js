@@ -62,5 +62,13 @@ const account = {
     }
     return res.status(201).send({ status: 201, data: debitAccount });
   },
+  deleteBankAccount(req, res) {
+    const bankAccount = accountModel.findBankAccount(req.params.accountNumber);
+    if (!bankAccount) {
+      return res.status(404).send({ status: 404, error: 'Bank Account not found' });
+    }
+    const deleteBankAccount = accountModel.deleteBankAccount(req.params.accountNumber);
+    return res.status(200).send({ status: 200, message: deleteBankAccount });
+  },
 };
 export default account;
