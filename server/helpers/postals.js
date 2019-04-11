@@ -39,4 +39,4 @@ const sendEmailNotification = (recipient, emailSubject, transactionType, transac
     }
   });
 };
-export default { sendEmailNotification };
+export default sendEmailNotification;

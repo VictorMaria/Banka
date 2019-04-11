@@ -1,3 +1,5 @@
+import sendEmailNotification from '../helpers/postals';
+
 /* eslint-disable consistent-return */
 class Account {
   constructor() {
@@ -75,7 +77,31 @@ class Account {
       lastName: bankAccount.lastName,
       type: bankAccount.type,
       accountBalance: bankAccount.balance.toFixed(2),
-    }
+    };
+  }
+
+  creditAccount(accountNumber, data) {
+    const bankAccount = this.bankAccounts.find(b => b.accountNumber === accountNumber);
+    this.transactionUniqueId += 1;
+    bankAccount.balance += parseFloat(data.amount);
+    bankAccount.balance = bankAccount.balance.toFixed(2);
+    const refinedBalance = bankAccount.balance;
+    bankAccount.balance = parseFloat(bankAccount.balance);
+    const transaction = {
+      transactionId: this.transactionUniqueId,
+      accountNumber: bankAccount.accountNumber,
+      transactionDate: new Date().toString(),
+      amount: parseFloat(data.amount).toFixed(2),
+      cashier: data.cashier,
+      transactionType: 'Credit',
+      remark: data.remark,
+      accountBalance: refinedBalance,
+    };
+    this.transactions.push(transaction);
+    const emailSubject = `${transaction.transactionType} Alert`;
+    // eslint-disable-next-line max-len
+    sendEmailNotification(bankAccount.email, emailSubject, transaction.transactionType, transaction.transactionDate, transaction.amount, transaction.remark, transaction.accountBalance);
+    return transaction;
   }
 }
 

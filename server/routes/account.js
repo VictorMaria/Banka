@@ -7,5 +7,6 @@ router.post('/accounts', account.createBankAccount);
 router.get('/accounts/:accountNumber', account.findBankAccount);
 router.patch('/accounts/:accountNumber', account.activateDeactivate);
 router.get('/accounts/:accountNumber/balance', account.checkBalance);
+router.post('/transactions/:accountNumber/credit', account.creditAccount);
 
 export default router;
