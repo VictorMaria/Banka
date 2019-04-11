@@ -16,7 +16,7 @@ const account = {
     if (!bankAccount) {
       return res.status(404).send({ status: 404, error: 'Bank Account not found' });
     }
-    return res.status(200).send({ status: 200, data: bankAccount});
+    return res.status(200).send({ status: 200, data: bankAccount });
   },
   activateDeactivate(req, res) {
     const bankAccount = accountModel.findBankAccount(req.params.accountNumber);
@@ -25,6 +25,14 @@ const account = {
     }
     const activateDeactivate = accountModel.activateDeactivate(req.params.accountNumber);
     return res.status(200).send({ status: 200, data: activateDeactivate });
-  }, 
+  },
+  checkBalance(req, res) {
+    const bankAccount = accountModel.findBankAccount(req.params.accountNumber);
+    if (!bankAccount) {
+      return res.status(404).send({ status: 404, error: 'Bank Account not found' });
+    }
+    const balance = accountModel.checkBalance(req.params.accountNumber);
+    return res.status(200).send({ status: 200, data: balance });
+  },
 };
 export default account;
