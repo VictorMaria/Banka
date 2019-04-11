@@ -28,7 +28,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "mocha dist/server/test",
+    "test": "mocha dist/server/test/*.js --timeout 10000 --exit",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/app.js"
   },
