@@ -5,8 +5,6 @@ import supertest from 'supertest';
 
 const api = supertest('http://localhost:3000');
 
-// eslint-disable-next-line no-undef
-
 // Tests for creating a new bank account
 describe('Creating a bank acocunt', () => {
   const emptyOwnerField = {
@@ -479,7 +477,7 @@ describe('Credit transcactions', () => {
       .send(emptyCashier)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
-        assert.equal((res.body.error), `"cashier" must be a number`)
+        assert.equal((res.body.error), `"cashier" must be a number`);
         done();
       });
   });
@@ -574,6 +572,137 @@ describe('Credit transcactions', () => {
         assert.equal((res.body.data.transactionType), 'Credit');
         assert.equal((res.body.data.amount), '1000.00');
         assert.equal((res.body.data.accountBalance), '1200.00');
+        assert.property((res.body.data), 'transactionId');
+        assert.property((res.body.data), 'transactionDate');
+        assert.property((res.body.data), 'amount');
+        assert.property((res.body.data), 'cashier');
+        assert.property((res.body.data), 'remark');
+        done();
+      });
+  });
+});
+
+// Tests for debit transaction
+const completeDebitDetails = {
+  cashier: 1,
+  amount: '50.00',
+  remark: 'Monthly Due',
+};
+const excessDebitDetails = {
+  cashier: 1,
+  amount: '5000.00',
+  remark: 'Party',
+};
+
+describe('Debit transcactions', () => {
+  it('Should return an error for empty cashier field', (done) => {
+    api.post('/api/v1/transactions/2019001/debit')
+      .send(emptyCashier)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"cashier" must be a number`);
+        done();
+      });
+  });
+
+  it('Should return an error stating cashier field is required', (done) => {
+    api.post('/api/v1/transactions/2019001/debit')
+      .send(missingCashier)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"cashier" is required`);
+        done();
+      });
+  });
+
+  it('Should return an error for wrong cashier input type', (done) => {
+    api.post('/api/v1/transactions/2019001/debit')
+      .send(wrongCashier)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"cashier" must be a number`);
+        done();
+      });
+  });
+
+  it('Should return an error for wrong  amount format', (done) => {
+    api.post('/api/v1/transactions/2019001/debit')
+      .send(wrongAmountPattern)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"amount" with value "100.000" fails to match the required pattern: /^[0-9]+\\.[0-9]{2}$/`);
+        done();
+      });
+  });
+
+  it('Should return an error stating amount field is required', (done) => {
+    api.post('/api/v1/transactions/2019001/debit')
+      .send(missingAmount)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"amount" is required`);
+        done();
+      });
+  });
+
+  it('Should return an error for empty remark field', (done) => {
+    api.post('/api/v1/transactions/2019001/debit')
+      .send(emptyRemark)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"remark" is not allowed to be empty`);
+        done();
+      });
+  });
+
+  it('Should return an error stating remark field is required', (done) => {
+    api.post('/api/v1/transactions/2019001/debit')
+      .send(missingRemark)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"remark" is required`);
+        done();
+      });
+  });
+
+  it('Should return an error for a remark of more than 25 characters', (done) => {
+    api.post('/api/v1/transactions/2019001/debit')
+      .send(lengthyRemark)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), `"remark" length must be less than or equal to 25 characters long`);
+        done();
+      });
+  });
+
+  it('Attempting to debit a non existent account should return a 404 error', (done) => {
+    api.post('/api/v1/transactions/20190012/debit')
+      .send(completeDebitDetails)
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'Bank Account not found');
+        done();
+      });
+  });
+
+  it('Attempting to debit an amount greater than the account balance should return an error', (done) => {
+    api.post('/api/v1/transactions/2019001/debit')
+      .send(excessDebitDetails)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), 'Insufficient Funds');
+        done();
+      });
+  });
+  it('Attempting to debit an existing account should return correct account balance and key-pair values in an object', (done) => {
+    api.post('/api/v1/transactions/2019001/debit')
+      .send(completeDebitDetails)
+      .end((err, res) => {
+        assert.equal((res.body.status), 201);
+        assert.equal((res.body.data.accountNumber), '2019001');
+        assert.equal((res.body.data.transactionType), 'Debit');
+        assert.equal((res.body.data.amount), '50.00');
+        assert.equal((res.body.data.accountBalance), '1150.00');
         assert.property((res.body.data), 'transactionId');
         assert.property((res.body.data), 'transactionDate');
         assert.property((res.body.data), 'amount');
