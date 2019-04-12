@@ -3,6 +3,4 @@ node_js:
   - "stable"
 script:
   - npm start
-  - npm test  
- after_success:
-  - npm run coveralls 
+  - npm test
