@@ -715,7 +715,6 @@ describe('Debit transcactions', () => {
 
 // Tests for deleting a specific bank account
 describe('Deleting a bank account', () => {
-
   it('Attempting to delete a non existing bank account should return a 404 message', (done) => {
     api.delete('/api/v1/accounts/201900')
       .end((err, res) => {
