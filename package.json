@@ -33,7 +33,8 @@
   "scripts": {
     "test": "nyc --reporter=lcov --reporter=text mocha dist/server/test",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "npm run build && node dist/app.js"
+    "start": "npm run build && node dist/app.js",
+    "travis": "node dist/app.js && mocha dist/server/test"
   },
   "repository": {
     "type": "git",
