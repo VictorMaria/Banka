@@ -3,3 +3,11 @@
 node_modules/
 
 dist/
+
+coverage/
+
+.nyc_output/eb7e467d-5743-4daa-b302-257ac42ca732.json
+
+.nyc_output/caea1358-6cf4-47b5-9816-bde51cb27f6a.json
+
+.coveralls.yml

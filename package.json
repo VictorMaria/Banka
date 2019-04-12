@@ -7,13 +7,16 @@
     "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
+    "coveralls": "^3.0.3",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
+    "mocha-lcov-reporter": "^1.3.0",
     "multer": "^1.4.1",
     "node": "^11.13.0",
     "nodemailer": "^6.1.0",
+    "nyc": "^13.3.0",
     "supertest": "^4.0.2"
   },
   "devDependencies": {
@@ -28,7 +31,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "mocha ./dist/server/test/*.js",
+    "test": "nyc --reporter=lcov --reporter=text --timeout 40000 mocha dist/server/test --exit",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/app.js"
   },
