@@ -2,5 +2,5 @@ language: node_js
 node_js:
   - "stable"
 script:
-  - npm run build
+  - npm start
   - npm run test
