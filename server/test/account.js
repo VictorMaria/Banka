@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable quotes */
-import { assert } from 'chai';
+import chai, { assert } from 'chai';
 import app from '../../app';
 
 chai.use(require('chai-http'));
