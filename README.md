@@ -16,10 +16,10 @@ ___
 5. User can create a bank account.
 6. Admin/staff can fetch a specific bank account.
 7. Admin/staff can activate or deactivate a bank account.
-8. User can retrieve their account balance.
+8. User can retrieve his/her account balance.
 9. Staff can credit an account.
 10. Staff can debit an account.
-10. Admin/staff can delete a bank account.
+11. Admin/staff can delete a bank account.
 
 ___
 
@@ -62,23 +62,27 @@ The API endpoints are hosted on Heroku - [Banka](https://hibanka.herokuapp.com/)
 |DELETE  |Delete bank account                |api/v1/accounts/:acccountNumber           |
 
 
+
+
 |DESCRIPTION         |REQUIRED FIELDS                                                    |                 
 |--------------------|-------------------------------------------------------------------|
 |Sign Up             |firstName, lastName, email, password                               |
 |Sign In             |email, password                                                    |
 |Upload profile photo|profilePhoto                                                       |
 |Create bank account |firstName, lastName, owner, email, type, openingBalance            |
-|Credit account      |cashier, amount(has to be in two decimal places e.g 200.50), remark|
-|Debit               |cashier, amount(has to be in two decimal places e.g 200.50), remark|
+|Credit account      |cashier, amount, remark                                            |
+|Debit               |cashier, amount, remark                                            |
+
+amount and openingBalance should be in two decimal places e.g 200.50
 
 ___
-## The points can be accessed remotely or locally.
+## The Endpoints can be accessed remotely or locally.
 
-#### Accessing endpoints remotely via POSTMAN
-You will need to have [POSTMAN](https://www.getpostman.com/downloads/) app installed.
+#### Accessing the endpoints remotely via POSTMAN
+You will need to have [POSTMAN](https://www.getpostman.com/downloads/) app installed on your computer.
 
 ##### Example 
-Sign In
+###### Sign In
 1. Launch POSTMAN
 2. Click the dropdown menu to the left of the URL bar and select POST as a method.
 3. To access the Sign In endpoint, at the end of Banka's URL attach the sign in endpoint to it as seen in step 4
@@ -90,15 +94,29 @@ Sign In
 9. And wait for a response below.
 
 
-####Note:
+#### Note:
 Upload profile photo endpoint uses form-data instead of x-www-form-urlencoded
 
 
-#### Accessing endpoints locally via POSTMAN
+#### Accessing the endpoints locally via POSTMAN
 
-You need to have npm and node installed on your computer.
-1. Click [npm](https://www.npmjs.com/get-npm) and [Node.js](https://nodejs.org/en/) to get npm and node respectively.
-2. Clone Banka repo `https://github.com/VictorMaria/Banka.git` on your local machine.
-3. Run ```$ npm install```
+1. On the terminal of your computer, navigate into the cloned repo's folder
+2. Click [npm](https://www.npmjs.com/get-npm) and [Node.js](https://nodejs.org/en/) to get npm and node respectively.
+3. Clone Banka repo `https://github.com/VictorMaria/Banka.git` on your local machine.
+4. Run `$ npm install` to install All of Banka's dependencies.
+5. Run `$ npm start` to power up the server.
+6. The procedure for using POSTMAN here is the same as when accessing the endpoint remotely except that you make use of http://localhost:3000 as the full URL's prefix in place of the app's URL on heroku
+e.g To access Sign In endpoint you will have a full URL like http://localhost:3000/api/v1/auth/signin
+
+#### Test
+You can locally run the test by running `npm test` in the cloned repo directory opened in a new terminal window while the server runs on the first window. It is important that the server is running for the tests to pass.
+
+___
+
+## Author
+### Victor Ajayi (VictorMaria)
+
+
+
 
 
