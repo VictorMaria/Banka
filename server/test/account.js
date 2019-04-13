@@ -164,7 +164,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error stating owner field is required', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(missingOwnerField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -174,7 +175,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error for empty firstName field', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(emptyFirstNameField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -184,7 +186,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error stating firstName field is required', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(missingFirstNameField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -194,7 +197,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error for empty lastName field', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(emptyLastNameField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -204,7 +208,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error stating lastName field is required', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(missingLastNameField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -214,7 +219,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error for empty email field', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(emptyEmailField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -224,7 +230,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error stating email field is required', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(missingEmailField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -234,7 +241,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error for an invalid email', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(invalidEmail)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -244,7 +252,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error for empty type field', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(emptyTypeField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -254,7 +263,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error stating type field is required', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(missingTypeField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -264,7 +274,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error for invalid account type', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(invalidType)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -274,7 +285,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error for empty openingBalance field', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(emptyOpeningBalanceField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -284,7 +296,8 @@ describe('Creating a bank acocunt', () => {
   });
 
   it('Should return an error stating openingBalance field is required', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(missingOpeningBalanceField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -293,7 +306,8 @@ describe('Creating a bank acocunt', () => {
       });
   });
   it('Should return an error for invalid openingBalance entry', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(invalidOpeningBalance)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -302,7 +316,8 @@ describe('Creating a bank acocunt', () => {
       });
   });
   it('Should return an object with key-value pairs upon sending complete and correct details', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(completeDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 201);
@@ -318,7 +333,8 @@ describe('Creating a bank acocunt', () => {
       });
   });
   it('Should return an object with key-value pairs upon sending another set of complete and correct details', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(completeDetailsTwo)
       .end((err, res) => {
         assert.equal((res.body.status), 201);
@@ -339,7 +355,8 @@ describe('Creating a bank acocunt', () => {
 
 describe('Fetching a specific bank account', () => {
   it('Should return an error for a non existent bank account', (done) => {
-    api.get('/api/v1/accounts/20190022')
+    chai.request(app)
+      .get('/api/v1/accounts/20190022')
       .end((err, res) => {
         assert.equal((res.body.status), 404);
         assert.equal((res.body.error), 'Bank Account not found');
@@ -348,7 +365,8 @@ describe('Fetching a specific bank account', () => {
   });
 
   it('Should return an object with key-value pairs for an existing bank account', (done) => {
-    api.get('/api/v1/accounts/2019001')
+    chai.request(app)
+      .get('/api/v1/accounts/2019001')
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.property((res.body), 'status');
@@ -368,7 +386,8 @@ describe('Fetching a specific bank account', () => {
 
 describe('Activating or deactivating a bank account', () => {
   it('Attempting to activate or deactivate a non existent account should return a 404 error', (done) => {
-    api.patch('/api/v1/accounts/20190022')
+    chai.request(app)
+      .patch('/api/v1/accounts/20190022')
       .end((err, res) => {
         assert.equal((res.body.status), 404);
         assert.equal((res.body.error), 'Bank Account not found');
@@ -377,7 +396,8 @@ describe('Activating or deactivating a bank account', () => {
   });
 
   it('Activating a bank account should return an object with key-value pairs', (done) => {
-    api.patch('/api/v1/accounts/2019001')
+    chai.request(app)
+      .patch('/api/v1/accounts/2019001')
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.equal((res.body.data.accountNumber), '2019001');
@@ -387,7 +407,8 @@ describe('Activating or deactivating a bank account', () => {
   });
 
   it('Deactivating a bank account should return an object with key-value pairs', (done) => {
-    api.patch('/api/v1/accounts/2019001')
+    chai.request(app)
+      .patch('/api/v1/accounts/2019001')
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.equal((res.body.data.accountNumber), '2019001');
@@ -400,7 +421,8 @@ describe('Activating or deactivating a bank account', () => {
 // Tests for checking account balance of a specific bank account
 describe('Checking bank account balance', () => {
   it('Attempting to check the balance of a non existent account should return a 404 error', (done) => {
-    api.get('/api/v1/accounts/20190022/balance')
+    chai.request(app)
+      .get('/api/v1/accounts/20190022/balance')
       .end((err, res) => {
         assert.equal((res.body.status), 404);
         assert.equal((res.body.error), 'Bank Account not found');
@@ -409,7 +431,8 @@ describe('Checking bank account balance', () => {
   });
 
   it('Checking balance for an exisiting bank account should return correct balance in an object', (done) => {
-    api.get('/api/v1/accounts/2019001/balance')
+    chai.request(app)
+      .get('/api/v1/accounts/2019001/balance')
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.equal((res.body.data.accountNumber), '2019001');
@@ -474,7 +497,8 @@ const completeCreditDetails = {
 
 describe('Credit transcactions', () => {
   it('Should return an error for empty cashier field', (done) => {
-    api.post('/api/v1/transactions/2019001/credit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/credit')
       .send(emptyCashier)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -484,7 +508,8 @@ describe('Credit transcactions', () => {
   });
 
   it('Should return an error for missing cashier field', (done) => {
-    api.post('/api/v1/transactions/2019001/credit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/credit')
       .send(missingCashier)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -494,7 +519,8 @@ describe('Credit transcactions', () => {
   });
 
   it('Should return an error for wrong cashier input type', (done) => {
-    api.post('/api/v1/transactions/2019001/credit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/credit')
       .send(wrongCashier)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -504,7 +530,8 @@ describe('Credit transcactions', () => {
   });
 
   it('Should return an error for wrong  amount format', (done) => {
-    api.post('/api/v1/transactions/2019001/credit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/credit')
       .send(wrongAmountPattern)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -514,7 +541,8 @@ describe('Credit transcactions', () => {
   });
 
   it('Should return an error stating amount field is required', (done) => {
-    api.post('/api/v1/transactions/2019001/credit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/credit')
       .send(missingAmount)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -525,7 +553,8 @@ describe('Credit transcactions', () => {
 
 
   it('Should return an error for empty remark field', (done) => {
-    api.post('/api/v1/transactions/2019001/credit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/credit')
       .send(emptyRemark)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -535,7 +564,8 @@ describe('Credit transcactions', () => {
   });
 
   it('Should return an error stating remark field is required', (done) => {
-    api.post('/api/v1/transactions/2019001/credit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/credit')
       .send(missingRemark)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -545,7 +575,8 @@ describe('Credit transcactions', () => {
   });
 
   it('Should return an error for a remark of more than 25 characters', (done) => {
-    api.post('/api/v1/transactions/2019001/credit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/credit')
       .send(lengthyRemark)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -555,7 +586,8 @@ describe('Credit transcactions', () => {
   });
 
   it('Attempting to credit a non existent account should return a 404 error', (done) => {
-    api.post('/api/v1/transactions/20190012/credit')
+    chai.request(app)
+      .post('/api/v1/transactions/20190012/credit')
       .send(completeCreditDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 404);
@@ -565,7 +597,8 @@ describe('Credit transcactions', () => {
   });
 
   it('Attempting to credit an existing account should return correct account balance and key-pair values in an object', (done) => {
-    api.post('/api/v1/transactions/2019001/credit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/credit')
       .send(completeCreditDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 201);
@@ -597,7 +630,8 @@ const excessDebitDetails = {
 
 describe('Debit transcactions', () => {
   it('Should return an error for empty cashier field', (done) => {
-    api.post('/api/v1/transactions/2019001/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/debit')
       .send(emptyCashier)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -607,7 +641,8 @@ describe('Debit transcactions', () => {
   });
 
   it('Should return an error stating cashier field is required', (done) => {
-    api.post('/api/v1/transactions/2019001/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/debit')
       .send(missingCashier)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -617,7 +652,8 @@ describe('Debit transcactions', () => {
   });
 
   it('Should return an error for wrong cashier input type', (done) => {
-    api.post('/api/v1/transactions/2019001/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/debit')
       .send(wrongCashier)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -627,7 +663,8 @@ describe('Debit transcactions', () => {
   });
 
   it('Should return an error for wrong  amount format', (done) => {
-    api.post('/api/v1/transactions/2019001/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/debit')
       .send(wrongAmountPattern)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -637,7 +674,8 @@ describe('Debit transcactions', () => {
   });
 
   it('Should return an error stating amount field is required', (done) => {
-    api.post('/api/v1/transactions/2019001/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/debit')
       .send(missingAmount)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -647,7 +685,8 @@ describe('Debit transcactions', () => {
   });
 
   it('Should return an error for empty remark field', (done) => {
-    api.post('/api/v1/transactions/2019001/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/debit')
       .send(emptyRemark)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -657,7 +696,8 @@ describe('Debit transcactions', () => {
   });
 
   it('Should return an error stating remark field is required', (done) => {
-    api.post('/api/v1/transactions/2019001/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/debit')
       .send(missingRemark)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -667,7 +707,8 @@ describe('Debit transcactions', () => {
   });
 
   it('Should return an error for a remark of more than 25 characters', (done) => {
-    api.post('/api/v1/transactions/2019001/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/debit')
       .send(lengthyRemark)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -677,7 +718,8 @@ describe('Debit transcactions', () => {
   });
 
   it('Attempting to debit a non existent account should return a 404 error', (done) => {
-    api.post('/api/v1/transactions/20190012/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/20190012/debit')
       .send(completeDebitDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 404);
@@ -687,7 +729,8 @@ describe('Debit transcactions', () => {
   });
 
   it('Attempting to debit an amount greater than the account balance should return an error', (done) => {
-    api.post('/api/v1/transactions/2019001/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/debit')
       .send(excessDebitDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -696,7 +739,8 @@ describe('Debit transcactions', () => {
       });
   });
   it('Attempting to debit an existing account should return correct account balance and key-pair values in an object', (done) => {
-    api.post('/api/v1/transactions/2019001/debit')
+    chai.request(app)
+      .post('/api/v1/transactions/2019001/debit')
       .send(completeDebitDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 201);
@@ -717,7 +761,8 @@ describe('Debit transcactions', () => {
 // Tests for deleting a specific bank account
 describe('Deleting a bank account', () => {
   it('Attempting to delete a non existing bank account should return a 404 message', (done) => {
-    api.delete('/api/v1/accounts/201900')
+    chai.request(app)
+      .delete('/api/v1/accounts/201900')
       .end((err, res) => {
         assert.equal((res.body.status), 404);
         assert.equal((res.body.error), 'Bank Account not found');
@@ -726,7 +771,8 @@ describe('Deleting a bank account', () => {
   });
 
   it('Deleting a bank accout should return a message about the action', (done) => {
-    api.delete('/api/v1/accounts/2019002')
+    chai.request(app)
+      .delete('/api/v1/accounts/2019002')
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.equal((res.body.message), 'Bank Account 2019002 Successfully Deleted');
@@ -735,7 +781,8 @@ describe('Deleting a bank account', () => {
   });
 
   it('Accesing a deleted bank account should return a 404 message', (done) => {
-    api.get('/api/v1/accounts/2019002')
+    chai.request(app)
+      .get('/api/v1/accounts/2019002')
       .end((err, res) => {
         assert.equal((res.body.status), 404);
         assert.equal((res.body.error), 'Bank Account not found');

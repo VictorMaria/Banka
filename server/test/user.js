@@ -1,8 +1,10 @@
 /* eslint-disable quotes */
 /* eslint-disable no-undef */
-import { assert } from 'chai';
-import supertest from 'supertest';
+import chai, { assert } from 'chai';
 import path from 'path';
+import app from '../../app';
+
+chai.use(require('chai-http'));
 
 const api = supertest('http://localhost:3000');
 
@@ -82,7 +84,8 @@ const completeSignUpDetails = {
 
 describe('Signing up', () => {
   it('Should return an error for missing email field', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(missingEmail)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -91,7 +94,8 @@ describe('Signing up', () => {
       });
   });
   it('Should return an error for missing firstName field', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(missingFirstName)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -100,7 +104,8 @@ describe('Signing up', () => {
       });
   });
   it('Should return an error for missing lastName field', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(missingLastName)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -109,7 +114,8 @@ describe('Signing up', () => {
       });
   });
   it('Should return an error for missing password field', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(missingPassword)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -118,7 +124,8 @@ describe('Signing up', () => {
       });
   });
   it('Should return an error for empty email field', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(emptyEmail)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -127,7 +134,8 @@ describe('Signing up', () => {
       });
   });
   it('Should return an error for an invalid email', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(invalidEmail)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -136,7 +144,8 @@ describe('Signing up', () => {
       });
   });
   it('Should return an error for empty firstName field', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(emptyFirstName)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -145,7 +154,8 @@ describe('Signing up', () => {
       });
   });
   it('Should return an error for empty lastName field', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(emptyLastName)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -154,7 +164,8 @@ describe('Signing up', () => {
       });
   });
   it('Should return an error for empty passsword field', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(emptyPassword)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -163,7 +174,8 @@ describe('Signing up', () => {
       });
   });
   it('Should return an error for a short or weak password', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(wrongPasswordLength)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -172,7 +184,8 @@ describe('Signing up', () => {
       });
   });
   it('A successful sign up should return an object of key-pair values', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(completeSignUpDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 201);
@@ -186,7 +199,8 @@ describe('Signing up', () => {
       });
   });
   it('Atempting to sign up again with the same email should return an error', (done) => {
-    api.post('/api/v1/auth/signup')
+    chai.request(app)
+      .post('/api/v1/auth/signup')
       .send(completeSignUpDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -235,7 +249,8 @@ const correctSignInDetails = {
 
 describe('Signing in', () => {
   it('Should return an error for missing email field', (done) => {
-    api.post('/api/v1/auth/signin')
+    chai.request(app)
+      .post('/api/v1/auth/signin')
       .send(missingEmailSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -244,7 +259,8 @@ describe('Signing in', () => {
       });
   });
   it('Should return an error for missing password field', (done) => {
-    api.post('/api/v1/auth/signin')
+    chai.request(app)
+      .post('/api/v1/auth/signin')
       .send(missingPasswordSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -253,7 +269,8 @@ describe('Signing in', () => {
       });
   });
   it('Should return an error for empty email field', (done) => {
-    api.post('/api/v1/auth/signin')
+    chai.request(app)
+      .post('/api/v1/auth/signin')
       .send(emptyEmailSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -262,7 +279,8 @@ describe('Signing in', () => {
       });
   });
   it('Should return an error for empty password field', (done) => {
-    api.post('/api/v1/auth/signin')
+    chai.request(app)
+      .post('/api/v1/auth/signin')
       .send(emptyPasswordSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -271,7 +289,8 @@ describe('Signing in', () => {
       });
   });
   it('Should return an error for an invalid email', (done) => {
-    api.post('/api/v1/auth/signin')
+    chai.request(app)
+      .post('/api/v1/auth/signin')
       .send(invalidEmailSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -281,7 +300,8 @@ describe('Signing in', () => {
   });
 
   it('Should return an error for a non existing user', (done) => {
-    api.post('/api/v1/auth/signin')
+    chai.request(app)
+      .post('/api/v1/auth/signin')
       .send(nonExistingUser)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -290,7 +310,8 @@ describe('Signing in', () => {
       });
   });
   it('Should return an error for a wrong password', (done) => {
-    api.post('/api/v1/auth/signin')
+    chai.request(app)
+      .post('/api/v1/auth/signin')
       .send(wrongPasswordSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -299,7 +320,8 @@ describe('Signing in', () => {
       });
   });
   it('A successful sign in should return an object of key-pair values', (done) => {
-    api.post('/api/v1/auth/signin')
+    chai.request(app)
+      .post('/api/v1/auth/signin')
       .send(correctSignInDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 200);
@@ -317,7 +339,8 @@ describe('Signing in', () => {
 // Tests for fetching a specific user
 describe('Fetching a specific user', () => {
   it('Fetching a specific and non existing user should return an error', (done) => {
-    api.get('/api/v1/users/12')
+    chai.request(app)
+      .get('/api/v1/users/12')
       .end((err, res) => {
         assert.equal((res.body.status), 404);
         assert.equal((res.body.error), 'User not found');
@@ -325,7 +348,8 @@ describe('Fetching a specific user', () => {
       });
   });
   it('Fetching a speciific and existing user should return an object of key-pair values', (done) => {
-    api.get('/api/v1/users/1')
+    chai.request(app)
+      .get('/api/v1/users/1')
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.equal((res.body.data.id), 1);
@@ -342,7 +366,8 @@ const fileLocation = path.join(__dirname, './Harmattan nights.pdf');
 
 describe('Uploading profile photo', () => {
   it('A non user attempting to upload a profile photo should throw an error', (done) => {
-    api.post('/api/v1/users/12/profilephotos')
+    chai.request(app)
+      .post('/api/v1/users/12/profilephotos')
       .attach('profilePhoto', photoLocation)
       .end((err, res) => {
         assert.equal((res.body.status), 404);
@@ -352,7 +377,8 @@ describe('Uploading profile photo', () => {
   });
 
   it('Uploading nothing should throw an error', (done) => {
-    api.post('/api/v1/users/1/profilephotos')
+    chai.request(app)
+      .post('/api/v1/users/1/profilephotos')
       .attach('profilePhoto', '')
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -362,7 +388,8 @@ describe('Uploading profile photo', () => {
   });
 
   it('Uploading a file asides an image should throw an error', (done) => {
-    api.post('/api/v1/users/1/profilephotos')
+    chai.request(app)
+      .post('/api/v1/users/1/profilephotos')
       .attach('profilePhoto', fileLocation)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -372,7 +399,8 @@ describe('Uploading profile photo', () => {
   });
 
   it('A successful upload should return an object of key-pair values', (done) => {
-    api.post('/api/v1/users/1/profilephotos')
+    chai.request(app)
+      .post('/api/v1/users/1/profilephotos')
       .attach('profilePhoto', photoLocation)
       .end((err, res) => {
         assert.equal((res.body.status), 200);
