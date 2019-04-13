@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable quotes */
 import { assert } from 'chai';
-import supertest from 'supertest';
+import app from '../../app';
 
-const api = supertest('http://localhost:3000');
+chai.use(require('chai-http'));
 
 // Tests for creating a new bank account
 describe('Creating a bank acocunt', () => {
@@ -153,7 +153,8 @@ describe('Creating a bank acocunt', () => {
   };
 
   it('Should return an error stating owner must be a number', (done) => {
-    api.post('/api/v1/accounts')
+    chai.request(app)
+      .post('/api/v1/accounts')
       .send(emptyOwnerField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -166,7 +167,6 @@ describe('Creating a bank acocunt', () => {
     api.post('/api/v1/accounts')
       .send(missingOwnerField)
       .end((err, res) => {
-        console.log(res, 'BEACON');
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"owner" is required`);
         done();
