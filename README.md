@@ -1,4 +1,4 @@
-# Banka   [![Coverage Status](https://coveralls.io/repos/github/VictorMaria/Banka/badge.svg?branch=develop)](https://coveralls.io/github/VictorMaria/Banka?branch=develop)
+# Banka   [![Coverage Status](https://coveralls.io/repos/github/VictorMaria/Banka/badge.svg?branch=develop)](https://coveralls.io/github/VictorMaria/Banka?branch=develop)  [![Maintainability](https://api.codeclimate.com/v1/badges/32f8d9c2c89d93dac323/maintainability)](https://codeclimate.com/github/VictorMaria/Banka/maintainability)
 ___
 
 Banka is a light-weight core banking application that powers banking operations like account
