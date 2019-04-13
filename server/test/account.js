@@ -1,9 +1,11 @@
 /* eslint-disable no-undef */
 /* eslint-disable quotes */
-import chai, { assert } from 'chai';
+import chai from 'chai';
 import app from '../../app';
 
 chai.use(require('chai-http'));
+
+const assert = chai.assert();
 
 // Tests for creating a new bank account
 describe('Creating a bank acocunt', () => {
