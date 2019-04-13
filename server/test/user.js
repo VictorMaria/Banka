@@ -6,8 +6,6 @@ import app from '../../app';
 
 chai.use(require('chai-http'));
 
-const api = supertest('http://localhost:3000');
-
 // Test for sign up
 const missingEmail = {
   firstName: 'VICTOR',
