@@ -166,7 +166,7 @@ describe('Creating a bank acocunt', () => {
     api.post('/api/v1/accounts')
       .send(missingOwnerField)
       .end((err, res) => {
-        console.log(res);
+        console.log(res, 'BEACON');
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"owner" is required`);
         done();
