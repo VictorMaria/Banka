@@ -25,3 +25,5 @@ coverage/
 .nyc_output/13089924-45cb-4896-82a8-da41cbd50204.json
 
 .nyc_output/71911ed1-806f-4441-8664-ef85d673c954.json
+.node_modules/
+

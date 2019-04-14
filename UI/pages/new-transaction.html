@@ -3,15 +3,15 @@
 	<head>
 	<title>New Transaction</title>
 	 <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
-     <link rel = 'icon' type= 'image/ico' href = 'banka-icon.png' />
-     <link rel = 'stylesheet' type = 'text/css' href = 'styles2.css'>
+     <link rel = 'icon' type= 'image/ico' href = '../images/banka-icon.png' />
+     <link rel = 'stylesheet' type = 'text/css' href = '../styles/styles.css'>
      <link rel = 'stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	</head>
 	<body>
 		<div class = 'topnav' id = 'myTopnav'>
 			<a id = 'logo' href = 'index.html'>BANKA</a>
-			<a href = 'bank-accounts.html'>Bank Accounts</a>
+			<a href = 'all-bank-accounts.html'>Bank Accounts</a>
 			<a href = 'sign-in.html'>Sign Out</a>
 			<a href="javascript:void(0);" class= 'icon' onclick = 'myFunction()'>
     			<i class="fa fa-bars"></i>
@@ -23,7 +23,7 @@
 		</div>
 		<div class = 'wrapper' id = 'wrapper'>
 		<div class = 'new-transaction' id = 'new-transaction'>
-			<h2>New Transaction</h2>
+			<h2 id = 'h2-text'>New Transaction</h2>
 			<input type = 'text' placeholder = 'Account Number'><br><br>
 			<input type = 'text' placeholder = 'John Kamali' disabled><br><br>
 			<input id = 'amount' type = 'text' placeholder = 'Amount'><br><br>
@@ -37,22 +37,12 @@
   			<button class = 'submit' onclick = 'finish()'>Finish</button>
   			</div>
 		</div>
-		</div><br>
+		</div>
 		<footer>
-			<p><a href = 'user-accounts.html'>Admin</a></p>
-			<p><a href = 'bank-accounts.html'>Staff</a></p>
+			<p><a href = 'all-bank-accounts.html'>Staff</a></p>
 			</p>Copyright 2019</p>
 		</footer>
-		<script src = 'banka.js'></script>
-		<script>
-			function myFunction() {
-  				var x = document.getElementById('myTopnav');
-  				if (x.className === "topnav") {
-   				 x.className += ' responsive';
-  				} else {
-   			 x.className = 'topnav';
-  				}
-		}
-	</script>
+		<script src = '../JS/banka.js'></script>
+		<script src  = '../JS/responsive-nav-bar.js'></script>
 	</body>
 </html>

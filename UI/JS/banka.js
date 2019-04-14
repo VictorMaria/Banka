@@ -1,6 +1,6 @@
 // Frontend code for Admin view of a user account
+const display = document.getElementById('display');
 const manage = () => {
-	const display = document.getElementById('display');
 	
 	const basicInfoButton = document.getElementById('basic-info');
 	basicInfoButton.style.background = 'white';
@@ -23,7 +23,6 @@ const manage = () => {
 	}
 	
 const basicInfo = () => {
-	const display = document.getElementById('display');
 	
 	const basicInfoButton = document.getElementById('basic-info');
 	basicInfoButton.style.background = '#ddd';
@@ -41,7 +40,9 @@ const basicInfo = () => {
 						<p><strong>John</strong></p>
 						<p>Lastname</p>
 						<p><strong>Kamali</strong></p>
+						<p>Email</p>
 						<p><strong>jkamali@mail.com</strong></p>
+						<p>Status</p>
 						<p><strong>Active</strong><p>
 						</div>`;
 }	
@@ -59,7 +60,6 @@ const activate = () => {
 
 // Frontend Code for bank accounts in staff view
 const basicBankAccountInfo = () => {
-	const display = document.getElementById('display');
 	
 	const basicInfoButton = document.getElementById('basic-info');
 	basicInfoButton.style.background = '#ddd';
@@ -94,7 +94,6 @@ const basicBankAccountInfo = () => {
 						</div>`;
 }	
 const transactionHistory = () => {
-	const display = document.getElementById('display');
 	
 	const basicInfoButton = document.getElementById('basic-info');
 	basicInfoButton.style.background = 'white';
@@ -113,30 +112,31 @@ const transactionHistory = () => {
 	transactionHistory.style.borderLeft = '5px solid #de4f4f';
 	
 	display.innerHTML = `<p><h1>John Kamali</h1>
+						<strong id = 'strong'>Savings Account 20190300001</strong>	
 	                    <div class = 'topic'><h2>Transaction History</h2></div>
 							<div class = 'history-body'>
-								<div class = 'transaction'>
+								<div class = 'transaction-profile-view'>
 									<p><strong>25 March, 2019  12:30</strong><br>
 										<strong>Credit N600, 000</strong><br>
 										<strong>March Salary</strong><br>
-										<strong>Balance N2, 400, 000</strong><br>
+										<strong>N2, 400, 000</strong><br>
 									</p>
 								</div><br>
-								<div class = 'transaction'>
+								<div class = 'transaction-profile-view'>
 									<p><strong>25 February, 2019  12:30</strong><br>
 										<strong>Credit N600, 000</strong><br>
 										<strong>Febrary Salary</strong><br>
 										<strong>Balance N1, 800, 000</strong>
 									</p>
 								</div><br>
-								<div class = 'transaction'>
+								<div class = 'transaction-profile-view'>
 									<p><strong>25 January, 2019  12:20</strong><br>
 										<strong>Credit N600, 000</strong><br>
 										<strong>January Salary</strong><br>
 										<strong>Balance N1, 200, 000</strong>
 									</p>
 								</div><br>
-								<div class = 'transaction'>
+								<div class = 'transaction-profile-view'>
 									<p><strong>20 December, 2018  12:30</strong><br>
 										<strong>Credit N600, 000</strong><br>
 										<strong>December Salary</strong><br>
@@ -149,7 +149,6 @@ const transactionHistory = () => {
 
 const manageBankAccount = () => {
 	
-	const display = document.getElementById('display');
 	const basicInfoButton = document.getElementById('basic-info');
 	basicInfoButton.style.background = 'white';
 	basicInfoButton.style.color = 'black';
@@ -178,7 +177,6 @@ const manageBankAccount = () => {
 
 // Frontend code for Profile 
 const myBasicInfo = () => {
-	const display = document.getElementById('display');
 	
 	const basicInfoButton = document.getElementById('basic-info');
 	basicInfoButton.style.background = '#ddd';
@@ -208,7 +206,6 @@ const myBasicInfo = () => {
 }
 
 const myBankingInfo = () => {
-	const display = document.getElementById('display');
 	
 	const basicInfoButton = document.getElementById('basic-info');
 	basicInfoButton.style.background = 'white';
@@ -239,7 +236,7 @@ const myBankingInfo = () => {
 }
 
 const myTransactionHistory = () => {
-	const display = document.getElementById('display');
+
 	const basicInfoButton = document.getElementById('basic-info');
 	basicInfoButton.style.background = 'white';
 	basicInfoButton.style.color = 'black';
@@ -255,32 +252,32 @@ const myTransactionHistory = () => {
 	transactionHistory.style.color = '#de4f4f';
 	transactionHistory.style.borderLeft = '5px solid #de4f4f';
 
-	display.innerHTML = `<p><h1>John Kamali</h1>
-						Savings Account 20190300001<p>
+	display.innerHTML = `<h1>John Kamali</h1>
+						<strong id = 'strong'>Savings Account 20190300001</strong>
 						<div class = 'topic'><h2>Transaction History</h2></div>
 						<div class = 'history-body'>
-								<div class = 'transaction'>
+								<div class = 'transaction-profile-view'>
 									<p><strong>25 March, 2019  12:30</strong><br>
 										<strong>Credit N600, 000</strong><br>
 										<strong>March Salary</strong><br>
 										<strong>Balance N2, 400, 000</strong>
 									</p>
 								</div><br>
-								<div class = 'transaction'>
+								<div class = 'transaction-profile-view'>
 									<p><strong>25 February, 2019  12:30</strong><br>
 										<strong>Credit N600, 000</strong><br>
 										<strong>Febrary Salary</strong><br>
 										<strong>Balance N1, 800, 000</strong>
 									</p>
 								</div><br>
-								<div class = 'transaction'>
+								<div class = 'transaction-profile-view'>
 									<p><strong>25 January, 2019  12:20</strong><br>
 										<strong>Credit N600, 000</strong><br>
 										<strong>January Salary</strong><br>
 										<strong>Balance N1, 200, 000</strong>
 									</p>
 								</div><br>
-								<div class = 'transaction'>
+								<div class = 'transaction-profile-view'>
 									<p><strong>20 December, 2018  12:30</strong><br>
 										<strong>Credit N600, 000</strong><br>
 										<strong>December Salary</strong><br>
@@ -288,19 +285,17 @@ const myTransactionHistory = () => {
 									</p>
 								</div><br>
 						</div>`;
-
-
 }
 
 // Frontend code for new transaction
+const wrapperDiv = document.getElementById('wrapper');
 const finish = () => {
-	const wrapperDiv = document.getElementById('wrapper');
 	const options = document.getElementById('options');
 	const selectedOption = options.value;
 
 	if (selectedOption === 'Select Transaction Type')
 		{
-			alert('Please Select Transaction Type');
+			alert('Please Select Transaction type');
 	} else if (selectedOption === 'Credit'){
 		wrapperDiv.innerHTML = `<div class = 'message-board'>
 										<h4>Credit Transaction Successful</h4>
@@ -315,13 +310,12 @@ const finish = () => {
 }
 
 const create = () => {
-	const wrapperDiv = document.getElementById('wrapper');
 	const options = document.getElementById('options');
 	const selectedOption = options.value;
 
 	if (selectedOption === 'Select User Type')
 		{
-			alert('Please Select User Type');
+			alert('Please Select User type');
 	} else if (selectedOption === 'Staff'){
 		wrapperDiv.innerHTML = `<div class = 'message-board'>
 										<h4>New Staff Created</h4>

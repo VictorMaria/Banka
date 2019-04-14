@@ -3,16 +3,16 @@
 	<head>
 	<title>User Accounts</title>
 	 <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
-     <link rel = 'icon' type= 'image/ico' href = 'banka-icon.png' />
-     <link rel = 'stylesheet' type = 'text/css' href = 'styles3.css'>
+     <link rel = 'icon' type= 'image/ico' href = '../images/banka-icon.png' />
+     <link rel = 'stylesheet' type = 'text/css' href = '../styles/styles.css'>
      <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	</head>
 	<body>
 		<div class = 'topnav' id = 'myTopnav'>
 			<a id = 'logo' href = 'index.html'>BANKA</a>
-			<a href = 'user-accounts.html' class = 'active' >User Accounts</a>
-			<a href ='bank-accounts-admin-view.html'>Bank Accounts</a>
+			<a href = 'all-users.html' class = 'active' >User Accounts</a>
+			<a href ='all-bank-accounts-admin-view.html'>Bank Accounts</a>
 			<a href = 'sign-in.html'>Sign Out</a>
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
     			<i class="fa fa-bars"></i>
@@ -20,13 +20,13 @@
 		</div>
 		<div class = 'second-bar'>
 			<a href = 'profile.html'>My Profile</a>
-			<a href = 'new-admin-staff-account.html'>New Admin/Staff</a>
+			<a href = 'new-admin-staff-account.html'>New admin/Staff</a>
 		</div>
 		<div class = 'wrapper'>
 			<div class = 'user-accounts'>
 					<h1>User Accounts</h1>
 				<div class = 'user-account'>
-					<a href = 'user-account.html' class = 'divlink'>
+					<a href = 'one-user.html' class = 'divlink'>
 						<p><strong>John Kamali</strong><br>
 					   	<strong>jkamali@mail.com</strong><br>
 					   	<strong>Active</strong>	
@@ -34,7 +34,7 @@
 					</a>
 				</div><br>
 				<div class = 'user-account'>
-					<a href = 'user-account.html' class = 'divlink'>
+					<a href = 'one-user.html' class = 'divlink'>
 						<p><strong>Fatima Kamali</strong><br>
 					   	<strong>fatima.k@mail.com</strong><br>
 					   	<strong>Active</strong>	
@@ -42,7 +42,7 @@
 					</a>
 				</div><br>
 				<div class = 'user-account'>
-					<a href = 'user-account.html' class = 'divlink'>
+					<a href = 'one-user.html' class = 'divlink'>
 						<p><strong>John Wick</strong><br>
 					   	<strong>johnwick@mail.com</strong><br>
 					   	<strong>Active</strong>	
@@ -50,7 +50,7 @@
 					</a>
 				</div><br>
 				<div class = 'user-account'>
-					<a href = 'user-account.html' class = 'divlink'>
+					<a href = 'one-user.html' class = 'divlink'>
 						<p><strong>Samurai Jack</strong><br>
 					   	<strong>jack@mail.com</strong><br>
 					   	<strong>Active</strong>	
@@ -58,7 +58,7 @@
 					</a>
 				</div><br>
 				<div class = 'user-account'>
-					<a href = 'user-account.html' class = 'divlink'>
+					<a href = 'one-user.html' class = 'divlink'>
 						<p><strong>John Grear</strong><br>
 					   	<strong>grears@samaritan.com</strong><br>
 					   	<strong>Inactive</strong>	
@@ -66,7 +66,7 @@
 					</a>
 				</div><br>
 				<div class = 'user-account'>
-					<a href = 'user-account.html' class = 'divlink'>
+					<a href = 'one-user.html' class = 'divlink'>
 						<p><strong>John Reese</strong><br>
 					   	<strong>john.reese@mail.com</strong><br>
 					   	<strong>Inactive</strong>	
@@ -74,21 +74,12 @@
 					</a>
 				</div><br>
 			</div>
-		</div><br>
+		</div>
 		<footer>
-			<p><a href = 'user-accounts.html'>Admin</a></p>
-			<p><a href = 'bank-accounts.html'>Staff</a></p>
+			<p><a href = 'all-users.html'>Admin</a></p>
+			<p><a href = 'all-bank-accounts-admin-view.html'>Staff</a></p>
 		</p>Copyright 2019</p>
 		</footer>
-		<script>
-			function myFunction() {
-  				var x = document.getElementById("myTopnav");
-  				if (x.className === "topnav") {
-   				 x.className += " responsive";
-  				} else {
-   			 x.className = "topnav";
-  				}
-}
-		</script>
+		<script src  = '../JS/responsive-nav-bar.js'></script>
 	</body>
 </html>
