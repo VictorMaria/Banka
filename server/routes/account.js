@@ -1,14 +1,11 @@
 import express from 'express';
-import account from '../controllers/account';
+import accountController from '../controllers/account';
+import bankAccountSchema from '../validation/bankAccountValidation';
+import validator from '../middleware/validator';
 
 const router = express.Router();
 
-router.post('/accounts', account.createBankAccount);
-router.get('/accounts/:accountNumber', account.findBankAccount);
-router.patch('/accounts/:accountNumber', account.activateDeactivate);
-router.get('/accounts/:accountNumber/balance', account.checkBalance);
-router.post('/transactions/:accountNumber/credit', account.creditAccount);
-router.post('/transactions/:accountNumber/debit', account.debitAccount);
-router.delete('/accounts/:accountNumber', account.deleteBankAccount);
+router.post('/accounts', validator(bankAccountSchema), accountController.createBankAccount);
+
 
 export default router;
