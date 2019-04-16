@@ -118,5 +118,13 @@ class Account {
     sendEmailNotification(bankAccount.email, emailSubject, transaction.transactionType, transaction.transactionDate, transaction.amount, transaction.remark, transaction.accountBalance);
     return transaction;
   }
+
+  static deleteBankAccount(accountNumber) {
+    const bankAccount = bankAccounts.find(b => b.accountNumber === accountNumber);
+    const index = bankAccounts.indexOf(bankAccount);
+    bankAccounts.splice(index, 1);
+    const message = `Bank Account ${accountNumber} Successfully Deleted`;
+    return message;
+  }
 }
 export default Account;
