@@ -39,4 +39,5 @@ const sendEmailNotification = (recipient, emailSubject, transactionType, transac
     }
   });
 };
-export default sendEmailNotification;
+// eslint-disable-next-line import/prefer-default-export
+export { sendEmailNotification };

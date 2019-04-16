@@ -3,88 +3,17 @@
 import chai, { assert } from 'chai';
 import path from 'path';
 import app from '../../app';
+import userData from './userData';
+
 
 chai.use(require('chai-http'));
 
 // Test for sign up
-const missingEmail = {
-  firstName: 'VICTOR',
-  lastname: 'AJAYI',
-  password: 'bankas',
-};
-
-const missingFirstName = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  lastName: 'AJAYI',
-  password: 'bankas',
-};
-
-const missingLastName = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  firstName: 'VICTOR',
-  password: 'bankas',
-};
-
-const missingPassword = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  firstName: 'VICTOR',
-  lastName: 'AJAYI',
-};
-
-const emptyEmail = {
-  email: '',
-  firstName: 'VICTOR',
-  lastname: 'AJAYI',
-  password: 'bankas',
-};
-
-const invalidEmail = {
-  email: 'VICTOR.ABAYOMIoutlook.com',
-  firstName: 'VICTOR',
-  lastname: 'AJAYI',
-  password: 'bankas',
-};
-
-const emptyFirstName = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  firstName: '',
-  lastName: 'AJAYI',
-  password: 'bankas',
-};
-
-const emptyLastName = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  firstName: 'VICTOR',
-  lastName: '',
-  password: 'bankas',
-};
-
-const emptyPassword = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  firstName: 'VICTOR',
-  lastName: 'AJAYI',
-  password: '',
-};
-
-const wrongPasswordLength = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  firstName: 'VICTOR',
-  lastName: 'AJAYI',
-  password: 'banka',
-};
-
-const completeSignUpDetails = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  firstName: 'VICTOR',
-  lastName: 'AJAYI',
-  password: 'bankas',
-};
-
 describe('Signing up', () => {
   it('Should return an error for missing email field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(missingEmail)
+      .send(userData.missingEmail)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"email" is required`);
@@ -94,7 +23,7 @@ describe('Signing up', () => {
   it('Should return an error for missing firstName field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(missingFirstName)
+      .send(userData.missingFirstName)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"firstName" is required`);
@@ -104,7 +33,7 @@ describe('Signing up', () => {
   it('Should return an error for missing lastName field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(missingLastName)
+      .send(userData.missingLastName)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"lastName" is required`);
@@ -114,7 +43,7 @@ describe('Signing up', () => {
   it('Should return an error for missing password field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(missingPassword)
+      .send(userData.missingPassword)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"password" is required`);
@@ -124,7 +53,7 @@ describe('Signing up', () => {
   it('Should return an error for empty email field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(emptyEmail)
+      .send(userData.emptyEmail)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"email" is not allowed to be empty`);
@@ -134,7 +63,7 @@ describe('Signing up', () => {
   it('Should return an error for an invalid email', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(invalidEmail)
+      .send(userData.invalidEmail)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"email" must be a valid email`);
@@ -144,7 +73,7 @@ describe('Signing up', () => {
   it('Should return an error for empty firstName field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(emptyFirstName)
+      .send(userData.emptyFirstName)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"firstName" is not allowed to be empty`);
@@ -154,7 +83,7 @@ describe('Signing up', () => {
   it('Should return an error for empty lastName field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(emptyLastName)
+      .send(userData.emptyLastName)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"lastName" is not allowed to be empty`);
@@ -164,7 +93,7 @@ describe('Signing up', () => {
   it('Should return an error for empty passsword field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(emptyPassword)
+      .send(userData.emptyPassword)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"password" is not allowed to be empty`);
@@ -174,7 +103,7 @@ describe('Signing up', () => {
   it('Should return an error for a short or weak password', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(wrongPasswordLength)
+      .send(userData.wrongPasswordLength)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"password" length must be at least 6 characters long`);
@@ -184,11 +113,11 @@ describe('Signing up', () => {
   it('A successful sign up should return an object of key-pair values', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(completeSignUpDetails)
+      .send(userData.completeSignUpDetails)
       .end((err, res) => {
-        assert.equal((res.body.status), 201);
+        assert.equal((res.body.status), 200);
         assert.property((res.body.data), 'token');
-        assert.equal((res.body.data.id), 1);
+        assert.equal((res.body.data.id), 3);
         assert.equal((res.body.data.firstName), 'Victor');
         assert.equal((res.body.data.lastName), 'Ajayi');
         assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
@@ -199,7 +128,7 @@ describe('Signing up', () => {
   it('Atempting to sign up again with the same email should return an error', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(completeSignUpDetails)
+      .send(userData.completeSignUpDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), 'Email already in use');
@@ -209,47 +138,11 @@ describe('Signing up', () => {
 });
 
 // Test for sign in
-const missingEmailSignIn = {
-  password: 'bankas',
-};
-const missingPasswordSignIn = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-};
-
-const emptyEmailSignIn = {
-  email: '',
-  password: 'bankas',
-};
-const emptyPasswordSignIn = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  password: '',
-};
-
-const invalidEmailSignIn = {
-  email: 'VICTOR.ABAYOMIoutlook.com',
-  password: 'bankas',
-};
-
-const nonExistingUser = {
-  email: 'Victor@outlook.com',
-  password: 'bankas',
-};
-
-const wrongPasswordSignIn = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  password: 'banka',
-};
-
-const correctSignInDetails = {
-  email: 'VICTOR.ABAYOMI@outlook.com',
-  password: 'bankas',
-};
-
 describe('Signing in', () => {
   it('Should return an error for missing email field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(missingEmailSignIn)
+      .send(userData.missingEmailSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"email" is required`);
@@ -259,7 +152,7 @@ describe('Signing in', () => {
   it('Should return an error for missing password field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(missingPasswordSignIn)
+      .send(userData.missingPasswordSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"password" is required`);
@@ -269,7 +162,7 @@ describe('Signing in', () => {
   it('Should return an error for empty email field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(emptyEmailSignIn)
+      .send(userData.emptyEmailSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"email" is not allowed to be empty`);
@@ -279,7 +172,7 @@ describe('Signing in', () => {
   it('Should return an error for empty password field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(emptyPasswordSignIn)
+      .send(userData.emptyPasswordSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"password" is not allowed to be empty`);
@@ -289,7 +182,7 @@ describe('Signing in', () => {
   it('Should return an error for an invalid email', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(invalidEmailSignIn)
+      .send(userData.invalidEmailSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), `"email" must be a valid email`);
@@ -300,7 +193,7 @@ describe('Signing in', () => {
   it('Should return an error for a non existing user', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(nonExistingUser)
+      .send(userData.nonExistingUser)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), 'Incorrect Email');
@@ -310,7 +203,7 @@ describe('Signing in', () => {
   it('Should return an error for a wrong password', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(wrongPasswordSignIn)
+      .send(userData.wrongPasswordSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), 'Incorrect Password');
@@ -320,11 +213,11 @@ describe('Signing in', () => {
   it('A successful sign in should return an object of key-pair values', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(correctSignInDetails)
+      .send(userData.correctSignInDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.property((res.body.data), 'token');
-        assert.equal((res.body.data.id), 1);
+        assert.equal((res.body.data.id), 3);
         assert.equal((res.body.data.firstName), 'Victor');
         assert.equal((res.body.data.lastName), 'Ajayi');
         assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
@@ -347,10 +240,10 @@ describe('Fetching a specific user', () => {
   });
   it('Fetching a speciific and existing user should return an object of key-pair values', (done) => {
     chai.request(app)
-      .get('/api/v1/users/1')
+      .get('/api/v1/users/3')
       .end((err, res) => {
         assert.equal((res.body.status), 200);
-        assert.equal((res.body.data.id), 1);
+        assert.equal((res.body.data.id), 3);
         assert.equal((res.body.data.firstName), 'Victor');
         assert.equal((res.body.data.lastName), 'Ajayi');
         assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
@@ -376,7 +269,7 @@ describe('Uploading profile photo', () => {
 
   it('Uploading nothing should throw an error', (done) => {
     chai.request(app)
-      .post('/api/v1/users/1/profilephotos')
+      .post('/api/v1/users/3/profilephotos')
       .attach('profilePhoto', '')
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -387,7 +280,7 @@ describe('Uploading profile photo', () => {
 
   it('Uploading a file asides an image should throw an error', (done) => {
     chai.request(app)
-      .post('/api/v1/users/1/profilephotos')
+      .post('/api/v1/users/3/profilephotos')
       .attach('profilePhoto', fileLocation)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -398,11 +291,11 @@ describe('Uploading profile photo', () => {
 
   it('A successful upload should return an object of key-pair values', (done) => {
     chai.request(app)
-      .post('/api/v1/users/1/profilephotos')
+      .post('/api/v1/users/3/profilephotos')
       .attach('profilePhoto', photoLocation)
       .end((err, res) => {
         assert.equal((res.body.status), 200);
-        assert.equal((res.body.data.id), 1);
+        assert.equal((res.body.data.id), 3);
         assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
         assert.include((res.body.data.profilePhoto), 'henrydanger');
         done();
