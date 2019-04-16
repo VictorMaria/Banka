@@ -1,4 +1,5 @@
 import users from '../storage/users';
+import helper from '../helpers/helpers';
 
 let uniqueUserId = 2;
 
@@ -28,6 +29,25 @@ class User {
       email: user.email,
       type: user.type,
       profilePhoto: user.profilePhoto,
+    };
+    return response;
+  }
+
+  static checkForEmail(data) {
+    const user = users.find(u => u.email === (data.email).toLowerCase());
+    return user;
+  }
+
+  static signIn(data) {
+    const user = users.find(u => u.email === (data.email).toLowerCase());
+    const userToken = helper.generateToken(user.id, user.isAdmin, user.isStaff);
+    const response = {
+      token: userToken,
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      type: user.type,
     };
     return response;
   }
