@@ -22,5 +22,15 @@ class accountController {
     const activateDeactivate = Account.activateDeactivate(req.params.accountNumber);
     return res.status(200).send({ status: 200, data: activateDeactivate });
   }
+
+  static creditAccount(req, res) {
+    const bankAccount = Account.findBankAccount(req.params.accountNumber);
+    if (!bankAccount) {
+      return res.status(404).send({ status: 404, error: 'Bank Account not found' });
+    }
+    const creditAccountResponse = Account.creditAccount(req.params.accountNumber, req.body);
+    return res.status(200).send({ status: 200, data: creditAccountResponse });
+  }
+
 }
 export default accountController;
