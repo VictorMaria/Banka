@@ -13,6 +13,7 @@ router.post('/accounts', validator(bankAccountSchema), accountController.createB
 router.get('/accounts/:accountNumber', accountController.findBankAccount);
 router.patch('/accounts/:accountNumber', verifyToken, checkIfAdminStaff, accountController.activateDeactivate);
 router.post('/transactions/:accountNumber/credit', verifyToken, checkIfStaff, validator(transactionSchema), accountController.creditAccount);
+router.post('/transactions/:accountNumber/debit', verifyToken, checkIfStaff, validator(transactionSchema), accountController.debitAccount);
 
 
 export default router;

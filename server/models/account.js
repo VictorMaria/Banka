@@ -92,5 +92,31 @@ class Account {
     return transaction;
   }
 
+  static debitAccount(accountNumber, data) {
+    const bankAccount = bankAccounts.find(b => b.accountNumber === accountNumber);
+    if (data.amount > bankAccount.balance) {
+      return 'Insufficient Funds';
+    }
+    transactionUniqueId += 1;
+    bankAccount.balance -= parseFloat(data.amount);
+    bankAccount.balance = bankAccount.balance.toFixed(2);
+    const refinedBalance = bankAccount.balance;
+    bankAccount.balance = parseFloat(bankAccount.balance);
+
+    const transaction = {
+      transactionId: transactionUniqueId,
+      accountNumber: bankAccount.accountNumber,
+      transactionDate: new Date().toString(),
+      amount: parseFloat(data.amount).toFixed(2),
+      cashier: data.cashier,
+      transactionType: 'Debit',
+      remark: data.remark,
+      accountBalance: refinedBalance,
+    };
+    transactions.push(transaction);
+    const emailSubject = `${transaction.transactionType} Alert`;
+    sendEmailNotification(bankAccount.email, emailSubject, transaction.transactionType, transaction.transactionDate, transaction.amount, transaction.remark, transaction.accountBalance);
+    return transaction;
+  }
 }
 export default Account;

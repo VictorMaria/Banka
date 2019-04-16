@@ -32,5 +32,16 @@ class accountController {
     return res.status(200).send({ status: 200, data: creditAccountResponse });
   }
 
+  static debitAccount(req, res) {
+    const bankAccount = Account.findBankAccount(req.params.accountNumber);
+    if (!bankAccount) {
+      return res.status(404).send({ status: 404, error: 'Bank Account not found' });
+    }
+    const debitAccount = Account.debitAccount(req.params.accountNumber, req.body);
+    if (debitAccount === 'Insufficient Funds') {
+      return res.status(400).send({ status: 400, error: debitAccount });
+    }
+    return res.status(200).send({ status: 200, data: debitAccount });
+  }
 }
 export default accountController;
