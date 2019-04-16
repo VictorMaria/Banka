@@ -1,7 +1,10 @@
 import bankAccounts from '../storage/bankAccounts';
+import transactions from '../storage/transactions';
+import { sendEmailNotification } from '../helpers/postals';
 
 let accountUniqueId = 0;
 let accountNumberUniqueId = 0;
+let transactionUniqueId = 0;
 
 class Account {
   static createBankAccount(data) {
@@ -63,5 +66,31 @@ class Account {
       status: bankAccount.status,
     };
   }
+
+  static creditAccount(accountNumber, data) {
+    const bankAccount = bankAccounts.find(b => b.accountNumber === accountNumber);
+    transactionUniqueId += 1;
+    bankAccount.balance += parseFloat(data.amount);
+    bankAccount.balance = bankAccount.balance.toFixed(2);
+    const refinedBalance = bankAccount.balance;
+    bankAccount.balance = parseFloat(bankAccount.balance);
+
+    const transaction = {
+      transactionId: transactionUniqueId,
+      accountNumber: bankAccount.accountNumber,
+      transactionDate: new Date().toString(),
+      amount: parseFloat(data.amount).toFixed(2),
+      cashier: data.cashier,
+      transactionType: 'Credit',
+      remark: data.remark,
+      accountBalance: refinedBalance,
+    };
+    transactions.push(transaction);
+    const emailSubject = `${transaction.transactionType} Alert`;
+    // eslint-disable-next-line max-len
+    sendEmailNotification(bankAccount.email, emailSubject, transaction.transactionType, transaction.transactionDate, transaction.amount, transaction.remark, transaction.accountBalance);
+    return transaction;
+  }
+
 }
 export default Account;
