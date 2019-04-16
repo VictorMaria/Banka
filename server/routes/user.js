@@ -1,12 +1,12 @@
 import express from 'express';
-import user from '../controllers/user';
+import userController from '../controllers/user';
 import upload from '../helpers/upload-profile-photo';
+import validator from '../middleware/validator';
+import signUpSchema from '../validation/signUpValidation';
+import signInSchema from '../validation/signInValidation';
 
 const router = express.Router();
 
-router.post('/auth/signup', user.signUp);
-router.post('/auth/signin', user.signIn);
-router.get('/users/:id', user.getUser);
-router.post('/users/:id/profilephotos', user.quickCheck, upload.single('profilePhoto'), user.uploadProfilePhoto);
+router.post('/auth/signup', validator(signUpSchema), userController.signUp);
 
 export default router;
