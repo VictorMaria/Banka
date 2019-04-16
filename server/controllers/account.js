@@ -23,6 +23,15 @@ class accountController {
     return res.status(200).send({ status: 200, data: activateDeactivate });
   }
 
+  static checkBalance(req, res) {
+    const bankAccount = Account.findBankAccount(req.params.accountNumber);
+    if (!bankAccount) {
+      return res.status(404).send({ status: 404, error: 'Bank Account not found' });
+    }
+    const balance = Account.checkBalance(req.params.accountNumber);
+    return res.status(200).send({ status: 200, data: balance });
+  }
+
   static creditAccount(req, res) {
     const bankAccount = Account.findBankAccount(req.params.accountNumber);
     if (!bankAccount) {
