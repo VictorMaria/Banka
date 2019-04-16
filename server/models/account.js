@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import bankAccounts from '../storage/bankAccounts';
 import transactions from '../storage/transactions';
 import { sendEmailNotification } from '../helpers/postals';
@@ -40,7 +41,7 @@ class Account {
 
   // eslint-disable-next-line consistent-return
   static findBankAccount(accountNumber) {
-    const bankAccount = bankAccounts.find(b => b.accountNumber === accountNumber);
+    const bankAccount = bankAccounts.find(item => item.accountNumber === accountNumber);
     if (bankAccount) {
       return {
         accountNumber: bankAccount.accountNumber,
@@ -55,7 +56,7 @@ class Account {
   }
 
   static activateDeactivate(accountNumber) {
-    const bankAccount = bankAccounts.find(b => b.accountNumber === accountNumber);
+    const bankAccount = bankAccounts.find(item => item.accountNumber === accountNumber);
     if (bankAccount.status === 'dormant' || bankAccount.status === 'draft') {
       bankAccount.status = 'active';
     } else {
@@ -67,8 +68,20 @@ class Account {
     };
   }
 
+  static checkBalance(accountNumber) {
+    const bankAccount = bankAccounts.find(item => item.accountNumber === accountNumber);
+    const response = {
+      accountNumber: bankAccount.accountNumber,
+      firstName: bankAccount.firstName,
+      lastName: bankAccount.lastName,
+      type: bankAccount.type,
+      accountBalance: bankAccount.balance.toFixed(2),
+    };
+    return response;
+  }
+
   static creditAccount(accountNumber, data) {
-    const bankAccount = bankAccounts.find(b => b.accountNumber === accountNumber);
+    const bankAccount = bankAccounts.find(item => item.accountNumber === accountNumber);
     transactionUniqueId += 1;
     bankAccount.balance += parseFloat(data.amount);
     bankAccount.balance = bankAccount.balance.toFixed(2);
@@ -93,7 +106,7 @@ class Account {
   }
 
   static debitAccount(accountNumber, data) {
-    const bankAccount = bankAccounts.find(b => b.accountNumber === accountNumber);
+    const bankAccount = bankAccounts.find(item => item.accountNumber === accountNumber);
     if (data.amount > bankAccount.balance) {
       return 'Insufficient Funds';
     }
@@ -120,7 +133,7 @@ class Account {
   }
 
   static deleteBankAccount(accountNumber) {
-    const bankAccount = bankAccounts.find(b => b.accountNumber === accountNumber);
+    const bankAccount = bankAccounts.find(item => item.accountNumber === accountNumber);
     const index = bankAccounts.indexOf(bankAccount);
     bankAccounts.splice(index, 1);
     const message = `Bank Account ${accountNumber} Successfully Deleted`;

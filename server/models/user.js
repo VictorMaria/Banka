@@ -34,12 +34,12 @@ class User {
   }
 
   static checkForEmail(data) {
-    const user = users.find(u => u.email === (data.email).toLowerCase());
+    const user = users.find(item => item.email === (data.email).toLowerCase());
     return user;
   }
 
   static signIn(data) {
-    const user = users.find(u => u.email === (data.email).toLowerCase());
+    const user = users.find(item => item.email === (data.email).toLowerCase());
     const userToken = helper.generateToken(user.id, user.isAdmin, user.isStaff);
     const response = {
       token: userToken,
@@ -48,6 +48,43 @@ class User {
       lastName: user.lastName,
       email: user.email,
       type: user.type,
+    };
+    return response;
+  }
+
+  // eslint-disable-next-line consistent-return
+  static getUser(id) {
+    const user = users.find(item => item.id === parseInt(id, 10));
+    if (user) {
+      return {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        type: user.type,
+        profilePhoto: user.profilePhoto,
+      };
+    }
+  }
+
+  // eslint-disable-next-line consistent-return
+  static quickCheck(id) {
+    const user = users.find(item => item.id === parseInt(id, 10));
+    if (user) {
+      return true;
+    }
+  }
+
+  static uploadProfilePhoto(id, file) {
+    const user = users.find(item => item.id === parseInt(id, 10));
+    if (!file) {
+      return 'Select an Image';
+    }
+    user.profilePhoto = file.path;
+    const response = {
+      id: user.id,
+      email: user.email,
+      profilePhoto: user.profilePhoto,
     };
     return response;
   }
