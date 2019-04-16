@@ -14,6 +14,7 @@ router.get('/accounts/:accountNumber', accountController.findBankAccount);
 router.patch('/accounts/:accountNumber', verifyToken, checkIfAdminStaff, accountController.activateDeactivate);
 router.post('/transactions/:accountNumber/credit', verifyToken, checkIfStaff, validator(transactionSchema), accountController.creditAccount);
 router.post('/transactions/:accountNumber/debit', verifyToken, checkIfStaff, validator(transactionSchema), accountController.debitAccount);
+router.delete('/accounts/:accountNumber', verifyToken, checkIfAdminStaff, accountController.deleteBankAccount);
 
 
 export default router;
