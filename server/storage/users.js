@@ -4,7 +4,7 @@ const users = [
     email: 'sophie.kamali@outlook.com',
     firstName: 'Sophie',
     lastName: 'Kamali',
-    type: 'admin',
+    type: 'user',
     isAdmin: false,
     isStaff: false,
     profilePhoto: '/server/uploads/ninja-avi.jpg',
