@@ -9,24 +9,24 @@ chai.use(require('chai-http'));
 
 // Tests for creating a new bank account
 describe('Creating a bank acocunt', () => {
-  it('Should return an error stating owner must be a number', (done) => {
+  it('Should return an error stating userID must be a number', (done) => {
     chai.request(app)
       .post('/api/v1/accounts')
-      .send(bankAccountData.emptyOwnerField)
+      .send(bankAccountData.emptyUserIDField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
-        assert.equal((res.body.error), `"owner" must be a number`);
+        assert.equal((res.body.error), `"userID" must be a number`);
         done();
       });
   });
 
-  it('Should return an error stating owner field is required', (done) => {
+  it('Should return an error stating userID field is required', (done) => {
     chai.request(app)
       .post('/api/v1/accounts')
-      .send(bankAccountData.missingOwnerField)
+      .send(bankAccountData.missingUserIDField)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
-        assert.equal((res.body.error), `"owner" is required`);
+        assert.equal((res.body.error), `"userID" is required`);
         done();
       });
   });

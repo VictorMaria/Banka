@@ -1,6 +1,6 @@
 const bankAccountData = {
-  emptyOwnerField: {
-    owner: '',
+  emptyUserIDField: {
+    userID: '',
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
@@ -8,7 +8,7 @@ const bankAccountData = {
     openingBalance: '200.00',
   },
 
-  missingOwnerField: {
+  missingUserIDField: {
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
@@ -17,7 +17,7 @@ const bankAccountData = {
   },
 
   emptyFirstNameField: {
-    owner: 1,
+    userID: 1,
     firstName: '',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
@@ -26,7 +26,7 @@ const bankAccountData = {
   },
 
   missingFirstNameField: {
-    owner: 1,
+    userID: 1,
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
     type: 'savings',
@@ -34,7 +34,7 @@ const bankAccountData = {
   },
 
   emptyLastNameField: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: '',
     email: 'victor.abayomi@outlook.com',
@@ -43,7 +43,7 @@ const bankAccountData = {
   },
 
   missingLastNameField: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     email: 'victor.abayomi@outlook.com',
     type: 'savings',
@@ -51,7 +51,7 @@ const bankAccountData = {
   },
 
   emptyEmailField: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: '',
@@ -60,7 +60,7 @@ const bankAccountData = {
   },
 
   missingEmailField: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     type: 'savings',
@@ -68,7 +68,7 @@ const bankAccountData = {
   },
 
   invalidEmail: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomioutlook.com',
@@ -77,7 +77,7 @@ const bankAccountData = {
   },
 
   emptyTypeField: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
@@ -86,7 +86,7 @@ const bankAccountData = {
   },
 
   missingTypeField: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
@@ -94,7 +94,7 @@ const bankAccountData = {
   },
 
   invalidType: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
@@ -103,7 +103,7 @@ const bankAccountData = {
   },
 
   emptyOpeningBalanceField: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
@@ -112,14 +112,14 @@ const bankAccountData = {
   },
 
   missingOpeningBalanceField: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
     type: 'savings',
   },
   invalidOpeningBalance: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
@@ -127,7 +127,7 @@ const bankAccountData = {
     openingBalance: '200.0',
   },
   completeDetails: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',
@@ -135,7 +135,7 @@ const bankAccountData = {
     openingBalance: '200.00',
   },
   completeDetailsTwo: {
-    owner: 1,
+    userID: 1,
     firstName: 'Victor',
     lastName: 'Ajayi',
     email: 'victor.abayomi@outlook.com',

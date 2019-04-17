@@ -14,7 +14,7 @@ class Account {
     const bankAccount = {
       id: bankAccounts.length + accountUniqueId,
       accountNumber: `${2019000 + accountNumberUniqueId}`,
-      owner: data.owner,
+      userID: data.userID,
       firstName: (data.firstName[0]).toUpperCase() + (data.firstName).slice(1).toLowerCase(),
       lastName: (data.lastName[0]).toUpperCase() + (data.lastName).slice(1).toLowerCase(),
       email: (data.email).toLowerCase(),
@@ -27,7 +27,7 @@ class Account {
 
     bankAccounts.push(bankAccount);
     const response = {
-      owner: bankAccount.owner,
+      userID: bankAccount.userID,
       accountNumber: bankAccount.accountNumber,
       firstName: bankAccount.firstName,
       lastName: bankAccount.lastName,
