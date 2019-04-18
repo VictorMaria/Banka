@@ -4,6 +4,7 @@ node_modules/
 
 coverage/
 
+<<<<<<< HEAD
 dist/
 
 .env
@@ -11,3 +12,11 @@ dist/
 nyc_output/
 
 .nyc_output/
+=======
+.dist/
+
+.env
+
+.nyc_output/
+
+>>>>>>> gh-pages
