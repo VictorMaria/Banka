@@ -5,3 +5,8 @@
 .coverage/
 
 .dist/
+
+.env
+
+.nyc_output/
+
