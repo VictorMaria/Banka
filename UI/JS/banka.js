@@ -13,7 +13,6 @@ const manage = () => {
 	manageButton.style.borderLeft = '5px solid #de4f4f';
 	
 	display.innerHTML = `<h1>John Kamali</h1>
-	                    <div class = 'topic'><h2>Manage Account</h2></div>
 						<div id = 'main-body'>
 						<h2>Activate Account</h2>
 						<button onclick = 'activate()' id = 'activate'>Activate</button>
@@ -34,16 +33,11 @@ const basicInfo = () => {
 	manageButton.style.color = 'black';
 	manageButton.style.border = 'white';
 	display.innerHTML = `<h1>John Kamali</h1>
-						<div class = 'topic'><h2>Basic Information</h2></div>
 						<div class = 'main-body'>
-						<p>Firstname</p>
-						<p><strong>John</strong></p>
-						<p>Lastname</p>
-						<p><strong>Kamali</strong></p>
-						<p>Email</p>
-						<p><strong>jkamali@mail.com</strong></p>
-						<p>Status</p>
-						<p><strong>Active</strong><p>
+						<div class = 'avi'><img src = '../images/ninja-avi.jpg'></img></div><br><br>
+						<p>First Name: <strong>John</strong><br><br>
+						Last Name: <strong>Kamali</strong><br><br>
+						Email: <strong>john.kamali@outlook.com</strong></p><br>
 						</div>`;
 }	
 
@@ -77,7 +71,6 @@ const basicBankAccountInfo = () => {
 	transactionHistory.style.color = 'black';
 	transactionHistory.style.border = 'white';
 	display.innerHTML = `<h1>John Kamali</h1>
-						<div class = 'topic'><h2>Basic Information</h2></div>
 						<div class = 'main-body'>
 							<p>Savings Account Number<br><strong>20190300001</strong><br><br>
 								Balance<br>
@@ -113,7 +106,6 @@ const transactionHistory = () => {
 	
 	display.innerHTML = `<p><h1>John Kamali</h1>
 						<strong id = 'strong'>Savings Account 20190300001</strong>	
-	                    <div class = 'topic'><h2>Transaction History</h2></div>
 							<div class = 'history-body'>
 								<div class = 'transaction-profile-view'>
 									<p><strong>25 March, 2019  12:30</strong><br>
@@ -194,15 +186,12 @@ const myBasicInfo = () => {
 	transactionHistory.style.border = 'white';
 
 	display.innerHTML = `<h1>John Kamali</h1>
-						<div class = 'topic'><h2>Basic Information</h2></div>
 						<div class = 'main-body'>
-						<p>Firstname<br>
-							<strong>John</strong><br>
-							Lastname<br>
-							<strong>Kamali</strong><br>
-							Email<br>
-							<strong>jkamali@mail.com</strong><br>
-							</div>`;
+						<div class = 'avi'><img src = '../images/ninja-avi.jpg'></img></div><br><br>
+						<p>First Name: <strong>John</strong><br><br>
+						Last Name: <strong>Kamali</strong><br><br>
+						Email: <strong>john.kamali@outlook.com</strong></p><br>
+						</div>`;
 }
 
 const myBankingInfo = () => {
@@ -223,7 +212,6 @@ const myBankingInfo = () => {
 	transactionHistory.style.border = 'white';
 
 	display.innerHTML = `<h1>John Kamali</h1>
-						<div class = 'topic'><h2>Banking Information</h2></div>
 						<div class = 'main-body'>
 							Savings Account Number<br>
 							<strong>20190300001</strong><br>
@@ -254,7 +242,6 @@ const myTransactionHistory = () => {
 
 	display.innerHTML = `<h1>John Kamali</h1>
 						<strong id = 'strong'>Savings Account 20190300001</strong>
-						<div class = 'topic'><h2>Transaction History</h2></div>
 						<div class = 'history-body'>
 								<div class = 'transaction-profile-view'>
 									<p><strong>25 March, 2019  12:30</strong><br>
