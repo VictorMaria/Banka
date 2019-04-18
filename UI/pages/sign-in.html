@@ -8,24 +8,29 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	</head>
-	<body>
+	<body id = 'index'>
 		<div class = 'topnav' id = 'myTopnav'>
 			<a id = 'logo' href = 'index.html'>BANKA</a>
 		</div>
 		<div class = 'wrapper'>
 		<div class = 'sign-in'>
 			<h2 id = 'h2-text'>Sign In here</h2>
-			<input type = 'text' placeholder = 'Email'><br><br>
+			<input type = 'text' placeholder = 'Email' id = 'email'><br><br>
 			<input type = 'text' placeholder = 'Password'><br><br>
   			<div class = 'submit-div'>
-  			<button class = 'submit' onclick = "location.href = 'profile.html'">Sign In</button><br>
-  			</div><br>
+  			<button class = 'submit' onclick = 'signIn()'>Sign In</button><br>
+			  </div><br>
+			  <h2 id = 'h2-text'>Start Banking with us</h2>
+			  <div class = 'submit-div'>
+					<button class = 'submit' onclick = "location.href = 'new-bank-account.html'">Open Bank Account</button><br>
+					</div><br>
   			<p>New Here?<a href = 'sign-up.html'> Sign Up</a></p>
   			<p>Forgot your password?<a href = ''> Reset Password</a></p>
 		</div>
-		</div>
+		</div><br>
 		<footer>
 		</p>Copyright 2019</p>
 		</footer>
+		<script src = '../JS/sign-in.js'></script>
 	</body>
 </html>

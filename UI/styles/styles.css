@@ -11,9 +11,9 @@ body {
     overflow-x: hidden; 
 	}
 
-/* Background image for index page */	
+/* Background image for index, sign-in and create account page */	
 #index {	
-	background: url('../images/bright.jpg') no-repeat center center / cover;	
+	 background: url('../images/kudi.jpeg') no-repeat center center / cover;	 
 	}
 
 /* Navigation bar */	
@@ -82,58 +82,25 @@ a.active {
 	align-items: flex-start;
 }
 
-/* Landing Page Buttons*/
-#sign-up {
-	color: white;
-	background-color: #de4f4f;
-	font-size: 40px;
-	width: 200px;
-	height: 50px;
-	border: solid 1px #de4f4f;
-	text-decoration: none;
+.sign-up, .sign-in, .new-bank-account, .new-transaction {
+	background-color: white;
+	width: 30%;
 	text-align: center;
-	border-radius: 5px;
-}
-#sign-in {
-	color: #de4f4f;
-	font-size: 40px;
-	width: 200px;
-	height: 50px;
-	border: solid 1px #de4f4f;
-	text-decoration: none;
-	text-align: center;
-	background-color: black;
-	border-radius: 5px;
-}	
-#new-bank {
-	color: white;
-	font-size: 40px;
-	background-color: #de4f4f;
-	width: 300px;
-	height: 50px;
-	border: solid 1px #de4f4f;
-	text-decoration: none;
-	text-align: center;
-	border-radius: 5px;
+	border-radius: 10px;
+	opacity: 0.9;
+	box-shadow: 1px 1px 8px 4px #f7f7f7;
 }
 
-/* Landing Page Intro */
-.intro {
-	color: black;
-  top: 0;
-  display: flex;
-	align-items: center;
-  width: 100%;
-  min-height: 100vh;
-	flex-direction: column;
-}
+
+
 
 /* Profile pages */
 .tabs {
-	width: 40%;
+	width: 25%;
+	padding-left: 10%;
 }
 .display {
-	width: 55%;
+	width: 75%;
 }
 .topic {
 	height: 40px;
@@ -141,18 +108,24 @@ a.active {
 }
 
 #main-body {
-	width: 45%;
+	width: 70%;
 	padding: 5px;
 	background-color: #ddd;
 	border-radius: 5px;
 	text-align: center;
 }
 .main-body {
-	width: 45%;
+	width: 70%;
 	padding: 5px;
 	background-color: #ddd;
 	border-radius: 5px;
 	border-left: 10px solid #de4f4f;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+img {
+	border-radius: 10px;
 }
 
 /* user accounts, transactions, bank accounts */
@@ -176,7 +149,7 @@ a.active {
 .transaction-profile-view {
 	border-left: solid 7px #de4f4f;
 	color: black;
-	width: 45%;
+	width: 70%;
 	padding: 5px;
 	background-color: #ddd;
 	border-radius: 5px;
@@ -210,20 +183,20 @@ a.active {
 
 /* Pages with forms*/
 input {
+	border: 1px solid black;
 	padding: 5px;
-	border: 1px solid #de4f4f;
-	width: 100%;
+	width: 60%;
 	height: 30px;
-	font-size: 25px;
+	font-size: 16px;
 	border-radius: 5px;
 }
 
 select {
-	border: 1px solid #de4f4f;
-	width: 100%;
-	height: 40px;
+	border: 1px solid black;
+	width: 60%;
+	height: 30px;
 	padding: 5px;
-	font-size: 25px;
+	font-size: 16px;
 	border-radius: 5px;
 }
 
@@ -279,33 +252,9 @@ select {
 	border-radius: 5px;
 	text-align: center;
 }
-
-.tabs {
-	width: 40%;
-}
-
-.display {
-	width: 55%;
-	
-}
-.topic {
-	height: 40px;
-	color: #b1b3be;
-}
-
 .display p {
 	padding-left: 10px;
 }
-
-.main-body {
-	width: 45%;
-	padding: 5px;
-	background-color: #ddd;
-	border-radius: 5px;
-	border-left: 10px solid #de4f4f;
-}
-
-
 
 /* styling for tab buttons for admin and staff view */
 #basic-info {
@@ -410,19 +359,6 @@ footer a {
 	flex-direction: column;
 	min-height: 100vh;
 	}
-
-	/* Landing page */
-	.intro {
-		color: black;
-		top: 0;
-		display: flex;
-		align-items: center;
-		width: 100%;
-		min-height: 100vh;
-		flex-direction: column;
-		font-size: 15px;
-		text-align: center;
-	}
 	
 	.started {
 		display: flex;
@@ -432,67 +368,45 @@ footer a {
 		flex-direction: column;
 	} 
 	
-	/* Landing page buttons */
-	#sign-up {
-		color: white;
-		background-color: #de4f4f;
-		font-size: 20px;
-		width: 100px;
-		height: 25px;
-		border: solid 1px #de4f4f;
-		text-decoration: none;
-		text-align: center;
-	}
-
-	#sign-in {
-		color: #de4f4f;
-		font-size: 20px;
-		width: 100px;
-		height: 25px;
-		border: solid 1px #de4f4f;
-		text-decoration: none;
-		text-align: center;
-	}	
-	
-	#new-bank {
-		color: white;
-		font-size: 20px;
-		background-color: #de4f4f;
-		width: 150px;
-		height: 25px;
-		border: solid 1px #de4f4f;
-		text-decoration: none;
-		text-align: center;
-	}
-
 /* Pages with forms */
-	.new-admin-staff-account, .sign-up, .sign-in, .new-bank-account, .new-transaction {
+	.new-admin-staff-account, .new-bank-account, .new-transaction {
 		width: 80%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;	
 	}
+	.sign-up, .sign-in {
+		width: 80%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 	.message-board {
 		width: 60%;
 		text-align: center;
 	}
-	input, select {
+	select {
+		height: 30px;
+	}
+	input {
+		padding: 5px;
+		width: 80%;
+		height: 30px;
+		font-size: 16px;
+		border-radius: 5px;
 		height: 40px;
 	}
-
+	
 /* Profile */
 	.tabs {
-		width: 60%;
+		width: 90%;
+		padding-left: 0;
 	}
 	.display {
 		width: 90%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	}
-	.topic {
-		height: 10%;
-		color: #b1b3be;
 	}
 	.display p {
 		padding-left: 10px;
@@ -519,7 +433,7 @@ footer a {
 	}
 
  	.transaction, .bank-account, .user-account {
-		width: 70%;
+		width: 90%;
 		padding: 5px;
 		border-left: 10px solid #de4f4f;
 	}
@@ -546,17 +460,11 @@ footer a {
 	}
 }
 
-
-#sign-up:hover, #sign-in:hover, #new-bank:hover {
-	opacity: 0.7;
-}
 button:hover {
 	opacity: 0.8;
 }
 .second-bar a:hover {
 	opacity: 0.8;
 }
-
-
 
 
