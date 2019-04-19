@@ -81,7 +81,7 @@ a.active {
 	align-items: flex-start;
 }
 
-.sign-up, .sign-in, .new-bank-account, .new-transaction {
+.sign-up, .sign-in, .new-bank-account, .new-transaction, .new-admin-staff-account {
 	background-color: white;
 	width: 50%;
 	text-align: center;
@@ -368,7 +368,7 @@ footer a {
 	} 
 	
 /* Pages with forms */
-	.new-admin-staff-account, .new-bank-account, .new-transaction {
+	.new-admin-staff-account, .new-bank-account, .new-transaction, .new-admin-staff-account {
 		width: 80%;
 		display: flex;
 		flex-direction: column;
@@ -450,7 +450,7 @@ footer a {
 		color: #de4f4f;
 	}
 
-	#banking-info, #transaction-history {
+	#banking-info, #transaction-history, #manage, #manage-bank-account {
 		width: 100%;
 		height: 40px;
 		font-size: 25px;
