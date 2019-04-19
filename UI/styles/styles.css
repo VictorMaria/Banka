@@ -22,7 +22,6 @@ body {
   padding: 20px;
   font-size: 20px;
 	height: 30px;
-	text-align: center;
   }
 
 .topnav a {
@@ -35,7 +34,6 @@ body {
 .topnav .icon {
   display: none;
 }
-
 #logo {
   background-color: #de4f4f;
   color: white;
@@ -76,7 +74,7 @@ a.active {
 .wrapper {
 	display: flex;
 	justify-content: center;
-	min-height: 80vh;	
+	min-height: 100vh;	
 	width: 100%;
 	flex-direction: row;
 	padding-top: 20px;
@@ -85,7 +83,7 @@ a.active {
 
 .sign-up, .sign-in, .new-bank-account, .new-transaction {
 	background-color: white;
-	width: 30%;
+	width: 50%;
 	text-align: center;
 	border-radius: 10px;
 	opacity: 0.9;

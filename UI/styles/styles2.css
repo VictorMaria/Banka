@@ -17,8 +17,7 @@ body {
   padding: 20px;
   font-size: 20px;
 	height: 30px;
-	text-align: center;
-  }
+	}
 
 .topnav a {
   text-decoration: none;
@@ -71,7 +70,7 @@ a.active {
 .wrapper {
 	display: flex;
 	align-content: center;
-	min-height: 80vh;	
+	min-height: 100vh;	
 	width: 100%;
 	flex-direction: column;
 	padding-top: 20px;
