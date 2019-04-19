@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import bankAccounts from '../storage/bankAccounts';
 import transactions from '../storage/transactions';
-import { sendEmailNotification } from '../helpers/postals';
+import sendEmailNotification from '../helpers/postals';
 
 let accountUniqueId = 0;
 let accountNumberUniqueId = 0;
@@ -100,8 +100,8 @@ class Account {
     };
     transactions.push(transaction);
     const emailSubject = `${transaction.transactionType} Alert`;
-    // eslint-disable-next-line max-len
-    sendEmailNotification(bankAccount.email, emailSubject, transaction.transactionType, transaction.transactionDate, transaction.amount, transaction.remark, transaction.accountBalance);
+    sendEmailNotification(bankAccount.email, emailSubject, transaction.transactionType, transaction.transactionDate,
+      transaction.amount, transaction.remark, transaction.accountBalance);
     return transaction;
   }
 
@@ -128,7 +128,8 @@ class Account {
     };
     transactions.push(transaction);
     const emailSubject = `${transaction.transactionType} Alert`;
-    sendEmailNotification(bankAccount.email, emailSubject, transaction.transactionType, transaction.transactionDate, transaction.amount, transaction.remark, transaction.accountBalance);
+    sendEmailNotification(bankAccount.email, emailSubject, transaction.transactionType, transaction.transactionDate,
+      transaction.amount, transaction.remark, transaction.accountBalance);
     return transaction;
   }
 

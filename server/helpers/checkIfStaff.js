@@ -3,5 +3,4 @@ const checkIfStaff = (req, res, next) => {
   return next();
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { checkIfStaff };
+export default checkIfStaff;

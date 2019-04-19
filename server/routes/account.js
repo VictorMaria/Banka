@@ -3,9 +3,9 @@ import accountController from '../controllers/account';
 import newbankAccountDetails from '../validation/newBankAccountDetails';
 import transactionDetails from '../validation/transactionDetails';
 import validator from '../middleware/validator';
-import { verifyToken } from '../middleware/verifyToken';
-import { checkIfAdminStaff } from '../helpers/checkIfAdminStaff';
-import { checkIfStaff } from '../helpers/checkIfStaff';
+import verifyToken from '../middleware/verifyToken';
+import checkIfAdminStaff from '../helpers/checkIfAdminStaff';
+import checkIfStaff from '../helpers/checkIfStaff';
 
 const router = express.Router();
 

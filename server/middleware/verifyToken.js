@@ -24,5 +24,4 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { verifyToken };
+export default verifyToken;
