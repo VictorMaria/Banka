@@ -157,8 +157,7 @@ const manageBankAccount = () => {
 	manageButton.style.borderLeft = '5px solid #de4f4f';
 	
 	display.innerHTML = `<h1>John Kamali</h1>
-	                    <div class = 'topic'><h2>Manage Account</h2></div>
-						<div id = 'main-body'>
+						<div class = 'main-body'>
 						<h2>Activate Account</h2>
 						<button onclick = 'activate()' id = 'activate'>Activate</button>
 						<h2>Delete Account</h2>
