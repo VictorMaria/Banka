@@ -1,22 +1,22 @@
 import jwt from 'jsonwebtoken';
-import user from '../models/user';
+import db from '../db/index';
 
-
-const verifyToken = (req, res, next) => {
+const verifyToken = async (req, res, next) => {
   const token = req.headers['x-access-token'];
   if (!token) {
-    return res.status(400).send({ status: 400, error: 'Token is not provided' });
+    return res.status(400).send({ error: 'Token is not provided' });
   }
   try {
-    const decoded = jwt.verify(token, process.env.SECRET);
-    const fetchUser = user.getUser(decoded.userId);
-    if (!fetchUser) {
-      return res.status(400).send({ status: 400, error: 'The token you provided is invalid' });
+    const decoded = await jwt.verify(token, process.env.SECRET);
+    const text = 'SELECT firstname, lastname, othername, email, phoneNumber, username, isAdmin FROM users WHERE id = $1';
+    const { rows } = await db.query(text, [decoded.userId]);
+    if (!rows[0]) {
+      return res.status(400).send({ error: 'The token you provided is invalid' });
     }
     req.user = {
       id: decoded.userId,
-      isAdmin: decoded.admin,
-      isStaff: decoded.staff,
+      is_admin: decoded.admin,
+      is_staff: decoded.staff,
     };
     return next();
   } catch (error) {

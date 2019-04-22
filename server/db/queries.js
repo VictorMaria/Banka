@@ -13,9 +13,9 @@ const createQueries = {
     )`,
   accountTable: `CREATE TABLE IF NOT EXISTS
     accounts(
-      id SERIAL PRIMARY KEY,
+      id SERIAL,
       user_id INTEGER,
-      account_number INTEGER DEFAULT 2019000,
+      account_number BIGINT,
       first_name VARCHAR(255) NOT NULL,
       last_name VARCHAR(255) NOT NULL, 
       email VARCHAR(100) NOT NULL,
@@ -23,7 +23,7 @@ const createQueries = {
       type VARCHAR(15) NOT NULL,
       status VARCHAR(15) NOT NULL,
       opening_balance FLOAT,
-      balance FLOAT,
+      balance FLOAT DEFAULT 0.00,
       FOREIGN KEY (user_id) REFERENCES users (id)
       )`,
   transactionTable: `CREATE TABLE IF NOT EXISTS
@@ -53,6 +53,10 @@ const seedQueries = {
           ('Fatima', 'Kamali', 'fatima.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', false, true),
           ('Sophie', 'Kamali', 'sophie.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', false, false)
           `,
+  accountNumbersTable: `INSERT INTO
+    accountnumbers(account_number)
+      VALUES(2019000)
+  `,
 };
 
 module.exports = {
