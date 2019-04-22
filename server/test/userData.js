@@ -1,76 +1,76 @@
 
 const userData = {
   missingEmail: {
-    firstName: 'VICTOR',
-    lastname: 'AJAYI',
+    firstName: 'Victor',
+    lastname: 'Ajayi',
     password: 'bankas',
   },
 
   missingFirstName: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
-    lastName: 'AJAYI',
+    email: 'victor.abayomi@outlook.com',
+    lastName: 'Ajayi',
     password: 'bankas',
   },
 
   missingLastName: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
-    firstName: 'VICTOR',
+    email: 'victor.abayomi@outlook.com',
+    firstName: 'Victor',
     password: 'bankas',
   },
   missingPassword: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
-    firstName: 'VICTOR',
-    lastName: 'AJAYI',
+    email: 'victor.abayomi@outlook.com',
+    firstName: 'Victor',
+    lastName: 'Ajayi',
   },
   emptyEmail: {
     email: '',
-    firstName: 'VICTOR',
-    lastname: 'AJAYI',
+    firstName: 'Victor',
+    lastname: 'Ajayi',
     password: 'bankas',
   },
   invalidEmail: {
     email: 'VICTOR.ABAYOMIoutlook.com',
-    firstName: 'VICTOR',
-    lastname: 'AJAYI',
+    firstName: 'Victor',
+    lastname: 'Ajayi',
     password: 'bankas',
   },
   emptyFirstName: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
+    email: 'victor.abayomi@outlook.com',
     firstName: '',
-    lastName: 'AJAYI',
+    lastName: 'Ajayi',
     password: 'bankas',
   },
   emptyLastName: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
-    firstName: 'VICTOR',
+    email: 'victor.abayomi@outlook.com',
+    firstName: 'Victor',
     lastName: '',
     password: 'bankas',
   },
   emptyPassword: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
-    firstName: 'VICTOR',
-    lastName: 'AJAYI',
+    email: 'victor.abayomi@outlook.com',
+    firstName: 'Victor',
+    lastName: 'Ajayi',
     password: '',
   },
 
   wrongPasswordLength: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
-    firstName: 'VICTOR',
-    lastName: 'AJAYI',
+    email: 'victor.abayomi@outlook.com',
+    firstName: 'Victor',
+    lastName: 'Ajayi',
     password: 'banka',
   },
 
   completeSignUpDetails: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
-    firstName: 'VICTOR',
-    lastName: 'AJAYI',
+    email: 'victor.abayomi@outlook.com',
+    firstName: 'Victor',
+    lastName: 'Ajayi',
     password: 'bankas',
   },
   missingEmailSignIn: {
     password: 'bankas',
   },
   missingPasswordSignIn: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
+    email: 'victor.abayomi@outlook.com',
   },
 
   emptyEmailSignIn: {
@@ -78,7 +78,7 @@ const userData = {
     password: 'bankas',
   },
   emptyPasswordSignIn: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
+    email: 'victor.abayomi@outlook.com',
     password: '',
   },
 
@@ -93,12 +93,12 @@ const userData = {
   },
 
   wrongPasswordSignIn: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
+    email: 'victor.abayomi@outlook.com',
     password: 'banka',
   },
 
   correctSignInDetails: {
-    email: 'VICTOR.ABAYOMI@outlook.com',
+    email: 'victor.abayomi@outlook.com',
     password: 'bankas',
   },
 

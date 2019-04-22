@@ -7,7 +7,7 @@ import transactionData from './transactionData';
 chai.use(require('chai-http'));
 
 // Tests for creating a new bank account
-describe('Creating a bank acocunt', () => {
+xdescribe('Creating a bank acocunt', () => {
   it('Should return an error stating userID must be a number', (done) => {
     chai.request(app)
       .post('/api/v1/accounts')
@@ -209,7 +209,7 @@ describe('Creating a bank acocunt', () => {
 
 // Test for fetching a specific bank account
 
-describe('Fetching a specific bank account', () => {
+xdescribe('Fetching a specific bank account', () => {
   it('Should return an error for a non existent bank account', (done) => {
     chai.request(app)
       .get('/api/v1/accounts/20190022')
@@ -240,7 +240,7 @@ describe('Fetching a specific bank account', () => {
 
 // Tests for activating or deactivating a bank account
 
-describe('Activating or deactivating a bank account', () => {
+xdescribe('Activating or deactivating a bank account', () => {
   it('Attempts without a token should throw an error', (done) => {
     chai.request(app)
       .patch('/api/v1/accounts/2019001')
@@ -352,7 +352,7 @@ describe('Activating or deactivating a bank account', () => {
 });
 
 // Tests for checking account balance of a specific bank account
-describe('Checking bank account balance', () => {
+xdescribe('Checking bank account balance', () => {
   it('Attempting to check the balance of a non existent account should return a 404 error', (done) => {
     chai.request(app)
       .get('/api/v1/accounts/20190022/balance')
@@ -378,7 +378,7 @@ describe('Checking bank account balance', () => {
 // Tests for credit transactions
 
 
-describe('Credit transcactions', () => {
+xdescribe('Credit transcactions', () => {
   it('Attempts without a token should throw an error', (done) => {
     chai.request(app)
       .post('/api/v1/transactions/2019001/credit')
@@ -561,7 +561,7 @@ describe('Credit transcactions', () => {
 });
 
 // Tests for debit transaction
-describe('Debit transcactions', () => {
+xdescribe('Debit transcactions', () => {
   it('Attempts without a token should throw an error', (done) => {
     chai.request(app)
       .post('/api/v1/transactions/2019001/debit')
@@ -754,7 +754,7 @@ describe('Debit transcactions', () => {
 });
 
 // Tests for deleting a specific bank account
-describe('Deleting a bank account', () => {
+xdescribe('Deleting a bank account', () => {
   it('Attempts without a token should throw an error', (done) => {
     chai.request(app)
       .delete('/api/v1/accounts/2019002')
