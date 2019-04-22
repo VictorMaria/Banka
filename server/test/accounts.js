@@ -211,24 +211,49 @@ describe('Creating a bank acocunt', () => {
 
 // Test for fetching a specific bank account
 
-xdescribe('Fetching a specific bank account', () => {
+describe('Fetching a specific bank account', () => {
+  const staff = {
+    email: 'fatima.kamali@outlook.com',
+    password: 'bankas',
+  };
+  let staffToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(staff)
+      .end((err, res) => {
+        staffToken = res.body.data.token;
+        done();
+      });
+  });
   it('Should return an error for a non existent bank account', (done) => {
     chai.request(app)
       .get('/api/v1/accounts/20190022')
+      .set('x-access-token', staffToken)
       .end((err, res) => {
         assert.equal((res.body.status), 404);
         assert.equal((res.body.error), 'Bank Account not found');
         done();
       });
   });
-
+  let requestedAccountNumber;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/accounts')
+      .send(bankAccountData.completeDetails)
+      .end((err, res) => {
+        requestedAccountNumber = res.body.data.accountNumber;
+        done();
+      });
+  });
   it('Should return an object with key-value pairs for an existing bank account', (done) => {
     chai.request(app)
-      .get('/api/v1/accounts/2019001')
+      .get(`/api/v1/accounts/${requestedAccountNumber}`)
+      .set('x-access-token', staffToken)
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.property((res.body), 'status');
-        assert.property((res.body.data), 'firstName');
+        assert.property((res.body.data), 'accountNumber');
         assert.property((res.body.data), 'firstName');
         assert.property((res.body.data), 'lastName');
         assert.property((res.body.data), 'email');
