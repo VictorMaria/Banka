@@ -129,7 +129,7 @@ describe('Signing up', () => {
       .post('/api/v1/auth/signup')
       .send(userData.completeSignUpDetails)
       .end((err, res) => {
-        // assert.equal((res.body.status), 400);
+        assert.equal((res.body.status), 400);
         assert.equal((res.body.error), 'Email already in use');
         done();
       });
@@ -137,7 +137,7 @@ describe('Signing up', () => {
 });
 
 // Test for sign in
-xdescribe('Signing in', () => {
+describe('Signing in', () => {
   it('Should return an error for missing email field', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
@@ -195,7 +195,7 @@ xdescribe('Signing in', () => {
       .send(userData.nonExistingUser)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
-        assert.equal((res.body.error), 'Incorrect Email');
+        assert.equal((res.body.error), 'Incorrect Credentials');
         done();
       });
   });
@@ -205,7 +205,7 @@ xdescribe('Signing in', () => {
       .send(userData.wrongPasswordSignIn)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
-        assert.equal((res.body.error), 'Incorrect Password');
+        assert.equal((res.body.error), 'Incorrect Credentials');
         done();
       });
   });
@@ -216,7 +216,7 @@ xdescribe('Signing in', () => {
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.property((res.body.data), 'token');
-        assert.equal((res.body.data.id), 3);
+        assert.equal((res.body.data.id), 4);
         assert.equal((res.body.data.firstName), 'Victor');
         assert.equal((res.body.data.lastName), 'Ajayi');
         assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
