@@ -7,7 +7,7 @@ import transactionData from './transactionData';
 chai.use(require('chai-http'));
 
 // Tests for creating a new bank account
-xdescribe('Creating a bank acocunt', () => {
+describe('Creating a bank acocunt', () => {
   it('Should return an error stating userID must be a number', (done) => {
     chai.request(app)
       .post('/api/v1/accounts')
@@ -181,6 +181,7 @@ xdescribe('Creating a bank acocunt', () => {
         assert.property((res.body.data), 'firstName');
         assert.property((res.body.data), 'firstName');
         assert.property((res.body.data), 'lastName');
+        assert.property((res.body.data), 'accountNumber');
         assert.property((res.body.data), 'email');
         assert.property((res.body.data), 'type');
         assert.property((res.body.data), 'openingBalance');
@@ -198,6 +199,7 @@ xdescribe('Creating a bank acocunt', () => {
         assert.property((res.body.data), 'firstName');
         assert.property((res.body.data), 'firstName');
         assert.property((res.body.data), 'lastName');
+        assert.property((res.body.data), 'accountNumber');
         assert.property((res.body.data), 'email');
         assert.property((res.body.data), 'type');
         assert.property((res.body.data), 'openingBalance');
