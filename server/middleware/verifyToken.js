@@ -8,7 +8,7 @@ const verifyToken = async (req, res, next) => {
   }
   try {
     const decoded = await jwt.verify(token, process.env.SECRET);
-    const text = 'SELECT firstname, lastname, othername, email, phoneNumber, username, isAdmin FROM users WHERE id = $1';
+    const text = 'SELECT is_admin, is_staff FROM users WHERE id = $1';
     const { rows } = await db.query(text, [decoded.userId]);
     if (!rows[0]) {
       return res.status(400).send({ error: 'The token you provided is invalid' });
