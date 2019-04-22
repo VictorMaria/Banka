@@ -22,8 +22,10 @@
     "pg": "^7.10.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.4.3",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "eslint": "^5.16.0",
@@ -36,7 +38,8 @@
     "test": "nyc --reporter=lcov --reporter=text mocha dist/server/test --timeout 10000 --exit",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/app.js",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "refresh": "babel-node server/db/migrate dropTables && babel-node server/db/migrate createTables && babel-node server/db/seed seedTables"
   },
   "repository": {
     "type": "git",

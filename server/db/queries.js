@@ -2,9 +2,9 @@ const createQueries = {
   userTable: `CREATE TABLE IF NOT EXISTS
     users(
         id SERIAL PRIMARY KEY,
-        email VARCHAR(100) NOT NULL,
         first_name VARCHAR(255) NOT NULL,
         last_name VARCHAR(255) NOT NULL,
+        email VARCHAR(100) NOT NULL,
         password VARCHAR(255) NOT NULL,
         type VARCHAR(255) NOT NULL,
         is_admin BOOLEAN NOT NULL DEFAULT false,
@@ -45,7 +45,18 @@ const dropQueries = {
   transactionTable: 'DROP TABLE IF EXISTS transactions CASCADE',
 };
 
+const hashedPassword = '$2b$08$vI3HX/EeLrATeRPf8/TPAuN2nVDb4ZZH.TXIjPH9oqjKRnGIfKY.G';
+const seedQueries = {
+  userTable: `INSERT INTO
+  users(first_name, last_name, email, password, type, profile_photo, is_admin, is_staff)
+    VALUES('John', 'Kamali', 'john.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', true, false),
+          ('Fatima', 'Kamali', 'fatima.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', false, true),
+          ('Sophie', 'Kamali', 'sophie.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', false, false)
+          `,
+};
+
 module.exports = {
   createQueries,
   dropQueries,
+  seedQueries,
 };
