@@ -64,5 +64,39 @@ class Account {
     }
     return true;
   }
+
+  static async activateDeactivate(req, res) {
+    try {
+      const { rows } = await db.query(accountQueries.checkStatus, [req.params.accountNumber]);
+      if (rows[0].status === 'draft' || rows[0].status === 'dormant') {
+        const values = [
+          'active',
+          req.params.accountNumber,
+        ];
+        const activate = await db.query(accountQueries.activateQuery, values);
+        return res.status(200).send({
+          status: 200,
+          data: {
+            accountNumber: activate.rows[0].account_number,
+            status: activate.rows[0].status,
+          },
+        });
+      }
+      const values = [
+        'dormant',
+        req.params.accountNumber,
+      ];
+      const deactivate = await db.query(accountQueries.deactivateQuery, values);
+      return res.status(200).send({
+        status: 200,
+        data: {
+          accountNumber: deactivate.rows[0].account_number,
+          status: deactivate.rows[0].status,
+        },
+      });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
 }
 export default Account;

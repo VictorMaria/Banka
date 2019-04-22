@@ -5,5 +5,8 @@ const accountQueries = {
         returning *`,
   getBankAccountQuery: `SELECT account_number, first_name, last_name, email, type, status, opening_balance, balance
         FROM accounts WHERE account_number = $1`,
+  checkStatus: 'SELECT status FROM accounts WHERE account_number = $1',
+  activateQuery: 'UPDATE accounts SET status = $1 WHERE account_number = $2 returning account_number, status',
+  deactivateQuery: 'UPDATE accounts SET status = $1 WHERE account_number = $2 returning account_number, status',
 };
 export default accountQueries;
