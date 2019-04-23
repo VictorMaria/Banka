@@ -28,8 +28,8 @@ class Account {
           lastName: rows[0].last_name,
           email: rows[0].email.toLowerCase(),
           type: rows[0].type,
-          openingBalance: rows[0].opening_balance.toFixed(2),
-          balance: rows[0].balance.toFixed(2),
+          openingBalance: rows[0].opening_balance,
+          balance: rows[0].balance,
         },
       };
       return res.status(201).send(response);
@@ -54,8 +54,8 @@ class Account {
           lastName: rows[0].last_name,
           email: rows[0].email.toLowerCase(),
           type: rows[0].type,
-          openingBalance: rows[0].opening_balance.toFixed(2),
-          balance: rows[0].balance.toFixed(2),
+          openingBalance: rows[0].opening_balance,
+          balance: rows[0].balance,
         },
       };
       return res.status(200).send(response);
@@ -94,6 +94,15 @@ class Account {
           status: deactivate.rows[0].status,
         },
       });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
+
+  static async getAllBankAccounts(req, res) {
+    try {
+      const { rows } = await db.query(accountQueries.getAllBankAccountsQuery);
+      return res.status(200).send({ status: 200, data: rows });
     } catch (error) {
       return res.status(400).send(error);
     }

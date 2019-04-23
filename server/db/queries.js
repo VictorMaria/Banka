@@ -22,8 +22,8 @@ const createQueries = {
       created_on TIMESTAMP,
       type VARCHAR(15) NOT NULL,
       status VARCHAR(15) NOT NULL,
-      opening_balance FLOAT,
-      balance FLOAT DEFAULT 0.00,
+      opening_balance NUMERIC(15, 2),
+      balance NUMERIC(15, 2) DEFAULT 0.00,
       FOREIGN KEY (user_id) REFERENCES users (id)
       )`,
   transactionTable: `CREATE TABLE IF NOT EXISTS
@@ -31,11 +31,11 @@ const createQueries = {
       id SERIAL PRIMARY KEY,
       account_number INTEGER NOT NULL,
       transaction_date TIMESTAMP,
-      amount FLOAT NOT NULL,
+      amount NUMERIC(15, 2) NOT NULL,
       cashier INTEGER NOT NULL,
       transaction_type VARCHAR(7) NOT NULL,
       remark VARCHAR(25) NOT NULL,
-      account_balance FLOAT
+      account_balance NUMERIC(15, 2)
       )`,
 };
 
@@ -53,10 +53,6 @@ const seedQueries = {
           ('Fatima', 'Kamali', 'fatima.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', false, true),
           ('Sophie', 'Kamali', 'sophie.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', false, false)
           `,
-  accountNumbersTable: `INSERT INTO
-    accountnumbers(account_number)
-      VALUES(2019000)
-  `,
 };
 
 module.exports = {

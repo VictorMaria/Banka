@@ -1,8 +1,18 @@
+sudo: false
 language: node_js
 node_js:
   - "stable"
+services: 
+  - postgresql
+addons:
+  - postgresql: "9.4"    
 notifications:
   email: false
+install:
+  - npm install
+before_script:
+  - psql -c 'create database banka;' -U postgres
+  - npm run refresh    
 script:
   - npm run build
   - npm run test
