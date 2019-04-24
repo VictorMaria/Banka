@@ -6,23 +6,28 @@ class Account {
   static async createBankAccount(req, res) {
     const accountStatus = 'active';
     const accountNumber = generateAccountNumber();
-    const values = [
-      req.body.userID,
-      accountNumber,
-      req.body.firstName,
-      req.body.lastName,
-      req.body.email,
-      new Date(),
-      req.body.type,
-      accountStatus,
-      parseFloat(req.body.openingBalance),
-      parseFloat(req.body.openingBalance) + 0.00,
-    ];
+    if (!req.body.openingBalance) {
+      req.body.openingBalance = 0.00;
+    }
     try {
+      const getUser = await db.query(accountQueries.getUserByIdQuery, [req.user.id]);
+      const values = [
+        req.user.id,
+        accountNumber,
+        getUser.rows[0].first_name,
+        getUser.rows[0].last_name,
+        getUser.rows[0].email,
+        new Date(),
+        req.body.type,
+        accountStatus,
+        parseFloat(req.body.openingBalance),
+        parseFloat(req.body.openingBalance) + 0.00,
+      ];
       const { rows } = await db.query(accountQueries.createBankAccountQuery, values);
       const response = {
         status: 201,
         data: {
+          userId: rows[0].user_id,
           accountNumber: rows[0].account_number,
           firstName: rows[0].first_name,
           lastName: rows[0].last_name,
@@ -34,7 +39,7 @@ class Account {
       };
       return res.status(201).send(response);
     } catch (error) {
-      res.status(400).send({ status: 400, mesaage: error });
+      res.status(500).send({ status: 500, mesaage: error });
     }
     return true;
   }
@@ -60,7 +65,7 @@ class Account {
       };
       return res.status(200).send(response);
     } catch (error) {
-      res.status(400).send({ status: 400, mesaage: error });
+      res.status(500).send({ status: 500, mesaage: error });
     }
     return true;
   }
@@ -79,6 +84,7 @@ class Account {
           data: {
             accountNumber: activate.rows[0].account_number,
             status: activate.rows[0].status,
+            message: 'Account activated',
           },
         });
       }
@@ -92,10 +98,11 @@ class Account {
         data: {
           accountNumber: deactivate.rows[0].account_number,
           status: deactivate.rows[0].status,
+          message: 'Account deactivated',
         },
       });
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(500).send(error);
     }
   }
 
@@ -104,7 +111,7 @@ class Account {
       const { rows } = await db.query(accountQueries.getAllBankAccountsQuery);
       return res.status(200).send({ status: 200, data: rows });
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(500).send(error);
     }
   }
 

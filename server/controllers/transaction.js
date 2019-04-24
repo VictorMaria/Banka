@@ -10,7 +10,7 @@ class Transaction {
         req.params.accountNumber,
         new Date(),
         req.body.amount,
-        req.body.cashier,
+        req.user.id,
         'Credit',
         req.body.remark,
         parseFloat(req.body.amount) + parseFloat(findBalance.rows[0].balance),
@@ -36,7 +36,7 @@ class Transaction {
       const updateBalance = await db.query(transactionQueries.creditBalanceQuery, values);
       return res.status(200).send(response);
     } catch (error) {
-      return res.status(400).send({ status: 400, mesaage: error });
+      return res.status(500).send({ status: 500, mesaage: error });
     }
   }
 
@@ -51,7 +51,7 @@ class Transaction {
         req.params.accountNumber,
         new Date(),
         req.body.amount,
-        req.body.cashier,
+        req.user.id,
         'Debit',
         req.body.remark,
         parseFloat(findBalance.rows[0].balance) - parseFloat(req.body.amount),
@@ -77,7 +77,7 @@ class Transaction {
       const updateBalance = await db.query(transactionQueries.debitBalanceQuery, values);
       return res.status(200).send(response);
     } catch (error) {
-      return res.status(400).send({ status: 400, mesaage: error });
+      return res.status(500).send({ status: 500, mesaage: error });
     }
   }
 }

@@ -5,11 +5,22 @@ import bankAccountData from './bankAccountData';
 import transactionData from './transactionData';
 import userData from './userData';
 
+let userToken;
+before((done) => {
+  chai.request(app)
+    .post('/api/v1/auth/signin')
+    .send(userData.user)
+    .end((err, res) => {
+      userToken = res.body.data.token;
+      done();
+    });
+});
 let requestedAccountNumber;
 before((done) => {
   chai.request(app)
     .post('/api/v1/accounts')
     .send(bankAccountData.completeDetails)
+    .set('x-access-token', userToken)
     .end((err, res) => {
       requestedAccountNumber = res.body.data.accountNumber;
       done();
@@ -22,18 +33,8 @@ describe('Credit transcactions', () => {
       .send(transactionData.completeCreditDetails)
       .set('x-access-token', '')
       .end((err, res) => {
-        assert.equal((res.body.status), 400);
+        assert.equal((res.body.status), 403);
         assert.equal((res.body.error), 'Token is not provided');
-        done();
-      });
-  });
-  let userToken;
-  before((done) => {
-    chai.request(app)
-      .post('/api/v1/auth/signin')
-      .send(userData.user)
-      .end((err, res) => {
-        userToken = res.body.data.token;
         done();
       });
   });
@@ -43,7 +44,7 @@ describe('Credit transcactions', () => {
       .set('x-access-token', userToken)
       .send(transactionData.completeCreditDetails)
       .end((err, res) => {
-        assert.equal((res.body.status), 403);
+        assert.equal((res.body.status), 401);
         assert.equal((res.body.error), 'Unauthourised!');
         done();
       });
@@ -55,39 +56,6 @@ describe('Credit transcactions', () => {
       .send(userData.staff)
       .end((err, res) => {
         staffToken = res.body.data.token;
-        done();
-      });
-  });
-  it('Should return an error for empty cashier field', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/credit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.emptyCashier)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-  it('Should return an error for missing cashier field', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/credit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.missingCashier)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-  it('Should return an error for wrong cashier input type', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/credit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.wrongCashier)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
         done();
       });
   });
@@ -185,18 +153,8 @@ describe('Debit transcactions', () => {
       .send(transactionData.completeDebitDetails)
       .set('x-access-token', '')
       .end((err, res) => {
-        assert.equal((res.body.status), 400);
+        assert.equal((res.body.status), 403);
         assert.equal((res.body.error), 'Token is not provided');
-        done();
-      });
-  });
-  let userToken;
-  before((done) => {
-    chai.request(app)
-      .post('/api/v1/auth/signin')
-      .send(userData.user)
-      .end((err, res) => {
-        userToken = res.body.data.token;
         done();
       });
   });
@@ -206,12 +164,12 @@ describe('Debit transcactions', () => {
       .set('x-access-token', userToken)
       .send(transactionData.completeDebitDetails)
       .end((err, res) => {
-        assert.equal((res.body.status), 403);
+        assert.equal((res.body.status), 401);
         assert.equal((res.body.error), 'Unauthourised!');
         done();
       });
   });
-  
+
   let staffToken;
   before((done) => {
     chai.request(app)
@@ -222,42 +180,7 @@ describe('Debit transcactions', () => {
         done();
       });
   });
-  it('Should return an error for empty cashier field', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.emptyCashier)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-  
-  it('Should return an error stating cashier field is required', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.missingCashier)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-  
-  it('Should return an error for wrong cashier input type', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.wrongCashier)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-  
+
   it('Should return an error for wrong  amount format', (done) => {
     chai.request(app)
       .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
@@ -269,7 +192,7 @@ describe('Debit transcactions', () => {
         done();
       });
   });
-  
+
   it('Should return an error stating amount field is required', (done) => {
     chai.request(app)
       .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
@@ -281,7 +204,7 @@ describe('Debit transcactions', () => {
         done();
       });
   });
-  
+
   it('Should return an error for empty remark field', (done) => {
     chai.request(app)
       .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
@@ -293,7 +216,7 @@ describe('Debit transcactions', () => {
         done();
       });
   });
-  
+
   it('Should return an error stating remark field is required', (done) => {
     chai.request(app)
       .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
@@ -305,7 +228,7 @@ describe('Debit transcactions', () => {
         done();
       });
   });
-  
+
   it('Should return an error for a remark of more than 25 characters', (done) => {
     chai.request(app)
       .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
@@ -317,7 +240,7 @@ describe('Debit transcactions', () => {
         done();
       });
   });
-  
+
   it('Attempting to debit a non existent account should return a 404 error', (done) => {
     chai.request(app)
       .post('/api/v1/transactions/20190012/debit')
@@ -329,7 +252,7 @@ describe('Debit transcactions', () => {
         done();
       });
   });
-  
+
   it('Attempting to debit an amount greater than the account balance should return an error', (done) => {
     chai.request(app)
       .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
@@ -361,4 +284,3 @@ describe('Debit transcactions', () => {
       });
   });
 });
-  

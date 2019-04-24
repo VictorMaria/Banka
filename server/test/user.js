@@ -116,7 +116,7 @@ describe('Signing up', () => {
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.property((res.body.data), 'token');
-        assert.equal((res.body.data.id), 4);
+        assert.equal((res.body.data.id), 5);
         assert.equal((res.body.data.firstName), 'Victor');
         assert.equal((res.body.data.lastName), 'Ajayi');
         assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
@@ -216,7 +216,7 @@ describe('Signing in', () => {
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.property((res.body.data), 'token');
-        assert.equal((res.body.data.id), 4);
+        assert.equal((res.body.data.id), 5);
         assert.equal((res.body.data.firstName), 'Victor');
         assert.equal((res.body.data.lastName), 'Ajayi');
         assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
