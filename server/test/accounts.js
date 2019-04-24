@@ -3,6 +3,7 @@ import chai, { assert } from 'chai';
 import app from '../../app';
 import bankAccountData from './bankAccountData';
 import transactionData from './transactionData';
+import userData from './userData';
 
 chai.use(require('chai-http'));
 
@@ -212,15 +213,11 @@ describe('Creating a bank acocunt', () => {
 // Test for fetching a specific bank account
 
 describe('Fetching a specific bank account', () => {
-  const staff = {
-    email: 'fatima.kamali@outlook.com',
-    password: 'bankas',
-  };
   let staffToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(staff)
+      .send(userData.staff)
       .end((err, res) => {
         staffToken = res.body.data.token;
         done();
@@ -288,15 +285,12 @@ describe('Activating or deactivating a bank account', () => {
         done();
       });
   });
-  const user = {
-    email: 'sophie.kamali@outlook.com',
-    password: 'bankas',
-  };
+
   let userToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(user)
+      .send(userData.user)
       .end((err, res) => {
         userToken = res.body.data.token;
         done();
@@ -312,15 +306,11 @@ describe('Activating or deactivating a bank account', () => {
         done();
       });
   });
-  const admin = {
-    email: 'john.kamali@outlook.com',
-    password: 'bankas',
-  };
   let adminToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(admin)
+      .send(userData.admin)
       .end((err, res) => {
         adminToken = res.body.data.token;
         done();
@@ -337,16 +327,11 @@ describe('Activating or deactivating a bank account', () => {
         done();
       });
   });
-
-  const staff = {
-    email: 'fatima.kamali@outlook.com',
-    password: 'bankas',
-  };
   let staffToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(staff)
+      .send(userData.staff)
       .end((err, res) => {
         staffToken = res.body.data.token;
         done();
@@ -383,6 +368,63 @@ describe('Activating or deactivating a bank account', () => {
         assert.equal((res.body.status), 200);
         assert.property((res.body.data), 'accountNumber');
         assert.equal((res.body.data.status), 'active');
+        done();
+      });
+  });
+});
+
+// Tests for getting all bank accounts
+describe('Fetching all bank accounts', () => {
+  let userToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.user)
+      .end((err, res) => {
+        userToken = res.body.data.token;
+        done();
+      });
+  });
+  let staffToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.staff)
+      .end((err, res) => {
+        staffToken = res.body.data.token;
+        done();
+      });
+  });
+  it('A regular user attempting to view all bank accounts should throw an error', (done) => {
+    chai.request(app)
+      .get('/api/v1/accounts')
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 403);
+        assert.equal((res.body.error), 'Unauthourised!');
+        done();
+      });
+  });
+
+  it('Attempting to get all bank accounts without a token should throw an error', (done) => {
+    chai.request(app)
+      .get('/api/v1/accounts')
+      .set('x-access-token', '')
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), 'Token is not provided');
+        done();
+      });
+  });
+  it('A staff attempting to view all accounts should get an array of objects', (done) => {
+    chai.request(app)
+      .get('/api/v1/accounts')
+      .set('x-access-token', staffToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body.data[0]), 'account_number');
+        assert.property((res.body.data[1]), 'account_number');
+        assert.property((res.body.data[2]), 'account_number');
         done();
       });
   });
@@ -427,15 +469,11 @@ xdescribe('Credit transcactions', () => {
         done();
       });
   });
-  const user = {
-    email: 'sophie.kamali@outlook.com',
-    password: 'bankas',
-  };
   let userToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(user)
+      .send(userData.user)
       .end((err, res) => {
         userToken = res.body.data.token;
         done();
@@ -452,16 +490,11 @@ xdescribe('Credit transcactions', () => {
         done();
       });
   });
-
-  const staff = {
-    email: 'fatima.kamali@outlook.com',
-    password: 'bankas',
-  };
   let staffToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(staff)
+      .send(userData.staff)
       .end((err, res) => {
         staffToken = res.body.data.token;
         done();
@@ -610,15 +643,11 @@ xdescribe('Debit transcactions', () => {
         done();
       });
   });
-  const user = {
-    email: 'sophie.kamali@outlook.com',
-    password: 'bankas',
-  };
   let userToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(user)
+      .send(userData.user)
       .end((err, res) => {
         userToken = res.body.data.token;
         done();
@@ -636,15 +665,11 @@ xdescribe('Debit transcactions', () => {
       });
   });
 
-  const staff = {
-    email: 'fatima.kamali@outlook.com',
-    password: 'bankas',
-  };
   let staffToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(staff)
+      .send(userData.staff)
       .end((err, res) => {
         staffToken = res.body.data.token;
         done();
@@ -802,15 +827,11 @@ xdescribe('Deleting a bank account', () => {
         done();
       });
   });
-  const user = {
-    email: 'sophie.kamali@outlook.com',
-    password: 'bankas',
-  };
   let userToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(user)
+      .send(userData.user)
       .end((err, res) => {
         userToken = res.body.data.token;
         done();
@@ -826,15 +847,12 @@ xdescribe('Deleting a bank account', () => {
         done();
       });
   });
-  const admin = {
-    email: 'john.kamali@outlook.com',
-    password: 'bankas',
-  };
+  
   let adminToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(admin)
+      .send(userData.admin)
       .end((err, res) => {
         adminToken = res.body.data.token;
         done();

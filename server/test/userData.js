@@ -102,5 +102,20 @@ const userData = {
     password: 'bankas',
   },
 
+  user: {
+    email: 'sophie.kamali@outlook.com',
+    password: 'bankas',
+  },
+
+  staff: {
+    email: 'fatima.kamali@outlook.com',
+    password: 'bankas',
+  },
+
+  admin: {
+    email: 'john.kamali@outlook.com',
+    password: 'bankas',
+  },
+
 };
 export default userData;
