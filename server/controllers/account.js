@@ -4,7 +4,7 @@ import generateAccountNumber from '../helpers/generateAccountNumber';
 
 class Account {
   static async createBankAccount(req, res) {
-    const accountStatus = 'draft';
+    const accountStatus = 'active';
     const accountNumber = generateAccountNumber();
     const values = [
       req.body.userID,
@@ -105,6 +105,19 @@ class Account {
       return res.status(200).send({ status: 200, data: rows });
     } catch (error) {
       return res.status(400).send(error);
+    }
+  }
+
+  static async deleteBankAccount(req, res) {
+    try {
+      const deleteAccount = await db.query(accountQueries.deleteBankAccountQuery,
+        [req.params.accountNumber]);
+      return res.status(200).send({
+        status: 200,
+        message: `Bank Account ${req.params.accountNumber} Successfully Deleted`,
+      });
+    } catch (error) {
+      return res.status(500).send(error);
     }
   }
 }
