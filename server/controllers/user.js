@@ -31,7 +31,7 @@ class User {
       };
       return res.status(200).send(response);
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(500).send(error);
     }
   }
 
@@ -58,7 +58,7 @@ class User {
       };
       return res.status(200).send(response);
     } catch (error) {
-      res.status(400).send(error);
+      res.status(500).send(error);
     }
   }
 }

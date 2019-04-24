@@ -51,7 +51,8 @@ const seedQueries = {
   users(first_name, last_name, email, password, type, profile_photo, is_admin, is_staff)
     VALUES('John', 'Kamali', 'john.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', true, false),
           ('Fatima', 'Kamali', 'fatima.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', false, true),
-          ('Sophie', 'Kamali', 'sophie.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', false, false)
+          ('Sophie', 'Kamali', 'sophie.kamali@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', false, false),
+          ('Christopher', 'Hassan', 'christopher.hassan@outlook.com', '${hashedPassword}', 'client', 'ninja-avi.jpg', false, false)
           `,
 };
 

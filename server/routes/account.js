@@ -8,7 +8,7 @@ import checkBankAccount from '../helpers/checkBankAccount';
 
 const router = express.Router();
 
-router.post('/accounts', validator(newbankAccountDetails), Account.createBankAccount);
+router.post('/accounts', verifyToken, validator(newbankAccountDetails), Account.createBankAccount);
 router.get('/accounts/:accountNumber', verifyToken, checkIfStaffAdmin, Account.getBankAccount);
 router.patch('/accounts/:accountNumber', verifyToken, checkIfStaffAdmin, checkBankAccount, Account.activateDeactivate);
 router.get('/accounts', verifyToken, checkIfStaffAdmin, Account.getAllBankAccounts);

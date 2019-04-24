@@ -8,109 +8,32 @@ chai.use(require('chai-http'));
 
 // Tests for creating a new bank account
 describe('Creating a bank acocunt', () => {
-  it('Should return an error stating userID must be a number', (done) => {
+  let userToken;
+  before((done) => {
     chai.request(app)
-      .post('/api/v1/accounts')
-      .send(bankAccountData.emptyUserIDField)
+      .post('/api/v1/auth/signin')
+      .send(userData.user)
       .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
+        userToken = res.body.data.token;
         done();
       });
   });
-
-  it('Should return an error stating userID field is required', (done) => {
+  it('Creating a bank accout without a token should throw an error', (done) => {
     chai.request(app)
       .post('/api/v1/accounts')
-      .send(bankAccountData.missingUserIDField)
+      .send(bankAccountData.completeDetails)
+      .set('x-access-token', '')
       .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
+        assert.equal((res.body.status), 403);
+        assert.equal((res.body.error), 'Token is not provided');
         done();
       });
   });
-
-  it('Should return an error for empty firstName field', (done) => {
-    chai.request(app)
-      .post('/api/v1/accounts')
-      .send(bankAccountData.emptyFirstNameField)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-
-  it('Should return an error stating firstName field is required', (done) => {
-    chai.request(app)
-      .post('/api/v1/accounts')
-      .send(bankAccountData.missingFirstNameField)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-
-  it('Should return an error for empty lastName field', (done) => {
-    chai.request(app)
-      .post('/api/v1/accounts')
-      .send(bankAccountData.emptyLastNameField)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-
-  it('Should return an error stating lastName field is required', (done) => {
-    chai.request(app)
-      .post('/api/v1/accounts')
-      .send(bankAccountData.missingLastNameField)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-
-  it('Should return an error for empty email field', (done) => {
-    chai.request(app)
-      .post('/api/v1/accounts')
-      .send(bankAccountData.emptyEmailField)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-
-  it('Should return an error stating email field is required', (done) => {
-    chai.request(app)
-      .post('/api/v1/accounts')
-      .send(bankAccountData.missingEmailField)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-
-  it('Should return an error for an invalid email', (done) => {
-    chai.request(app)
-      .post('/api/v1/accounts')
-      .send(bankAccountData.invalidEmail)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-
   it('Should return an error for empty type field', (done) => {
     chai.request(app)
       .post('/api/v1/accounts')
       .send(bankAccountData.emptyTypeField)
+      .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.property((res.body), 'error');
@@ -122,6 +45,7 @@ describe('Creating a bank acocunt', () => {
     chai.request(app)
       .post('/api/v1/accounts')
       .send(bankAccountData.missingTypeField)
+      .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.property((res.body), 'error');
@@ -133,28 +57,7 @@ describe('Creating a bank acocunt', () => {
     chai.request(app)
       .post('/api/v1/accounts')
       .send(bankAccountData.invalidType)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-
-  it('Should return an error for empty openingBalance field', (done) => {
-    chai.request(app)
-      .post('/api/v1/accounts')
-      .send(bankAccountData.emptyOpeningBalanceField)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-
-  it('Should return an error stating openingBalance field is required', (done) => {
-    chai.request(app)
-      .post('/api/v1/accounts')
-      .send(bankAccountData.missingOpeningBalanceField)
+      .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.property((res.body), 'error');
@@ -165,6 +68,7 @@ describe('Creating a bank acocunt', () => {
     chai.request(app)
       .post('/api/v1/accounts')
       .send(bankAccountData.invalidOpeningBalance)
+      .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.property((res.body), 'error');
@@ -175,6 +79,7 @@ describe('Creating a bank acocunt', () => {
     chai.request(app)
       .post('/api/v1/accounts')
       .send(bankAccountData.completeDetails)
+      .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 201);
         assert.property((res.body), 'status');
@@ -193,6 +98,7 @@ describe('Creating a bank acocunt', () => {
     chai.request(app)
       .post('/api/v1/accounts')
       .send(bankAccountData.completeDetailsTwo)
+      .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 201);
         assert.property((res.body), 'status');
@@ -232,11 +138,22 @@ describe('Fetching a specific bank account', () => {
         done();
       });
   });
+  let villainToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.villain)
+      .end((err, res) => {
+        villainToken = res.body.data.token;
+        done();
+      });
+  });
   let requestedAccountNumber;
   before((done) => {
     chai.request(app)
       .post('/api/v1/accounts')
       .send(bankAccountData.completeDetails)
+      .set('x-access-token', villainToken)
       .end((err, res) => {
         requestedAccountNumber = res.body.data.accountNumber;
         done();
@@ -264,11 +181,22 @@ describe('Fetching a specific bank account', () => {
 // Tests for activating or deactivating a bank account
 
 describe('Activating or deactivating a bank account', () => {
+  let villainToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.villain)
+      .end((err, res) => {
+        villainToken = res.body.data.token;
+        done();
+      });
+  });
   let requestedAccountNumber;
   before((done) => {
     chai.request(app)
       .post('/api/v1/accounts')
       .send(bankAccountData.completeDetails)
+      .set('x-access-token', villainToken)
       .end((err, res) => {
         requestedAccountNumber = res.body.data.accountNumber;
         done();
@@ -279,7 +207,7 @@ describe('Activating or deactivating a bank account', () => {
       .patch(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', '')
       .end((err, res) => {
-        assert.equal((res.body.status), 400);
+        assert.equal((res.body.status), 403);
         assert.equal((res.body.error), 'Token is not provided');
         done();
       });
@@ -300,7 +228,7 @@ describe('Activating or deactivating a bank account', () => {
       .patch(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', userToken)
       .end((err, res) => {
-        assert.equal((res.body.status), 403);
+        assert.equal((res.body.status), 401);
         assert.equal((res.body.error), 'Unauthourised!');
         done();
       });
@@ -399,7 +327,7 @@ describe('Fetching all bank accounts', () => {
       .get('/api/v1/accounts')
       .set('x-access-token', userToken)
       .end((err, res) => {
-        assert.equal((res.body.status), 403);
+        assert.equal((res.body.status), 401);
         assert.equal((res.body.error), 'Unauthourised!');
         done();
       });
@@ -410,7 +338,7 @@ describe('Fetching all bank accounts', () => {
       .get('/api/v1/accounts')
       .set('x-access-token', '')
       .end((err, res) => {
-        assert.equal((res.body.status), 400);
+        assert.equal((res.body.status), 403);
         assert.equal((res.body.error), 'Token is not provided');
         done();
       });
@@ -456,11 +384,22 @@ xdescribe('Checking bank account balance', () => {
 
 // Tests for deleting a specific bank account
 describe('Deleting a bank account', () => {
+  let villainToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.villain)
+      .end((err, res) => {
+        villainToken = res.body.data.token;
+        done();
+      });
+  });
   let requestedAccountNumber;
   before((done) => {
     chai.request(app)
       .post('/api/v1/accounts')
       .send(bankAccountData.completeDetails)
+      .set('x-access-token', villainToken)
       .end((err, res) => {
         requestedAccountNumber = res.body.data.accountNumber;
         done();
@@ -471,7 +410,7 @@ describe('Deleting a bank account', () => {
       .delete(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', '')
       .end((err, res) => {
-        assert.equal((res.body.status), 400);
+        assert.equal((res.body.status), 403);
         assert.equal((res.body.error), 'Token is not provided');
         done();
       });
@@ -491,7 +430,7 @@ describe('Deleting a bank account', () => {
       .delete(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', userToken)
       .end((err, res) => {
-        assert.equal((res.body.status), 403);
+        assert.equal((res.body.status), 401);
         assert.equal((res.body.error), 'Unauthourised!');
         done();
       });
