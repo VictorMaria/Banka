@@ -295,7 +295,7 @@ describe('Activating or deactivating a bank account', () => {
         done();
       });
   });
-  it('A regular user attempting to activate a bank account should return a 403 error', (done) => {
+  it('A regular user attempting to activate a bank account should return an error', (done) => {
     chai.request(app)
       .patch(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', userToken)
@@ -315,14 +315,14 @@ describe('Activating or deactivating a bank account', () => {
         done();
       });
   });
-  it('An admin attempting to activate a bank account should an object', (done) => {
+  it('An admin attempting to deactivate a bank account should an object', (done) => {
     chai.request(app)
       .patch(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', adminToken)
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.property((res.body.data), 'accountNumber');
-        assert.equal((res.body.data.status), 'active');
+        assert.equal((res.body.data.status), 'dormant');
         done();
       });
   });
@@ -347,19 +347,7 @@ describe('Activating or deactivating a bank account', () => {
       });
   });
 
-  it('Staff attempting to Dectivate a bank account should return an object with key-value pairs', (done) => {
-    chai.request(app)
-      .patch(`/api/v1/accounts/${requestedAccountNumber}`)
-      .set('x-access-token', staffToken)
-      .end((err, res) => {
-        assert.equal((res.body.status), 200);
-        assert.property((res.body.data), 'accountNumber');
-        assert.equal((res.body.data.status), 'dormant');
-        done();
-      });
-  });
-
-  it('Staff attempting to activate a bank account should return an object with key-value pairs', (done) => {
+  it('Staff attempting to Activate a bank account should return an object with key-value pairs', (done) => {
     chai.request(app)
       .patch(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', staffToken)
@@ -367,6 +355,18 @@ describe('Activating or deactivating a bank account', () => {
         assert.equal((res.body.status), 200);
         assert.property((res.body.data), 'accountNumber');
         assert.equal((res.body.data.status), 'active');
+        done();
+      });
+  });
+
+  it('Staff attempting to deactivate a bank account should return an object with key-value pairs', (done) => {
+    chai.request(app)
+      .patch(`/api/v1/accounts/${requestedAccountNumber}`)
+      .set('x-access-token', staffToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body.data), 'accountNumber');
+        assert.equal((res.body.data.status), 'dormant');
         done();
       });
   });
@@ -453,15 +453,22 @@ xdescribe('Checking bank account balance', () => {
   });
 });
 
-// Tests for credit transactions
-
-
 
 // Tests for deleting a specific bank account
-xdescribe('Deleting a bank account', () => {
+describe('Deleting a bank account', () => {
+  let requestedAccountNumber;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/accounts')
+      .send(bankAccountData.completeDetails)
+      .end((err, res) => {
+        requestedAccountNumber = res.body.data.accountNumber;
+        done();
+      });
+  });
   it('Attempts without a token should throw an error', (done) => {
     chai.request(app)
-      .delete('/api/v1/accounts/2019002')
+      .delete(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', '')
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -481,7 +488,7 @@ xdescribe('Deleting a bank account', () => {
   });
   it('A non admin attempting to delete an existing bank account should return a 403 error', (done) => {
     chai.request(app)
-      .delete('/api/v1/accounts/2019002')
+      .delete(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 403);
@@ -489,7 +496,6 @@ xdescribe('Deleting a bank account', () => {
         done();
       });
   });
-  
   let adminToken;
   before((done) => {
     chai.request(app)
@@ -513,18 +519,19 @@ xdescribe('Deleting a bank account', () => {
 
   it('Deleting a bank accout should return a message about the action', (done) => {
     chai.request(app)
-      .delete('/api/v1/accounts/2019002')
+      .delete(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', adminToken)
       .end((err, res) => {
         assert.equal((res.body.status), 200);
-        assert.equal((res.body.message), 'Bank Account 2019002 Successfully Deleted');
+        assert.equal((res.body.message), `Bank Account ${requestedAccountNumber} Successfully Deleted`);
         done();
       });
   });
 
   it('Accesing a deleted bank account should return a 404 message', (done) => {
     chai.request(app)
-      .get('/api/v1/accounts/2019002')
+      .get(`/api/v1/accounts/${requestedAccountNumber}`)
+      .set('x-access-token', adminToken)
       .end((err, res) => {
         assert.equal((res.body.status), 404);
         assert.equal((res.body.error), 'Bank Account not found');
