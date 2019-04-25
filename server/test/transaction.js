@@ -45,7 +45,7 @@ describe('Credit transcactions', () => {
       .send(transactionData.completeCreditDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthourised!');
+        assert.equal((res.body.error), 'Unauthorized!');
         done();
       });
   });
@@ -165,7 +165,7 @@ describe('Debit transcactions', () => {
       .send(transactionData.completeDebitDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthourised!');
+        assert.equal((res.body.error), 'Unauthorized!');
         done();
       });
   });

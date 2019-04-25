@@ -229,7 +229,7 @@ describe('Activating or deactivating a bank account', () => {
       .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthourised!');
+        assert.equal((res.body.error), 'Unauthorized!');
         done();
       });
   });
@@ -328,7 +328,7 @@ describe('Fetching all bank accounts', () => {
       .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthourised!');
+        assert.equal((res.body.error), 'Unauthorized!');
         done();
       });
   });
@@ -381,6 +381,70 @@ xdescribe('Checking bank account balance', () => {
   });
 });
 
+// Test for viewing all bank accounts owned by one user
+describe('Fetching bank accounts owned by one user', () => {
+  it('Attempts without a token should throw an error', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/sophie.kamali@outlook.com/accounts')
+      .set('x-access-token', '')
+      .end((err, res) => {
+        assert.equal((res.body.status), 403);
+        assert.equal((res.body.error), 'Token is not provided');
+        done();
+      });
+  });
+  let userToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.user)
+      .end((err, res) => {
+        userToken = res.body.data.token;
+        done();
+      });
+  });
+  it('A non admin or staff attempting to view all bank accounts owned by a user should throw an error', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/sophie.kamali@outlook.com/accounts')
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 401);
+        assert.equal((res.body.error), 'Unauthorized!');
+        done();
+      });
+  });
+  let adminToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.admin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        done();
+      });
+  });
+  it('Attempts for a user with no bank account should throw a 404', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/sophi.kamali@outlook.com/accounts')
+      .set('x-access-token', adminToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'This User has no bank account');
+        done();
+      });
+  });
+  it('Attempts for a user with one or more bank accounts should return an array of objects', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/sophie.kamali@outlook.com/accounts')
+      .set('x-access-token', adminToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body.data[0]), 'account_number');
+        assert.property((res.body.data[1]), 'account_number');
+        done();
+      });
+  });
+});
 
 // Tests for deleting a specific bank account
 describe('Deleting a bank account', () => {
@@ -425,13 +489,13 @@ describe('Deleting a bank account', () => {
         done();
       });
   });
-  it('A non admin attempting to delete an existing bank account should return a 403 error', (done) => {
+  it('A non admin or staff attempting to delete an existing bank account should return error', (done) => {
     chai.request(app)
       .delete(`/api/v1/accounts/${requestedAccountNumber}`)
       .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthourised!');
+        assert.equal((res.body.error), 'Unauthorized!');
         done();
       });
   });
