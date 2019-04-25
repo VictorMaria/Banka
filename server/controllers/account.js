@@ -115,6 +115,19 @@ class Account {
     }
   }
 
+  static async getAllBankAccountsForOneUser(req, res) {
+    try {
+      const { rows } = await db.query(accountQueries.getAllBankAccountsForOneUserQuery,
+        [req.params.email]);
+      if (!rows[0]) {
+        return res.status(404).send({ status: 404, error: 'This User has no bank account' });
+      }
+      return res.status(200).send({ status: 200, data: rows });
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  }
+
   static async deleteBankAccount(req, res) {
     try {
       const deleteAccount = await db.query(accountQueries.deleteBankAccountQuery,

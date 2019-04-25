@@ -12,5 +12,6 @@ router.post('/accounts', verifyToken, validator(newbankAccountDetails), Account.
 router.get('/accounts/:accountNumber', verifyToken, checkIfStaffAdmin, Account.getBankAccount);
 router.patch('/accounts/:accountNumber', verifyToken, checkIfStaffAdmin, checkBankAccount, Account.activateDeactivate);
 router.get('/accounts', verifyToken, checkIfStaffAdmin, Account.getAllBankAccounts);
+router.get('/user/:email/accounts', verifyToken, checkIfStaffAdmin, Account.getAllBankAccountsForOneUser);
 router.delete('/accounts/:accountNumber', verifyToken, checkIfStaffAdmin, checkBankAccount, Account.deleteBankAccount);
 export default router;

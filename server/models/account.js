@@ -12,5 +12,6 @@ const accountQueries = {
   getAllBankAccountsQuery: 'SELECT * FROM accounts',
   deleteBankAccountQuery: 'DELETE FROM accounts WHERE account_number = $1 returning *',
   checkBankAccountQuery: 'SELECT * FROM accounts WHERE account_number = $1',
+  getAllBankAccountsForOneUserQuery: 'SELECT * FROM accounts WHERE email = $1',
 };
 export default accountQueries;
