@@ -357,6 +357,51 @@ describe('Fetching all bank accounts', () => {
   });
 });
 
+describe('Checking active and dormant accounts', () => {
+  let staffToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.staff)
+      .end((err, res) => {
+        staffToken = res.body.data.token;
+        done();
+      });
+  });
+  it('A staff attempting to view all active accounts should status property as active', (done) => {
+    chai.request(app)
+      .get('/api/v1/accounts?status=active')
+      .set('x-access-token', staffToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.equal((res.body.data[0].status), 'active');
+        assert.equal((res.body.data[1].status), 'active');
+        assert.equal((res.body.data[2].status), 'active');
+        done();
+      });
+  });
+  it('A staff attempting to view all dormant accounts should return status property as dormant', (done) => {
+    chai.request(app)
+      .get('/api/v1/accounts?status=dormant')
+      .set('x-access-token', staffToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.equal((res.body.data[0].status), 'dormant');
+        done();
+      });
+  });
+  it('A wrong query string should return an error', (done) => {
+    chai.request(app)
+      .get('/api/v1/accounts?status=dormat')
+      .set('x-access-token', staffToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 400);
+        assert.equal((res.body.error), 'Bad request');
+        done();
+      });
+  });
+});
+
 // Tests for checking account balance of a specific bank account
 xdescribe('Checking bank account balance', () => {
   it('Attempting to check the balance of a non existent account should return a 404 error', (done) => {

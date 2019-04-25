@@ -2,9 +2,14 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
+let databaseUrl = '';
+if (process.env.NODE_ENV === 'PRODUCTION') {
+  databaseUrl = process.env.DATABASE_URL_PRODUCTION;
+} else {
+  databaseUrl = process.env.DATABASE_URL;
+}
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: databaseUrl,
 });
 
 export default {

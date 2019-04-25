@@ -37,7 +37,7 @@ class User {
 
   static async signIn(req, res) {
     try {
-      const { rows } = await db.query(userQueries.signInQuery, [req.body.email]);
+      const { rows } = await db.query(userQueries.signInQuery, [req.body.email.toLowerCase()]);
       if (!rows[0]) {
         return res.status(400).send({ status: 400, error: 'Incorrect Credentials' });
       }
@@ -60,6 +60,7 @@ class User {
     } catch (error) {
       res.status(500).send(error);
     }
+    return true;
   }
 }
 export default User;
