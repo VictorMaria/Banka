@@ -80,5 +80,17 @@ class Transaction {
       return res.status(500).send({ status: 500, mesaage: error });
     }
   }
+
+  static async getAllTransactions(req, res) {
+    try {
+      const { rows } = await db.query(transactionQueries.allTransactions);
+      if (!rows[0]) {
+        return res.status(404).send({ status: 404, error: 'No transactions here' });
+      }
+      return res.status(200).send({ status: 200, data: rows });
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  }
 }
 export default Transaction;

@@ -37,7 +37,7 @@ class User {
 
   static async signIn(req, res) {
     try {
-      const { rows } = await db.query(userQueries.signInQuery, [req.body.email]);
+      const { rows } = await db.query(userQueries.signInQuery, [req.body.email.toLowerCase()]);
       if (!rows[0]) {
         return res.status(400).send({ status: 400, error: 'Incorrect Credentials' });
       }
@@ -59,6 +59,29 @@ class User {
       return res.status(200).send(response);
     } catch (error) {
       res.status(500).send(error);
+    }
+    return true;
+  }
+
+  static async myAccountDetails(req, res) {
+    try {
+      const myAccount = await db.query(userQueries.myAccountQuery, [req.params.accountNumber]);
+      return res.status(200).send({ status: 200, data: myAccount.rows[0] });
+    } catch (error) {
+      return res.send(500).send(error);
+    }
+  }
+
+  static async myTransactionHistory(req, res) {
+    try {
+      const transactionHistory = await db.query(userQueries.myTransactionHistoryQuery,
+        [req.params.accountNumber]);
+      if (!transactionHistory.rows[0]) {
+        return res.status(404).send({ status: 404, error: 'No transactions here' });
+      }
+      return res.status(200).send({ status: 200, data: transactionHistory.rows });
+    } catch (error) {
+      return res.status(500).send(error);
     }
   }
 }

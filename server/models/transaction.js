@@ -12,6 +12,7 @@ const transactionQueries = {
     transactions(account_number, transaction_date, amount, cashier, transaction_type, remark, account_balance)
     values($1, $2, $3, $4, $5, $6, $7)
     returning *`,
+  allTransactions: 'SELECT * FROM transactions',
 
 };
 export default transactionQueries;

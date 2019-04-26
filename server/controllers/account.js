@@ -37,20 +37,16 @@ class Account {
           balance: rows[0].balance,
         },
       };
-      return res.status(201).send(response);
+      res.status(201).send(response);
     } catch (error) {
       res.status(500).send({ status: 500, mesaage: error });
     }
-    return true;
   }
 
   static async getBankAccount(req, res) {
     try {
       const { rows } = await db.query(accountQueries.getBankAccountQuery,
         [req.params.accountNumber]);
-      if (!rows[0]) {
-        return res.status(404).send({ status: 404, error: 'Bank Account not found' });
-      }
       const response = {
         status: 200,
         data: {
@@ -107,9 +103,22 @@ class Account {
   }
 
   static async getAllBankAccounts(req, res) {
+    const { status } = req.query;
     try {
-      const { rows } = await db.query(accountQueries.getAllBankAccountsQuery);
-      return res.status(200).send({ status: 200, data: rows });
+      if (status === undefined) {
+        const { rows } = await db.query(accountQueries.getAllBankAccountsQuery);
+        res.status(200).send({ status: 200, data: rows });
+      } else if (status === 'active') {
+        const activeAccounts = await db.query(accountQueries.getActiveBankAccountsQuery, [status]);
+        res.status(200).send({ status: 200, data: activeAccounts.rows });
+      } else if (status === 'dormant') {
+        const dormantAccounts = await db.query(accountQueries.getDormantBackAccountsQuery,
+          [status]);
+        res.status(200).send({ status: 200, data: dormantAccounts.rows });
+      } else {
+        res.status(400).send({ status: 400, error: 'Bad request' });
+      }
+      return true;
     } catch (error) {
       return res.status(500).send(error);
     }
