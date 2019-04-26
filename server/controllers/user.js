@@ -1,6 +1,7 @@
 import helper from '../helpers/helpers';
 import userQueries from '../models/user';
 import db from '../db/index';
+import refine from '../helpers/refine';
 
 class User {
   static async signUp(req, res) {
@@ -8,8 +9,8 @@ class User {
     const userType = 'client';
     const defaultProfilePhoto = 'ninja-avi.jpg';
     const values = [
-      req.body.firstName,
-      req.body.lastName,
+      refine(req.body.firstName),
+      refine(req.body.lastName),
       (req.body.email).toLowerCase(),
       hashedPassword,
       userType,

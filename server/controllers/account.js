@@ -1,6 +1,7 @@
 import accountQueries from '../models/account';
 import db from '../db/index';
 import generateAccountNumber from '../helpers/generateAccountNumber';
+import refine from '../helpers/refine';
 
 class Account {
   static async createBankAccount(req, res) {
@@ -18,7 +19,7 @@ class Account {
         getUser.rows[0].last_name,
         getUser.rows[0].email,
         new Date(),
-        req.body.type,
+        refine(req.body.type),
         accountStatus,
         parseFloat(req.body.openingBalance),
         parseFloat(req.body.openingBalance) + 0.00,

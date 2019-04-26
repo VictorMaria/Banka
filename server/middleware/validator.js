@@ -1,11 +1,16 @@
 import Joi from 'joi';
 
-const validator = schema => (req, res, next) => {
-  const result = Joi.validate(req.body, schema);
-  if (result.error) {
-    return res.status(400).send({ status: 400, error: result.error.details[0].message });
+const validator = schema => async (req, res, next) => {
+  try {
+    const result = await Joi.validate(req.body, schema, {
+      abortEarly: false,
+      allowUnknown: true,
+    });
+    req.body = result;
+    next();
+  } catch (error) {
+    const errors = error.details.map(item => item.message);
+    res.status(400).send({ status: 400, error: errors });
   }
-  return next();
 };
-
 export default validator;
