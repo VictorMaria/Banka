@@ -60,44 +60,11 @@ describe('Credit transcactions', () => {
         done();
       });
   });
-  it('Should return an error for wrong  amount format', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/credit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.wrongAmountPattern)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
   it('Should return an error stating amount field is required', (done) => {
     chai.request(app)
       .post(`/api/v1/transactions/${requestedAccountNumber}/credit`)
       .set('x-access-token', staffToken)
       .send(transactionData.missingAmount)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-  it('Should return an error for empty remark field', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/credit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.emptyRemark)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-  it('Should return an error stating remark field is required', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/credit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.missingRemark)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.property((res.body), 'error');
@@ -178,18 +145,6 @@ describe('Debit transcactions', () => {
       .send(userData.staff)
       .end((err, res) => {
         staffToken = res.body.data.token;
-        done();
-      });
-  });
-
-  it('Should return an error for wrong  amount format', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.wrongAmountPattern)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
         done();
       });
   });

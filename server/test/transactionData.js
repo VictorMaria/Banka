@@ -1,7 +1,7 @@
 
 const transactionData = {
   wrongAmountPattern: {
-    amount: '100.000',
+    amount: 100,
     remark: 'Monthly Interest',
   },
 
@@ -10,29 +10,29 @@ const transactionData = {
   },
 
   emptyRemark: {
-    amount: '100.00',
+    amount: 100,
     remark: '',
   },
 
   missingRemark: {
-    amount: '100.00',
+    amount: 100,
   },
 
   lengthyRemark: {
-    amount: '100.00',
+    amount: 100,
     remark: 'This is a lengthy remark for a transaction',
   },
 
   completeCreditDetails: {
-    amount: '1000.00',
+    amount: 1000,
     remark: 'Monthly Interest',
   },
   completeDebitDetails: {
-    amount: '50.00',
+    amount: 50,
     remark: 'Monthly Due',
   },
   excessDebitDetails: {
-    amount: '5000.00',
+    amount: 5000,
     remark: 'Party',
   },
   user: {
