@@ -15,5 +15,6 @@ const accountQueries = {
   getAllBankAccountsForOneUserQuery: 'SELECT * FROM accounts WHERE email = $1',
   getActiveBankAccountsQuery: 'SELECT * FROM accounts WHERE status = $1',
   getDormantBackAccountsQuery: 'SELECT * FROM accounts WHERE status = $1',
+  checkUserQuery: 'SELECT user_id FROM accounts WHERE id = $1',
 };
 export default accountQueries;

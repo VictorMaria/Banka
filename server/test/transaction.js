@@ -5,6 +5,7 @@ import bankAccountData from './bankAccountData';
 import transactionData from './transactionData';
 import userData from './userData';
 
+// User token requested for new bank account
 let userToken;
 before((done) => {
   chai.request(app)
@@ -280,6 +281,84 @@ describe('Debit transcactions', () => {
         assert.property((res.body.data), 'amount');
         assert.property((res.body.data), 'cashier');
         assert.property((res.body.data), 'remark');
+        done();
+      });
+  });
+});
+describe('User access to own bank account transaction', () => {
+  let villainToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.villain)
+      .end((err, res) => {
+        villainToken = res.body.data.token;
+        done();
+      });
+  });
+  let requestedVillainAccountNumber;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/accounts')
+      .send(bankAccountData.completeDetails)
+      .set('x-access-token', villainToken)
+      .end((err, res) => {
+        requestedVillainAccountNumber = res.body.data.accountNumber;
+        done();
+      });
+  });
+
+  it('A user attempting to access another user bank account history should throw an error', (done) => {
+    chai.request(app)
+      .get(`/api/v1/accounts/${requestedVillainAccountNumber}/transactions`)
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 401);
+        assert.equal((res.body.error), 'Unauthorized!');
+        done();
+      });
+  });
+  it('A user attempting to access own bank account history should return success with an object', (done) => {
+    chai.request(app)
+      .get(`/api/v1/accounts/${requestedAccountNumber}/transactions`)
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body.data[0]), 'transaction_type');
+        assert.property((res.body.data[0]), 'amount');
+        assert.property((res.body.data[1]), 'transaction_type');
+        assert.property((res.body.data[1]), 'amount');
+        done();
+      });
+  });
+  let requestedSecondAccountNumber;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/accounts')
+      .send(bankAccountData.completeDetails)
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        requestedSecondAccountNumber = res.body.data.accountNumber;
+        done();
+      });
+  });
+  it('A user attempting to access own bank account without history should throw an error', (done) => {
+    chai.request(app)
+      .get(`/api/v1/accounts/${requestedSecondAccountNumber}/transactions`)
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'No transactions here');
+        done();
+      });
+  });
+  it('A user attempting to access bank account history with a wrong account number should throw an error', (done) => {
+    chai.request(app)
+      .get('/api/v1/accounts/2019000/transactions')
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 404);
+        assert.equal((res.body.error), 'Bank Account not found');
         done();
       });
   });

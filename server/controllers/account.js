@@ -47,9 +47,6 @@ class Account {
     try {
       const { rows } = await db.query(accountQueries.getBankAccountQuery,
         [req.params.accountNumber]);
-      if (!rows[0]) {
-        return res.status(404).send({ status: 404, error: 'Bank Account not found' });
-      }
       const response = {
         status: 200,
         data: {

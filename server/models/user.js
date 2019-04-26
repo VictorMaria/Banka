@@ -5,6 +5,9 @@ const userQueries = {
     returning *`,
   signInQuery: 'SELECT * FROM users WHERE email = $1',
   checkEmailQuery: 'SELECT * FROM users WHERE email = $1',
+  myTransactionHistoryQuery: 'SELECT * FROM transactions WHERE account_number = $1',
+  checkUser: 'SELECT user_id FROM accounts WHERE account_number = $1',
+  myAccountQuery: 'SELECT * FROM accounts WHERE account_number = $1',
 };
 
 export default userQueries;

@@ -5,11 +5,12 @@ import validator from '../middleware/validator';
 import verifyToken from '../middleware/verifyToken';
 import checkIfStaffAdmin from '../helpers/checkIfAdminStaff';
 import checkBankAccount from '../helpers/checkBankAccount';
+import userStaffAdminCheck from '../helpers/userStaffAdminCheck';
 
 const router = express.Router();
 
 router.post('/accounts', verifyToken, validator(newbankAccountDetails), Account.createBankAccount);
-router.get('/accounts/:accountNumber', verifyToken, checkIfStaffAdmin, Account.getBankAccount);
+router.get('/accounts/:accountNumber', verifyToken, checkBankAccount, userStaffAdminCheck, Account.getBankAccount);
 router.patch('/accounts/:accountNumber', verifyToken, checkIfStaffAdmin, checkBankAccount, Account.activateDeactivate);
 router.get('/accounts', verifyToken, checkIfStaffAdmin, Account.getAllBankAccounts);
 router.get('/user/:email/accounts', verifyToken, checkIfStaffAdmin, Account.getAllBankAccountsForOneUser);
