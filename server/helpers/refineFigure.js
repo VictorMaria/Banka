@@ -1,3 +1,3 @@
 const refineFigure = figure => {
-    let refined = figure
+    let refined = figure.replace(/+/g, '');
 }

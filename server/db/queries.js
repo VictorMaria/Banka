@@ -22,7 +22,7 @@ const createQueries = {
       created_on TIMESTAMP,
       type VARCHAR(15) NOT NULL,
       status VARCHAR(15) NOT NULL,
-      opening_balance NUMERIC(15, 2),
+      opening_balance NUMERIC(15, 2) DEFAULT 0.00,
       balance NUMERIC(15, 2) DEFAULT 0.00,
       FOREIGN KEY (user_id) REFERENCES users (id)
       )`,
@@ -34,7 +34,7 @@ const createQueries = {
       amount NUMERIC(15, 2) NOT NULL,
       cashier INTEGER NOT NULL,
       transaction_type VARCHAR(7) NOT NULL,
-      remark VARCHAR(25) NOT NULL,
+      remark VARCHAR(25),
       account_balance NUMERIC(15, 2)
       )`,
 };

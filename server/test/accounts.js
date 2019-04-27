@@ -7,7 +7,7 @@ import userData from './userData';
 chai.use(require('chai-http'));
 
 // Tests for creating a new bank account
-describe('Creating a bank acocunt', () => {
+describe('Creating a bank account', () => {
   let userToken;
   before((done) => {
     chai.request(app)
@@ -128,7 +128,7 @@ describe('Fetching a specific bank account', () => {
         done();
       });
   });
-  it('Should return an error for a non existent bank account', (done) => {
+  it('Should return an error for a non existing bank account', (done) => {
     chai.request(app)
       .get('/api/v1/accounts/20190022')
       .set('x-access-token', staffToken)
@@ -264,7 +264,7 @@ describe('Activating or deactivating a bank account', () => {
         done();
       });
   });
-  it('Attempting to activate or deactivate a non existent account should return a 404 error', (done) => {
+  it('Attempting to activate or deactivate a non existing account should return a 404 error', (done) => {
     chai.request(app)
       .patch('/api/v1/accounts/20190022')
       .set('x-access-token', staffToken)
@@ -368,7 +368,7 @@ describe('Checking active and dormant accounts', () => {
         done();
       });
   });
-  it('A staff attempting to view all active accounts should status property as active', (done) => {
+  it('A staff attempting to view all active accounts should get a list of all active accounts', (done) => {
     chai.request(app)
       .get('/api/v1/accounts?status=active')
       .set('x-access-token', staffToken)
@@ -380,7 +380,7 @@ describe('Checking active and dormant accounts', () => {
         done();
       });
   });
-  it('A staff attempting to view all dormant accounts should return status property as dormant', (done) => {
+  it('A staff attempting to view all dormant accounts should get a list of all dormant accounts', (done) => {
     chai.request(app)
       .get('/api/v1/accounts?status=dormant')
       .set('x-access-token', staffToken)
@@ -404,7 +404,7 @@ describe('Checking active and dormant accounts', () => {
 
 // Tests for checking account balance of a specific bank account
 xdescribe('Checking bank account balance', () => {
-  it('Attempting to check the balance of a non existent account should return a 404 error', (done) => {
+  it('Attempting to check the balance of a non existing account should return a 404 error', (done) => {
     chai.request(app)
       .get('/api/v1/accounts/20190022/balance')
       .end((err, res) => {

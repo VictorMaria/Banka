@@ -172,19 +172,6 @@ describe('Debit transcactions', () => {
         done();
       });
   });
-
-  it('Should return an error stating remark field is required', (done) => {
-    chai.request(app)
-      .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
-      .set('x-access-token', staffToken)
-      .send(transactionData.missingRemark)
-      .end((err, res) => {
-        assert.equal((res.body.status), 400);
-        assert.property((res.body), 'error');
-        done();
-      });
-  });
-
   it('Should return an error for a remark of more than 25 characters', (done) => {
     chai.request(app)
       .post(`/api/v1/transactions/${requestedAccountNumber}/debit`)
@@ -240,6 +227,7 @@ describe('Debit transcactions', () => {
       });
   });
 });
+
 describe('User access to own bank account transaction', () => {
   let villainToken;
   before((done) => {
@@ -302,7 +290,7 @@ describe('User access to own bank account transaction', () => {
       .get(`/api/v1/accounts/${requestedSecondAccountNumber}/transactions`)
       .set('x-access-token', userToken)
       .end((err, res) => {
-        assert.equal((res.body.status), 404);
+        assert.equal((res.body.status), 200);
         assert.equal((res.body.error), 'No transactions here');
         done();
       });
@@ -314,6 +302,56 @@ describe('User access to own bank account transaction', () => {
       .end((err, res) => {
         assert.equal((res.body.status), 404);
         assert.equal((res.body.error), 'Bank Account not found');
+        done();
+      });
+  });
+});
+
+// An admin or staff can view transactions of any bank account
+describe('User access to own bank account transaction', () => {
+  let adminToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.admin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        done();
+      });
+  });
+  let staffToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.staff)
+      .end((err, res) => {
+        staffToken = res.body.data.token;
+        done();
+      });
+  });
+  it('A staff attempting to access a bank account history should return success with an object', (done) => {
+    chai.request(app)
+      .get(`/api/v1/accounts/${requestedAccountNumber}/transactions`)
+      .set('x-access-token', staffToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body.data[0]), 'transaction_type');
+        assert.property((res.body.data[0]), 'amount');
+        assert.property((res.body.data[1]), 'transaction_type');
+        assert.property((res.body.data[1]), 'amount');
+        done();
+      });
+  });
+  it('An admin attempting to access a bank account history should return success with an object', (done) => {
+    chai.request(app)
+      .get(`/api/v1/accounts/${requestedAccountNumber}/transactions`)
+      .set('x-access-token', adminToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body.data[0]), 'transaction_type');
+        assert.property((res.body.data[0]), 'amount');
+        assert.property((res.body.data[1]), 'transaction_type');
+        assert.property((res.body.data[1]), 'amount');
         done();
       });
   });

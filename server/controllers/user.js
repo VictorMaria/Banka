@@ -78,7 +78,7 @@ class User {
       const transactionHistory = await db.query(userQueries.myTransactionHistoryQuery,
         [req.params.accountNumber]);
       if (!transactionHistory.rows[0]) {
-        return res.status(404).send({ status: 404, error: 'No transactions here' });
+        return res.status(200).send({ status: 200, error: 'No transactions here' });
       }
       return res.status(200).send({ status: 200, data: transactionHistory.rows });
     } catch (error) {

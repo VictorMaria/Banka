@@ -1,4 +1,6 @@
 import transactionQueries from '../models/transaction';
+import accountQueries from '../models/account';
+import userQueries from '../models/user';
 import db from '../db/index';
 
 class Transaction {
@@ -85,7 +87,7 @@ class Transaction {
     try {
       const { rows } = await db.query(transactionQueries.allTransactions);
       if (!rows[0]) {
-        return res.status(404).send({ status: 404, error: 'No transactions here' });
+        return res.status(404).send({ status: 200, error: 'No transactions here' });
       }
       return res.status(200).send({ status: 200, data: rows });
     } catch (error) {
