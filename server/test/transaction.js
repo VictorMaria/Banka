@@ -47,7 +47,7 @@ describe('Credit transcactions', () => {
       .send(transactionData.completeCreditDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthorized!');
+        assert.equal((res.body.error), 'You are not authorized to perform this action');
         done();
       });
   });
@@ -134,7 +134,7 @@ describe('Debit transcactions', () => {
       .send(transactionData.completeDebitDetails)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthorized!');
+        assert.equal((res.body.error), 'You are not authorized to perform this action');
         done();
       });
   });
@@ -258,7 +258,7 @@ describe('User access to own bank account transaction', () => {
       .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthorized!');
+        assert.equal((res.body.error), 'You are not authorized to perform this action');
         done();
       });
   });

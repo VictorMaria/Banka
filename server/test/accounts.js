@@ -229,7 +229,7 @@ describe('Activating or deactivating a bank account', () => {
       .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthorized!');
+        assert.equal((res.body.error), 'You are not authorized to perform this action');
         done();
       });
   });
@@ -328,7 +328,7 @@ describe('Fetching all bank accounts', () => {
       .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthorized!');
+        assert.equal((res.body.error), 'You are not authorized to perform this action');
         done();
       });
   });
@@ -454,7 +454,7 @@ describe('Fetching bank accounts owned by one user', () => {
       .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthorized!');
+        assert.equal((res.body.error), 'You are not authorized to perform this action');
         done();
       });
   });
@@ -540,7 +540,7 @@ describe('Deleting a bank account', () => {
       .set('x-access-token', userToken)
       .end((err, res) => {
         assert.equal((res.body.status), 401);
-        assert.equal((res.body.error), 'Unauthorized!');
+        assert.equal((res.body.error), 'You are not authorized to perform this action');
         done();
       });
   });

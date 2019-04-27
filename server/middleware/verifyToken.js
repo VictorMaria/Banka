@@ -20,6 +20,12 @@ const verifyToken = async (req, res, next) => {
     };
     return next();
   } catch (error) {
+    if (error.message === 'jwt expired') {
+      return res.status(403).send({ status: 403, error: 'Your session has expired, please sign in again' });
+    }
+    if (error.message === 'invalid token') {
+      return res.status(403).send({ status: 403, error: 'Your token is invalid' });
+    }
     return res.status(500).send(error);
   }
 };
