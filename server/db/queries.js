@@ -28,7 +28,7 @@ const createQueries = {
       )`,
   transactionTable: `CREATE TABLE IF NOT EXISTS
     transactions(
-      id SERIAL PRIMARY KEY,
+      transaction_id SERIAL PRIMARY KEY,
       account_number BIGINT NOT NULL,
       transaction_date TIMESTAMP,
       amount NUMERIC(15, 2) NOT NULL,

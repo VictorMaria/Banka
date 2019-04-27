@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import chai, { assert } from 'chai';
 import app from '../../app';
 import bankAccountData from './bankAccountData';

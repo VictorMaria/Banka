@@ -21,7 +21,7 @@ class Transaction {
       const response = {
         status: 200,
         data: {
-          transactionId: rows[0].id,
+          transactionId: rows[0].transaction_id,
           accountNumber: req.params.accountNumber,
           transactionDate: rows[0].transaction_date,
           transactionType: rows[0].transaction_type,
@@ -62,7 +62,7 @@ class Transaction {
       const response = {
         status: 200,
         data: {
-          transactionId: rows[0].id,
+          transactionId: rows[0].transaction_id,
           accountNumber: req.params.accountNumber,
           transactionDate: rows[0].transaction_date,
           transactionType: rows[0].transaction_type,
