@@ -22,19 +22,21 @@
 		</div>
 		<div class = 'wrapper' id = 'wrapper'>
 		<div class = 'new-transaction' id = 'new-transaction'>
+			<form onsubmit = 'event.preventDefault(); return finish()'>
 			<h2 id = 'h2-text'>New Transaction</h2>
-			<input type = 'text' placeholder = 'Account Number'><br><br>
+			<input type = 'number' placeholder = 'Account Number' required minlength = 6><br><br>
 			<input type = 'text' placeholder = 'John Kamali' disabled><br><br>
-			<input id = 'amount' type = 'text' placeholder = 'Amount'><br><br>
+			<input id = 'amount' type = 'number' placeholder = 'Amount' required><br><br>
 			<input type = 'text' placeholder = 'Description'><br><br>
-			<select id = 'options' name = 'transaction type'>
+			<select id = 'options' name = 'transaction type' required>
 				<option value = 'Select Transaction Type'>Select Transaction Type</option>
   				<option value = 'Credit'>Credit</option>
   				<option value = 'Debit'>Debit</option>
 			  </select><br><br>
   			<div class = 'submit-div'>
-  			<button class = 'submit' onclick = 'finish()'>Finish</button>
-  			</div><br>
+  			<button class = 'submit'>Finish</button>
+			  </div><br>
+			  </form>
 		</div>
 		</div><br>
 		<footer>

@@ -67,54 +67,24 @@ a.active {
 .second-bar a:hover {
 	opacity: 0.8;
 }
-.wrapper {
+.transaction-wrapper {
 	display: flex;
-	align-content: center;
+	align-items: center;
 	min-height: 100vh;	
 	width: 100%;
 	flex-direction: column;
 	padding-top: 20px;
 }
 
-
-/* user accounts, transactions, bank accounts */
-.all-transactions, .all-bank-accounts, .all-accounts {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	min-height: 40px;
-    justify-content: space-evenly;
-    padding-bottom: 20px;
-}
-.top-text {
-    text-align: center;
-}
-.transaction, .bank-account, .account {
-	border-left: solid 7px #de4f4f;
+.transaction {
+	border-top: solid 7px #de4f4f;
 	color: black;
-    width: 25%;
-    height: 50%;
+    width: 50%;
+    height: 70%;
 	padding-left: 5px;
 	background-color: #ddd;
-	border-radius: 5px;
-}
-
-
-.divlink {
-	text-decoration: none;
-	color: black;
-}
-
-
-#okay {
-	border: solid 5px #de4f4f;
-	background-color: #de4f4f;
-	color: #ddd;
-	width: 50%;
-	height: 40px;
-	font-size: 16px;
-	font-weight: bold;
-	border-radius: 5px;
+    border-radius: 5px;
+    text-align: center;
 }
 
 
@@ -157,28 +127,20 @@ footer a {
 
 /* Media query for other page elements */
 @media (min-width: 275px) and (max-width: 554px) {
-	.wrapper {
+	.transaction-wrapper {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	min-height: 100vh;
 	}
-    .all-transactions, .all-bank-accounts, .all-accounts {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        min-height: 40px;
-        align-items: center;
-        padding-bottom: 0;
-    }
     
-.transaction, .bank-account, .account {
+.transaction {
 		width: 70%;
 		padding: 5px;
-        border-left: 10px solid #de4f4f;
         margin-bottom: 10px;
 	}
 
 .second-bar a:hover {
 	opacity: 0.8;
+}
 }

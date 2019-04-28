@@ -4,8 +4,8 @@
 		<title>Transactions</title>
 	 	<meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
      	<link rel= 'icon' type= 'image/ico' href = '../images/banka-icon.png' />
-     	<link rel= 'stylesheet' type = 'text/css' href = '../styles/styles2.css'>
-     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     	<link rel= 'stylesheet' type = 'text/css' href = '../styles/transactions.css'>
+     	<link rel= 'stylesheet' href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
      </head>
 	<body>
 		<div class = 'topnav' id = 'myTopnav'>
@@ -15,101 +15,86 @@
             <a href = 'transactions.html' class = 'active'>Transactions</a>
             <a href = 'new-transaction.html' >New Transaction</a>
 			<a href = 'sign-in.html'>Sign Out</a>
-			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+			<a href = 'javascript:void(0);' class = 'icon' onclick = 'myFunction()'>
     			<i class="fa fa-bars"></i>
   			</a>
-		</div>
-		
-		<div class = 'wrapper'>
-           <div class = 'top-text'><h1>Transactions</h1></div>
-                <div class = 'all-transactions'>
-                    <div class = 'transaction'>
-                        <p><strong>25 March, 2019  12:30</strong><br>
-                            <strong>John Kamali</strong><br>
-                            <strong>Account Number  20190300001</strong><br>
-                            <strong>Credit N600, 000</strong><br>
-                            <strong>March Salary</strong><br>
-                            <strong>N2, 400, 000</strong><br>
-                        </p>
-                    </div>
-                    <div class = 'transaction'>
-                        <p><strong>25 February, 2019  12:30</strong><br>
-                            <strong>John Kamali</strong><br>
-                            <strong>Account Number  20190300001</strong><br>
-                            <strong>Credit N600, 000</strong><br>
-                            <strong>Febrary Salary</strong><br>
-                            <strong>Balance N1, 800, 000</strong>
-                        </p>
-                    </div>
-                    <div class = 'transaction'>
-                        <p><strong>25 January, 2019  12:20</strong><br>
-                            <strong>John Kamali</strong><br>
-                            <strong>Account Number  20190300001</strong><br>
-                            <strong>Credit N600, 000</strong><br>
-                            <strong>January Salary</strong><br>
-                            <strong>Balance N1, 200, 000</strong>
-                        </p>
-                    </div>
-            </div>
-            <div class = 'all-transactions'>
-                    <div class = 'transaction'>
-                        <p><strong>25 March, 2019  12:30</strong><br>
-                            <strong>John Kamali</strong><br>
-                            <strong>Account Number  20190300001</strong><br>
-                            <strong>Credit N600, 000</strong><br>
-                            <strong>March Salary</strong><br>
-                            <strong>N2, 400, 000</strong><br>
-                        </p>
-                    </div>
-                    <div class = 'transaction'>
-                        <p><strong>25 February, 2019  12:30</strong><br>
-                            <strong>John Kamali</strong><br>
-                            <strong>Account Number  20190300001</strong><br>
-                            <strong>Credit N600, 000</strong><br>
-                            <strong>Febrary Salary</strong><br>
-                            <strong>Balance N1, 800, 000</strong>
-                        </p>
-                    </div>
-                    <div class = 'transaction'>
-                        <p><strong>25 January, 2019  12:20</strong><br>
-                            <strong>John Kamali</strong><br>
-                            <strong>Account Number  20190300001</strong><br>
-                            <strong>Credit N600, 000</strong><br>
-                            <strong>January Salary</strong><br>
-                            <strong>Balance N1, 200, 000</strong>
-                        </p>
-                    </div>
-            </div>
-            <div class = 'all-transactions'>
-                    <div class = 'transaction'>
-                        <p><strong>25 March, 2019  12:30</strong><br>
-                            <strong>John Kamali</strong><br>
-                            <strong>Account Number  20190300001</strong><br>
-                            <strong>Credit N600, 000</strong><br>
-                            <strong>March Salary</strong><br>
-                            <strong>N2, 400, 000</strong><br>
-                        </p>
-                    </div>
-                    <div class = 'transaction'>
-                        <p><strong>25 February, 2019  12:30</strong><br>
-                            <strong>John Kamali</strong><br>
-                            <strong>Account Number  20190300001</strong><br>
-                            <strong>Credit N600, 000</strong><br>
-                            <strong>Febrary Salary</strong><br>
-                            <strong>Balance N1, 800, 000</strong>
-                        </p>
-                    </div>
-                    <div class = 'transaction'>
-                        <p><strong>25 January, 2019  12:20</strong><br>
-                            <strong>John Kamali</strong><br>
-                            <strong>Account Number  20190300001</strong><br>
-                            <strong>Credit N600, 000</strong><br>
-                            <strong>January Salary</strong><br>
-                            <strong>Balance N1, 200, 000</strong>
-                        </p>
-                    </div>
-            </div>
-		</div>
+    </div>
+    
+    <div class = 'wrapper'>
+      <h1>All Transactions</h1>
+		<table>
+                <tr>
+                  <th>S/No</th>
+                  <th>Date</th>
+                  <th>Account No</th>
+                  <th>Account Name</th>
+                  <th>Action</th>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>25-03-2019</td>
+                  <td>20190300001</td>
+                  <td>John Kamali</td>
+                  <td><button onclick = "location.href = 'one-transaction.html'">More</button></td>
+                </tr>
+                  <tr>
+                  <td>8</td>
+                  <td>25-02-2019</td>
+                  <td>20190300001</td>
+                  <td>John Kamali</td>
+                  <td><button onclick = "location.href = 'one-transaction.html'">More</button></td>
+                </tr>
+                  <tr>
+                  <td>7</td>
+                  <td>25-01-2019</td>
+                  <td>20190300001</td>
+                  <td>John Kamali</td>
+                  <td><button onclick = "location.href = 'one-transaction.html'">More</button></td>
+                </tr>
+                  <tr>
+                  <td>6</td>
+                  <td>25-12-2018</td>
+                  <td>20190300001</td>
+                  <td>John Kamali</td>
+                  <td><button onclick = "location.href = 'one-transaction.html'">More</button></td>
+                </tr>
+                  <tr>
+                  <td>5</td>
+                  <td>25-11-2018</td>
+                  <td>20190300001</td>
+                  <td>John Kamali</td>
+                  <td><button onclick = "location.href = 'one-transaction.html'">More</button></td>
+                </tr>
+                  <tr>
+                  <td>4</td>
+                  <td>25-10-2018</td>
+                  <td>20190300001</td>
+                  <td>John Kamali</td>
+                  <td><button onclick = "location.href = 'one-transaction.html'">More</button></td>
+                </tr>
+                  <tr>
+                  <td>3</td>
+                  <td>25-09-2018</td>
+                  <td>20190300001</td>
+                  <td>John Kamali</td>
+                  <td><button onclick = "location.href = 'one-transaction.html'">More</button></td>
+                </tr>
+                  <tr>
+                  <td>2</td>
+                  <td>25-08-2018</td>
+                  <td>20190300001</td>
+                  <td>John Kamali</td>
+                  <td><button onclick = "location.href = 'one-transaction.html'">More</button></td>
+                </tr>
+                  <tr>
+                  <td>1</td>
+                  <td>25-07-2018</td>
+                  <td>20190300001</td>
+                  <td>John Kamali</td>
+                  <td><button onclick = "location.href = 'one-transaction.html'">More</button></td>
+                </tr>
+              </table> 
+    </div>           
 		<footer>
 			</p>Copyright 2019</p>
 		</footer>

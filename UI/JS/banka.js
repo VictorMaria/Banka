@@ -18,6 +18,10 @@ const manage = () => {
 						<button onclick = 'activate()' id = 'activate'>Activate</button>
 						<h2>Delete Account</h2>
 						<button id = 'delete'>Delete</button><br><br>
+						<h2>Make User an Admin</h2>
+						<button id = 'activate'>Done</button><br><br>
+						<h2>Make User a Staff</h2>
+						<button id = 'activate'>Done</button><br><br>
 						</div>`;
 	}
 	
@@ -105,7 +109,7 @@ const transactionHistory = () => {
 	transactionHistory.style.borderLeft = '5px solid #de4f4f';
 	
 	display.innerHTML = `<p><h1>John Kamali</h1>
-						<strong id = 'strong'>Savings Account 20190300001</strong>	
+						<strong id = 'strong'>Savings Account 20190300001</strong><br>	
 							<div class = 'history-body'>
 								<div class = 'transaction-profile-view'>
 									<p><strong>25 March, 2019  12:30</strong><br>
@@ -240,7 +244,7 @@ const myTransactionHistory = () => {
 	transactionHistory.style.borderLeft = '5px solid #de4f4f';
 
 	display.innerHTML = `<h1>John Kamali</h1>
-						<strong id = 'strong'>Savings Account 20190300001</strong>
+						<strong id = 'strong'>Savings Account 20190300001</strong><br>
 						<div class = 'history-body'>
 								<div class = 'transaction-profile-view'>
 									<p><strong>25 March, 2019  12:30</strong><br>
@@ -281,7 +285,7 @@ const finish = () => {
 
 	if (selectedOption === 'Select Transaction Type')
 		{
-			alert('Please Select Transaction type');
+			//alert('Please Select Transaction type');
 	} else if (selectedOption === 'Credit'){
 		wrapperDiv.innerHTML = `<div class = 'message-board'>
 										<h4>Credit Transaction Successful</h4>
@@ -291,26 +295,6 @@ const finish = () => {
 		wrapperDiv.innerHTML = `<div class = 'message-board'>
 									   <h4>Debit Transaction Successful</h4>
 									   <button id = 'okay' onclick = "location.href = 'transactions.html'">Okay</button><br><br>
-		                               <div>`;
-	}
-}
-
-const create = () => {
-	const options = document.getElementById('options');
-	const selectedOption = options.value;
-
-	if (selectedOption === 'Select User Type')
-		{
-			alert('Please Select User type');
-	} else if (selectedOption === 'Staff'){
-		wrapperDiv.innerHTML = `<div class = 'message-board'>
-										<h4>New Staff Created</h4>
-										<button id = 'okay' onclick = "location.href = 'user-accounts.html'">Okay</button><br><br>
-										<div>`;
-	} else {
-		wrapperDiv.innerHTML = `<div class = 'message-board'>
-									   <h4>New Admin Created</h4>
-									   <button id = 'okay' onclick = "location.href = 'user-accounts.html'">Okay</button><br><br>
 		                               <div>`;
 	}
 }

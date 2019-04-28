@@ -87,7 +87,7 @@ a.active {
 	text-align: center;
 	border-radius: 10px;
 	opacity: 0.9;
-	box-shadow: 1px 1px 8px 4px #f7f7f7;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.28);
 }
 
 
@@ -186,14 +186,14 @@ input {
 	padding: 5px;
 	width: 60%;
 	height: 30px;
-	font-size: 16px;
+	font-size: 20px;
 	border-radius: 5px;
 }
 
 select {
 	border: 1px solid black;
-	width: 60%;
-	height: 30px;
+	width: 62%;
+	height: 42px;
 	padding: 5px;
 	font-size: 16px;
 	border-radius: 5px;
@@ -214,8 +214,8 @@ select {
 	border: solid 5px #de4f4f;
 	background-color: #de4f4f;
 	color: #ddd;
-	width: 50%;
-	height: 50px;
+	width: 62%;
+	height: 42px;
 	font-size: 16px;
 	font-weight: bold;
 	border-radius: 5px;
@@ -329,14 +329,14 @@ footer a {
 }
 
 /* Media query for responsive menu */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 969px) {
   .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 969px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive a.icon {
     position: absolute;
@@ -351,9 +351,10 @@ footer a {
 }
 
 /* Media query for other page elements */
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 272px) and (max-width: 969px) {
 	.wrapper {
 	display: flex;
+	justify-content: normal;
 	align-items: center;
 	flex-direction: column;
 	min-height: 100vh;
@@ -385,17 +386,20 @@ footer a {
 		text-align: center;
 	}
 	select {
-		height: 30px;
+		height: 46px;
+		width: 84%;
 	}
 	input {
 		padding: 5px;
 		width: 80%;
-		height: 30px;
-		font-size: 16px;
 		border-radius: 5px;
 		height: 40px;
+		font-size: 30px;
 	}
-	
+	.submit-div button {
+		width: 84%;
+		height: 46px;
+	}
 /* Profile */
 	.tabs {
 		width: 90%;
@@ -421,6 +425,9 @@ footer a {
 		background-color: #ddd;
 		border-radius: 5px;
 		text-align: center;
+	}
+	.history-body {
+		width: 95%;
 	}
 	.transaction-profile-view {
 		border-left: solid 7px #de4f4f;

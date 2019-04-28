@@ -13,19 +13,17 @@
 		</div>
 		<div class = 'wrapper'>
 		<div class = 'sign-in'>
+			<form onsubmit = "event.preventDefault(); return signIn()">
 			<h2 id = 'h2-text'>Sign In here</h2>
-			<input type = 'text' placeholder = 'Email' id = 'email'><br><br>
-			<input type = 'text' placeholder = 'Password'><br><br>
+			<input type = 'email' placeholder = 'Email' id = 'email' required><br><br>
+			<input type = 'password' placeholder = 'Password' required minlength = '6'><br><br>
   			<div class = 'submit-div'>
-  				<button class = 'submit' onclick = 'signIn()'>Sign In</button><br>
-			</div><br>
-			<h2 id = 'h2-text'>Start Banking with us</h2>
-			<div class = 'submit-div'>
-				<button class = 'submit' onclick = "location.href = 'new-bank-account.html'">Open Bank Account</button><br>
+  				<button class = 'submit'>Sign In</button><br>
 			</div><br>
   			<p>New Here?<a href = 'index.html'> Sign Up</a></p>
-  			<p>Forgot your password?<a href = ''> Reset Password</a></p>
+  			<p>Forgot your password?<a href = 'reset-password.html'> Reset Password</a></p>
 		</div>
+			</form>
 		</div><br>
 		<footer>
 			</p>Copyright 2019</p>
