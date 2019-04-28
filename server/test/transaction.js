@@ -7,6 +7,7 @@ import transactionData from './transactionData';
 import userData from './userData';
 
 // User token requested for new bank account
+let requestedTransactionId;
 let userToken;
 before((done) => {
   chai.request(app)
@@ -110,6 +111,7 @@ describe('Credit transcactions', () => {
         assert.property((res.body.data), 'amount');
         assert.property((res.body.data), 'cashier');
         assert.property((res.body.data), 'remark');
+        requestedTransactionId = res.body.data.transactionId;
         done();
       });
   });
@@ -353,6 +355,60 @@ describe('User access to own bank account transaction', () => {
         assert.property((res.body.data[0]), 'amount');
         assert.property((res.body.data[1]), 'transaction_type');
         assert.property((res.body.data[1]), 'amount');
+        done();
+      });
+  });
+});
+describe('Getting a specific transaction', () => {
+  it('A user attempting to access a specific transaction belonging to him/her should return an object', (done) => {
+    chai.request(app)
+      .get(`/api/v1/transactions/${requestedTransactionId}`)
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body.data), 'transactionType');
+        assert.property((res.body.data), 'amount');
+        done();
+      });
+  });
+  let villainToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.villain)
+      .end((err, res) => {
+        villainToken = res.body.data.token;
+        done();
+      });
+  });
+  it('A user attempting to access another user transaction should throw an error', (done) => {
+    chai.request(app)
+      .get(`/api/v1/transactions/${requestedTransactionId}`)
+      .set('x-access-token', villainToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 401);
+        assert.equal((res.body.error), 'You are not authorized to perform this action');
+        done();
+      });
+  });
+  let staffToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.staff)
+      .end((err, res) => {
+        staffToken = res.body.data.token;
+        done();
+      });
+  });
+  it('A staff attempting to access a specific transaction should return an object', (done) => {
+    chai.request(app)
+      .get(`/api/v1/transactions/${requestedTransactionId}`)
+      .set('x-access-token', staffToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body.data), 'transactionType');
+        assert.property((res.body.data), 'amount');
         done();
       });
   });
