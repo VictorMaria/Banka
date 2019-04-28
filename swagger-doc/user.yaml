@@ -1,0 +1,119 @@
+path:
+  /api/v1/auth/signup:
+    post:
+      tags:
+        - users
+      summary: Creates a new user
+      description: |
+        By passing in the right parameters, you can sign up for a user account on Banka
+      produces:
+          - application/json
+      parameters:
+        - in: body
+          name: user
+          description: user to be created
+          schema:
+            $ref: '#/definitions/signUp'
+      responses:
+        200:
+          description: User created
+        400:
+          description: Bad request  
+        409:
+          description: User with email already exists
+        500:
+          description: Internal server error
+  /api/v1/auth/signin:
+    post:
+      tags:
+        - users
+      summary: Signs in a new user
+      description: A user can sign in to use the Banka app
+      consumes:
+          - application/json
+      produces:
+          - application/json   
+      parameters:
+        - in: body
+          name: sign in
+          description: user sign in
+          schema:
+            $ref: '#/definitions/signIn'
+      responses:
+        200:
+          description: User signed in
+        400: 
+          description: Bad request  
+        401:
+          description: Incorrect credentials
+        500:
+          description: Internal server error
+  /api/v1/users/3/profilephotos:
+    post:
+      tags:
+        - users
+      summary: Uploads profile photo
+      description: By passing in an image file, user profile photo is uploaded
+      security:
+      - bearerAuth: []
+      consumes: 
+          - application/form-data
+      produces:
+          - application/json
+      parameters:
+        - in: body
+          name: upload profile photo
+          description: photo to be uploaded
+          schema:
+            $ref: '#/definitions/profilephotos'
+      responses:
+        200:
+          description: photo uploaded
+        400:
+          description: Conflict! User tries to upload a non image file
+        500:
+          description: Internal server error            
+definitions:
+  signUp:
+    type: object
+    required:
+      - firstName
+      - lastName
+      - email
+      - password
+    properties:
+      firstName:
+        type: string
+        example: Sophie
+      lastName:
+        type: string
+        example: Kamali
+      email:
+        type: string
+        example: sophie2.kamali@outlook.com
+      password: 
+        type: string
+        example: wordpass
+  signIn:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+        example: sophie2.kamali@outlook.com
+      password: 
+        type: string
+        example: wordpass      
+  profilephotos:
+    type: object
+    required:
+      - profilePhoto
+    properties:
+      profilePhoto:
+        type: file
+        example: ninja-avi.jpg
+
+
+

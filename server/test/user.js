@@ -129,7 +129,7 @@ describe('Signing up', () => {
       .post('/api/v1/auth/signup')
       .send(userData.completeSignUpDetails)
       .end((err, res) => {
-        assert.equal((res.body.status), 400);
+        assert.equal((res.body.status), 409);
         assert.equal((res.body.error), 'Email already in use');
         done();
       });
@@ -194,7 +194,7 @@ describe('Signing in', () => {
       .post('/api/v1/auth/signin')
       .send(userData.nonExistingUser)
       .end((err, res) => {
-        assert.equal((res.body.status), 400);
+        assert.equal((res.body.status), 401);
         assert.equal((res.body.error), 'Incorrect Credentials');
         done();
       });
@@ -204,7 +204,7 @@ describe('Signing in', () => {
       .post('/api/v1/auth/signin')
       .send(userData.wrongPasswordSignIn)
       .end((err, res) => {
-        assert.equal((res.body.status), 400);
+        assert.equal((res.body.status), 401);
         assert.equal((res.body.error), 'Incorrect Credentials');
         done();
       });

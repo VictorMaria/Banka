@@ -6,7 +6,7 @@ const checkEmail = async (req, res, next) => {
   try {
     const { rows } = await db.query(userQueries.checkEmailQuery, [req.body.email.toLowerCase()]);
     if (rows[0]) {
-      return res.status(400).send({ status: 400, error: 'Email already in use' });
+      return res.status(409).send({ status: 409, error: 'Email already in use' });
     }
     return next();
   } catch (error) {

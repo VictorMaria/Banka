@@ -1,0 +1,154 @@
+paths:
+  /api/v1/transactions/{accountNumber}/credit:
+    post:
+      tags:
+      - staff
+      summary: credit a bank account
+      description: A bank account can be credited with a specified amount greater than or equal to N50
+      security:
+      - x-access-token: []
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: accountNumber
+      - in: body
+        name:  amount  
+        description: credit transaction to be carried out
+        schema:
+          $ref: '#/definitions/credit'
+      responses:
+        200:
+          description: Transaction successful
+        401:
+          description: User or Admin not authorized  
+        403:
+          description: Invalid, expired or undefined token  
+        404:
+          description: Bank account not found 
+        500:
+          description: Internal server error   
+  /api/v1/transactions/{accountNumber}/debit:
+    post:
+      tags:
+      - staff
+      summary: Debit an account
+      description: A bank account can be debited provided the amount to be debited is less than the account balance
+      security:
+      - bearerAuth: []
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: accountNumber
+      - in: body
+        name:  amount
+        description: account to be debited
+        schema:
+          $ref: '#/definitions/debit'
+      responses:
+        200:
+          description: Transaction successful
+        401:
+          description: User or Admin not authorized 
+        403:
+          description: Invalid, expired or undefined token    
+        404:
+          description: Bank account not found  
+        500:
+          description: Internal server error     
+  /api/v1/transactions:  
+    get:
+      tags:
+      - staff
+      - admin
+      summary: Get all transactions
+      description: With a valid staff or admin token, all transactions can be seen
+      security:
+      - x-access-token: []
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Success or without returning anything
+        401: An unathorized attempt  
+        403:
+          description: User not authorized   
+        500: 
+          description: Internal server error    
+  /api/v1/accounts/{accountNumber}/transactions:
+    get:
+      tags:
+      - users
+      - staff
+      - admin
+      summary: Get all transactions of a specifc bank account
+      description: Allows a user view details of all transactions performed on their account and allows staff and admin view details of all transaction on the account
+      security:
+      - bearerAuth: []
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: accountNumber
+        description: account number
+        type: bigint
+        required: true
+      responses:
+        200:
+          description: Successful operation or not transaction found
+        401:
+          description: It is thrown when a user attempts to access this endpoint  
+        403:
+          description: Invalid. expired or undefined token  
+        500:
+          description: Internal server error  
+  /api/v1/transactions/{transactionId}:
+    get:
+      tags:
+      - users
+      - staff
+      - admin
+      summary: Details of a transaction related to his or her account number, as for admin or staff it fetches details of any transaction
+      description: A user can view a specific transaction in their bank account while an admin or staff can view any
+      security:
+      - bearerAuth: []
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: transactionId
+        description: Transaction ID
+        type: integer
+        required: true
+      responses:
+        200:
+          description: Transaction info retrieved successfully
+        401:
+          description: An authorized attmept  
+        403:
+          description: Invalid, expired or undefined token 
+        404:
+          description: Transaction not found  
+        500:
+          description: Internal server error               
+           
+definitions:
+  credit:
+    type: object
+    required:
+    - amount
+    properties:
+      amount:
+        type: number
+        example: 300   
+  debit:
+    type: object
+    required:
+    - amount
+    - remark
+    properties:
+      amount:
+        type: number
+        example: 300
+                

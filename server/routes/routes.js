@@ -11,11 +11,4 @@ export default (app) => {
   app.use('/api/v1', user);
   app.use('/api/v1', account);
   app.use('/api/v1', transaction);
-
-  app.use((req, res) => {
-    res.status(404).json({
-      status: 404,
-      error: 'No such endpoints on this server',
-    });
-  });
 };
