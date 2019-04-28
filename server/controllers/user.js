@@ -40,10 +40,10 @@ class User {
     try {
       const { rows } = await db.query(userQueries.signInQuery, [req.body.email.toLowerCase()]);
       if (!rows[0]) {
-        return res.status(400).send({ status: 400, error: 'Incorrect Credentials' });
+        return res.status(401).send({ status: 401, error: 'Incorrect Credentials' });
       }
       if (!helper.comparePassword(rows[0].password, req.body.password)) {
-        return res.status(400).send({ status: 400, error: 'Incorrect Credentials' });
+        return res.status(401).send({ status: 401, error: 'Incorrect Credentials' });
       }
       const userToken = helper.generateToken(rows[0].id, rows[0].is_admin, rows[0].is_staff);
       const response = {

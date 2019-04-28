@@ -1,0 +1,167 @@
+paths:
+  /api/v1/accounts:
+    post:
+      tags:
+      - User
+      summary: Opens a new bank account for user
+      description: On providing valid parameters, a new account is created for a user who has signed up on the app
+      security:
+      - bearerAuth: []
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: amount
+        description: new account to be created
+        schema:
+          $ref: '#/definitions/account'
+      responses:
+        201:
+          description: New account created successfully
+        400:
+          description: Bad request
+        403:
+          description: Invalid token or missing token
+        500:
+          description: Internal server error
+    get:
+      tags:
+      - staff
+      - admin
+      summary: Fetches all bank accounts, then if a query string is present it sorts the accounts based on their status
+      description: A staff or an admin can view all bank accounts
+      security:
+      - bearerAuth: []
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Successful operation
+        401:
+          description: This happens when a user tries to access this resource
+        500: 
+          description: Internal server error   
+  api/v1/user/email/accounts:
+    get:
+      tags:
+      - staff
+      - admin
+      summary: Fetches all bank accounts owned by a user
+      description: A staff or an admin can view all bank accounts owned by a specific user
+      security:
+      - bearerAuth: []
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: email
+        description: User's email
+        type: email
+        required: true
+      responses:
+        200:
+          description: Successful operation
+        401:
+          description: This happens when a user tries to access another user's bank account
+        500:
+          description: Internal server error            
+  /api/v1/accounts/{accountNumber}:  
+    get:
+      tags:
+      - users
+      - staff
+      - admin
+      summary: Gets the details of an account
+      description: This provides a user details of his or her own account and a staff or an admin, details of any account
+      security:
+      - bearerAuth: []
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: accountNumber
+        description: Account number
+        type: bigint
+        required: true
+      responses:
+        200:
+          description: Successful operation
+        401:
+          description: This error is thrown when a user attempts to access this endpoint   
+        403:
+          description: This error is thrown for expired, invalid or unavailabe token
+        500: 
+          description: Internal server error  
+    patch:
+      tags:
+      - admin
+      - staff
+      summary: Acitvates or deactives a bank account
+      description: In most situations new bank accounts are active by default
+      security:
+      - bearerAuth: []
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Account number
+        type: bigint
+        required: true
+      - in: body
+        name: status
+        description: active or dormant
+        schema:
+          $ref: '#/definitions/Status'
+      responses:
+        200:
+          description: Bank account activated or deactivated successfully
+        401:
+          description: User not authorized.
+        403:
+          description: Invalid, expired or undefined token
+        404:
+          description: Bank account not found  
+        500:
+          description: Internal server error         
+    delete:
+      tags:
+      - staff
+      - admin
+      summary: Deletes a bank account based on the account number
+      security:
+      - bearerAuth: []
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Account number
+        type: bigint
+        required: true
+      responses:
+        200:
+          description: Bank account deleted successfully
+        401: 
+          description: This error is thrown when a user attempts to perform this action 
+        403:
+          description: Invalid token, expired token or no token provided  
+        500:
+          description: Internal server error                
+definitions:
+  account:
+    type: object
+    required:
+    - accountType  
+    properties:
+      accountType:
+        type: string
+        example: savings
+  Status:
+    type: object
+    required:
+    - status
+    properties:
+      status:
+        type: string
+        example: active
