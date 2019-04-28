@@ -13,6 +13,7 @@ const transactionQueries = {
     values($1, $2, $3, $4, $5, $6, $7)
     returning *`,
   allTransactions: 'SELECT * FROM transactions ORDER BY transaction_id DESC',
+  getTransaction: 'SELECT * FROM transactions WHERE transaction_id = $1',
 
 };
 export default transactionQueries;

@@ -16,6 +16,14 @@ const swaggerDefinition = {
     version: '1.0.0',
     description: 'A light weight banking app',
   },
+  securityDefinitions:{
+    bearerAuth: {
+      type: 'apiKey',
+      name: 'Authorization',
+      scheme: 'bearer',
+      in: 'header',
+    },
+  },
 };
 
 const options = {

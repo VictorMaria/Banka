@@ -14,5 +14,6 @@ router.post('/transactions/:accountNumber/credit', verifyToken, checkIfStaffAdmi
 router.post('/transactions/:accountNumber/debit', verifyToken, checkIfStaffAdmin, validator(transactionDetails),
   checkBankAccount, Transaction.debitAccount);
 router.get('/transactions', verifyToken, checkIfStaffAdmin, Transaction.getAllTransactions);
+router.get('/transactions/:transactionId', verifyToken, Transaction.getTransaction);
 
 export default router;

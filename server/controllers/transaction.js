@@ -94,5 +94,36 @@ class Transaction {
       return res.status(500).send(error);
     }
   }
+
+  static async getTransaction(req, res) {
+    try {
+      const transaction = await db.query(transactionQueries.getTransaction,
+        [req.params.transactionId]);
+      if (!transaction.rows[0]) {
+        return res.status(404).send({ status: 404, error: 'Transaction not found' });
+      }
+      const accountNumber = transaction.rows[0].account_number;
+      const retreiveAccount = await db.query(accountQueries.getBankAccountQuery,
+        [accountNumber]);
+
+      if (req.user.id !== retreiveAccount.rows[0].user_id
+          && !req.user.is_admin && !req.user.is_staff) {
+        return res.status(401).send({ status: 401, error: 'You are not authorized to perform this action' });
+      }
+      return res.status(200).send({
+        status: 200,
+        data: {
+          transactionId: transaction.rows[0].transaction_id,
+          transactionDate: transaction.rows[0].transaction_date,
+          transactionType: transaction.rows[0].transaction_type,
+          accountNumber: transaction.rows[0].account_number,
+          amount: transaction.rows[0].amount,
+          accountBalance: transaction.rows[0].account_balance,
+        },
+      });
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  }
 }
 export default Transaction;
