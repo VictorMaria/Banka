@@ -34,7 +34,7 @@ const createQueries = {
       amount NUMERIC(15, 2) NOT NULL,
       cashier INTEGER NOT NULL,
       transaction_type VARCHAR(10) NOT NULL,
-      remark VARCHAR(25) NOT NULL DEFAULT 'No remark',
+      remark VARCHAR(25),
       account_balance NUMERIC(15, 2)
       )`,
 };

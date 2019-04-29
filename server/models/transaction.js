@@ -1,5 +1,5 @@
 const transactionQueries = {
-  findBalanceQuery: 'SELECT balance FROM accounts WHERE account_number = $1',
+  findBalanceQuery: 'SELECT * FROM accounts WHERE account_number = $1',
   creditBalanceQuery: `UPDATE accounts SET balance = balance + $1 WHERE account_number = $2
     returning balance`,
   creditTransactionQuery: `INSERT INTO
