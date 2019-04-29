@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
 import chai, { assert } from 'chai';
 import path from 'path';
@@ -226,38 +227,24 @@ describe('Signing in', () => {
   });
 });
 
-// Tests for fetching a specific user
-xdescribe('Fetching a specific user', () => {
-  it('Fetching a specific and non existing user should return an error', (done) => {
-    chai.request(app)
-      .get('/api/v1/users/12')
-      .end((err, res) => {
-        assert.equal((res.body.status), 404);
-        assert.equal((res.body.error), 'User not found');
-        done();
-      });
-  });
-  it('Fetching a speciific and existing user should return an object of key-pair values', (done) => {
-    chai.request(app)
-      .get('/api/v1/users/3')
-      .end((err, res) => {
-        assert.equal((res.body.status), 200);
-        assert.equal((res.body.data.id), 3);
-        assert.equal((res.body.data.firstName), 'Victor');
-        assert.equal((res.body.data.lastName), 'Ajayi');
-        assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
-        assert.equal((res.body.data.type), 'client');
-        done();
-      });
-  });
-});
 const photoLocation = path.join(__dirname, './testItems/henrydanger.jpg');
 const fileLocation = path.join(__dirname, './testItems/Harmattan nights.pdf');
 
-xdescribe('Uploading profile photo', () => {
+describe('Uploading profile photo', () => {
+  let userToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.user)
+      .end((err, res) => {
+        userToken = res.body.data.token;
+        done();
+      });
+  });
   it('A non user attempting to upload a profile photo should throw an error', (done) => {
     chai.request(app)
       .post('/api/v1/users/12/profilephotos')
+      .set('x-access-token', userToken)
       .attach('profilePhoto', photoLocation)
       .end((err, res) => {
         assert.equal((res.body.status), 404);
@@ -269,6 +256,7 @@ xdescribe('Uploading profile photo', () => {
   it('Uploading nothing should throw an error', (done) => {
     chai.request(app)
       .post('/api/v1/users/3/profilephotos')
+      .set('x-access-token', userToken)
       .attach('profilePhoto', '')
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -280,6 +268,7 @@ xdescribe('Uploading profile photo', () => {
   it('Uploading a file asides an image should throw an error', (done) => {
     chai.request(app)
       .post('/api/v1/users/3/profilephotos')
+      .set('x-access-token', userToken)
       .attach('profilePhoto', fileLocation)
       .end((err, res) => {
         assert.equal((res.body.status), 400);
@@ -291,12 +280,13 @@ xdescribe('Uploading profile photo', () => {
   it('A successful upload should return an object of key-pair values', (done) => {
     chai.request(app)
       .post('/api/v1/users/3/profilephotos')
+      .set('x-access-token', userToken)
       .attach('profilePhoto', photoLocation)
       .end((err, res) => {
         assert.equal((res.body.status), 200);
         assert.equal((res.body.data.id), 3);
-        assert.equal((res.body.data.email), 'victor.abayomi@outlook.com');
-        assert.include((res.body.data.profilePhoto), 'henrydanger');
+        assert.equal((res.body.data.email), 'sophie.kamali@outlook.com');
+        assert.include((res.body.data.profile_photo), 'henrydanger');
         done();
       });
   });
