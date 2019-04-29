@@ -16,7 +16,7 @@ const swaggerDefinition = {
     version: '1.0.0',
     description: 'A light weight banking app',
   },
-  securityDefinitions:{
+  securityDefinitions: {
     bearerAuth: {
       type: 'apiKey',
       name: 'Authorization',
