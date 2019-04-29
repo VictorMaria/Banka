@@ -85,5 +85,22 @@ class User {
       return res.status(500).send(error);
     }
   }
+
+  static async uploadProfilePhoto(req, res) {
+    try {
+      if (!req.file) {
+        return res.status(400).send({ status: 400, error: 'Select an Image' });
+      }
+      const values = [
+        req.file.path,
+        req.params.id,
+      ];
+      const uploadPhoto = await db.query(userQueries.uploadPhotoQuery, values);
+      return res.status(200).send({ status: 200, data: uploadPhoto.rows[0] });
+    } catch (error) {
+      res.status(500).send(error);
+    }
+    return true;
+  }
 }
 export default User;

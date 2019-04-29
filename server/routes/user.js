@@ -7,11 +7,13 @@ import checkEmail from '../middleware/checkEmail';
 import verifyToken from '../middleware/verifyToken';
 import userStaffAdmin from '../helpers/userStaffAdminCheck';
 import checkBankAccount from '../helpers/checkBankAccount';
+import upload from '../helpers/upload-profile-photo';
+import quickCheck from '../middleware/quickCheck';
 
 const router = express.Router();
 
 router.post('/auth/signup', validator(signUpDetails), checkEmail, User.signUp);
 router.post('/auth/signin', validator(signInDetails), User.signIn);
 router.get('/accounts/:accountNumber/transactions', verifyToken, checkBankAccount, userStaffAdmin, User.myTransactionHistory);
-
+router.post('/users/:id/profilephotos', verifyToken, quickCheck, upload.single('profilePhoto'), User.uploadProfilePhoto);
 export default router;

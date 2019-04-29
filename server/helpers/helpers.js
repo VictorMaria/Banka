@@ -12,7 +12,7 @@ const helper = {
     const token = jwt.sign({
       userId: id, admin: isAdmin, staff: isStaff,
     },
-    process.env.SECRET, { expiresIn: '10m' });
+    process.env.SECRET, { expiresIn: '13m' });
     return token;
   },
 };
