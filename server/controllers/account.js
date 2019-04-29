@@ -48,6 +48,10 @@ class Account {
     try {
       const { rows } = await db.query(accountQueries.getBankAccountQuery,
         [req.params.accountNumber]);
+      const accountOwner = rows[0].user_id;
+      if (req.user.id !== accountOwner && !req.user.is_staff && !req.user.is_admin) {
+        return res.status(401).send({ status: 401, error: 'You are not authorized to perform this action' });
+      }
       const response = {
         status: 200,
         data: {
@@ -140,6 +144,7 @@ class Account {
 
   static async deleteBankAccount(req, res) {
     try {
+      // eslint-disable-next-line no-unused-vars
       const deleteAccount = await db.query(accountQueries.deleteBankAccountQuery,
         [req.params.accountNumber]);
       return res.status(200).send({

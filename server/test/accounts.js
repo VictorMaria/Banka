@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
 import chai, { assert } from 'chai';
 import app from '../../app';
@@ -173,6 +174,43 @@ describe('Fetching a specific bank account', () => {
         assert.property((res.body.data), 'type');
         assert.property((res.body.data), 'openingBalance');
         assert.property((res.body.data), 'balance');
+        done();
+      });
+  });
+  it('Owner checking own account should return an object with key-value pairs for an existing bank account', (done) => {
+    chai.request(app)
+      .get(`/api/v1/accounts/${requestedAccountNumber}`)
+      .set('x-access-token', villainToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 200);
+        assert.property((res.body), 'status');
+        assert.property((res.body.data), 'accountNumber');
+        assert.property((res.body.data), 'firstName');
+        assert.property((res.body.data), 'lastName');
+        assert.property((res.body.data), 'email');
+        assert.property((res.body.data), 'type');
+        assert.property((res.body.data), 'openingBalance');
+        assert.property((res.body.data), 'balance');
+        done();
+      });
+  });
+  let userToken;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(userData.user)
+      .end((err, res) => {
+        userToken = res.body.data.token;
+        done();
+      });
+  });
+  it('A user attempting to access another user account should throw an error', (done) => {
+    chai.request(app)
+      .get(`/api/v1/accounts/${requestedAccountNumber}`)
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        assert.equal((res.body.status), 401);
+        assert.equal((res.body.error), 'You are not authorized to perform this action');
         done();
       });
   });
@@ -397,30 +435,6 @@ describe('Checking active and dormant accounts', () => {
       .end((err, res) => {
         assert.equal((res.body.status), 400);
         assert.equal((res.body.error), 'Bad request');
-        done();
-      });
-  });
-});
-
-// Tests for checking account balance of a specific bank account
-xdescribe('Checking bank account balance', () => {
-  it('Attempting to check the balance of a non existing account should return a 404 error', (done) => {
-    chai.request(app)
-      .get('/api/v1/accounts/20190022/balance')
-      .end((err, res) => {
-        assert.equal((res.body.status), 404);
-        assert.equal((res.body.error), 'Bank Account not found');
-        done();
-      });
-  });
-
-  it('Checking balance for an exisiting bank account should return correct balance in an object', (done) => {
-    chai.request(app)
-      .get('/api/v1/accounts/2019001/balance')
-      .end((err, res) => {
-        assert.equal((res.body.status), 200);
-        assert.equal((res.body.data.accountNumber), '2019001');
-        assert.equal((res.body.data.accountBalance), '200.00');
         done();
       });
   });
