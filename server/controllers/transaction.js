@@ -2,6 +2,7 @@ import transactionQueries from '../models/transaction';
 import accountQueries from '../models/account';
 import db from '../db/index';
 
+
 class Transaction {
   static async creditAccount(req, res) {
     try {
@@ -34,6 +35,7 @@ class Transaction {
         parseFloat(req.body.amount),
         req.params.accountNumber,
       ];
+
       // eslint-disable-next-line no-unused-vars
       const updateBalance = await db.query(transactionQueries.creditBalanceQuery, values);
       return res.status(200).send(response);

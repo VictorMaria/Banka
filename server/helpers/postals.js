@@ -1,16 +1,21 @@
 import nodemailer from 'nodemailer';
 import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const glide = process.env.postalsecret;
 
 const transporter = nodemailer.createTransport({
   service: 'outlook',
   auth: {
-    user: 'victormaria.oar@outlook.com',
-    pass: 'd4shw0rd',
+    user: 'fatima.kamali@outlook.com',
+    pass: glide,
   },
 });
 
-// eslint-disable-next-line max-len
-const sendEmailNotification = (recipient, emailSubject, transactionType, transactionDate, amount, remark, balance) => {
+
+const sendEmailNotification = (recipient, emailSubject, transactionType, transactionDate,
+  amount, balance) => {
   const mailOptions = {
     from: ' "Banka 👻" victormaria.oar@outlook.com',
     to: recipient,
@@ -20,7 +25,6 @@ const sendEmailNotification = (recipient, emailSubject, transactionType, transac
               <p><strong>${transactionDate}</strong><br>
               <strong>${transactionType}</strong><br>
               Amount <strong>N${amount}</strong><br>
-              Remark <strong>${remark}</strong><br>
               Balance <strong>N${balance}</strong></p>
         `,
     attachments: [
