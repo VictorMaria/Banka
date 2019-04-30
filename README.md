@@ -24,7 +24,7 @@ ___
 ___
 
 ## Templates
-UI Templates for this application are live on [Github Pages](https://victormaria.github.io/Banka/UI)
+UI Templates for this application are live on [Github Pages](https://victormaria.github.io/Banka/UI/pages)
 
 ___
 
