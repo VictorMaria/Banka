@@ -6,21 +6,23 @@
      	<link rel= 'icon' type = 'image/ico' href = '../images/banka-icon.png' />
      	<link rel= 'stylesheet' type = 'text/css' href = '../styles/styles.css'>
 	</head>
-	<body id = 'index'> 
+	<body id = 'index'>
 		<div class = 'topnav'>
 			<a id = 'logo' href = ''>BANKA</a>
 		</div>
 		<div class = 'wrapper'>
 			<div class = 'sign-up'>
-				<form onsubmit = "event.preventDefault(); return location.href = 'profile.html'">
+				<form onsubmit = 'event.preventDefault()'>
 					<h1>With Banka the figures look great</h1>
 					<h2 id = 'h2-text'>Sign Up Here</h2>
-					<input type = 'text' placeholder = 'Firstname' required minlength = '3'><br><br>
-					<input type = 'text' placeholder = 'Lastname' required minlength = '3'><br><br>
-					<input type = 'email' placeholder = 'Email' required><br><br>
-					<input type = 'password' placeholder = 'Password' required minlength = '3'><br><br>
+					<input type = 'text' id = 'firstname' placeholder = 'Firstname' pattern = '[a-zA-Z]+' required minlength = '2'><br><br>
+					<input type = 'text' id = 'lastname' placeholder = 'Lastname' pattern = '[a-zA-Z]+' required minlength = '2'><br><br>
+					<input type = 'email' id = 'email' placeholder = 'Email' required><br><br>
+					<input type = 'password' id = 'password' placeholder = 'Password' required minlength = '3'><br><br>
+					<input type = 'password' id = 'confirm-password' placeholder = 'Confirm Password' required minlength = '6'><br><br>
+					<p id = 'error-message'></p>
 					<div class = 'submit-div'>
-				  		<button class = 'submit'>Sign Up</button>
+						  <button id = 'sign-up-btn' class = 'submit'>Sign Up</button>
 				</div><br>
 				<p>Already a user?<a href = 'sign-in.html'> Sign In</a></p>
 				</form>
@@ -30,5 +32,6 @@
 		<footer>
 			Copyright 2019
 		</footer>
+		<script src = '../JS/sign-up.js'></script>
 	</body>
 </html>
