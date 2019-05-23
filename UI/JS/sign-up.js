@@ -1,9 +1,9 @@
 const signUpButton = document.getElementById('sign-up-btn');
 const urlToReach = 'http://hibanka.herokuapp.com/api/v1/auth/signup';
-const errorMessage = document.getElementById('error-message');
+const responseTag = document.getElementById('response-tag');
 
 const validator = () => {
-    errorMessage.innerHTML = '';
+    responseTag.innerHTML = '';
     const firstnameEntered = document.getElementById('firstname').value;
     const lastnameEntered = document.getElementById('lastname').value;
     const emailEntered = document.getElementById('email').value;
@@ -15,32 +15,32 @@ const validator = () => {
     
     if (!firstnameEntered.match(namePattern) || !firstnameEntered || firstnameEntered.length < 2) {
         setTimeout(() => {
-            errorMessage.innerHTML = 'Your First Name must be letters';
+            responseTag.innerHTML = 'Your First Name must be letters';
         }, 100);    
     }
     else if (!lastnameEntered.match(namePattern) || !lastnameEntered || lastnameEntered.length < 2) {
         setTimeout(() => {
-            errorMessage.innerHTML = 'Your Last Name must be letters';
+            responseTag.innerHTML = 'Your Last Name must be letters';
         }, 100);
     }
     else if (!emailEntered.match(emailPattern) || !emailEntered) {
         setTimeout(() => {    
-            errorMessage.innerHTML = 'Please check your email address';
+            responseTag.innerHTML = 'Please check your email address';
         }, 100)
     }
     else if (!passwordEntered || passwordEntered.length < 6) {
         setTimeout(() => {
-            errorMessage.innerHTML = 'Your password must be at least 6 characters';
+            responseTag.innerHTML = 'Your password must be at least 6 characters';
         }, 100)    
     }
     else if (passwordEntered !== confirmPassword){
         setTimeout(() => {
-            errorMessage.innerHTML = 'Please ensure your passwords match';
+            responseTag.innerHTML = 'Please ensure your passwords match';
         }, 100);
     }
     else {
         signUp();
-        errorMessage.innerHTML = `<img src = '../images/chased.gif'>`
+        responseTag.innerHTML = `<img src = '../images/chased.gif'>`
     }
 }
 
@@ -60,15 +60,16 @@ const signUp = async () => {
         const response = await fetch (urlToReach, {  method: 'POST', body: data, headers: { 'Content-type': 'application/json' }});
         const jsonResponse = await response.json();
         if (response.status === 200){
+            responseTag.innerHTML = '';
             const user = localStorage.setItem('userDetails', JSON.stringify(jsonResponse.data))
             const token = localStorage.setItem('token', jsonResponse.data.token);
-            console.log(localStorage.getItem('token'));
+            location.href = 'welcome.html'
         } 
         else {
-            errorMessage.innerHTML = jsonResponse.error;
+            responseTag.innerHTML = jsonResponse.error;
         }
     } catch (error) {
-        errorMessage.innerHTML = 'Connection error, please try again';
+        responseTag.innerHTML = 'Connection error, please try again';
     }
 };
 
