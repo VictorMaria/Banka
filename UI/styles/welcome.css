@@ -1,0 +1,176 @@
+html {
+	padding: 0;
+	margin: 0;
+	overflow-y: auto;
+	overflow-x: hidden; 
+}
+body {
+		background: url('../images/confetti.jpg') no-repeat center center / cover;
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    overflow-x: hidden; 
+	}
+
+
+/* Navigation bar */	
+.topnav {
+  background-color: black;
+  padding: 20px;
+  font-size: 20px;
+	height: 30px;
+  }
+
+.topnav a {
+  text-decoration: none;
+  color: #b1b3be;
+  padding: 10px;
+  background-color: black;
+  
+}
+.topnav .icon {
+  display: none;
+}
+#logo {
+  background-color: #de4f4f;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  border-radius: 5px;
+  }
+ a:hover {
+ 	color: #de4f4f;
+ } 
+#logo:hover {
+	color: white;
+	opacity: 0.9;
+}
+ 
+a.active {
+	color: #de4f4f;
+}
+
+
+.wrapper {
+	display: flex;
+	justify-content: center;
+	min-height: 100vh;	
+	width: 100%;
+	flex-direction: row;
+	padding-top: 20px;
+	align-items: flex-start;
+}
+
+.welcome {
+	opacity: 0.8;
+	background-color: white;
+  width: 50%;
+  min-height: 65vh;
+	text-align: center;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.28);
+}
+
+
+
+
+
+.divlink {
+	text-decoration: none;
+	color: black;
+}
+
+
+/* form heading */
+#h2-text {
+	text-align: center;
+}
+
+.buttons button, .buttons button {
+	background-color: black;
+	color:#de4f4f;
+	width: 62%;
+	height: 42px;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 5px;
+}
+#okay {
+	border: solid 5px #de4f4f;
+	background-color: #de4f4f;
+	color: #ddd;
+	width: 50%;
+	height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+#okay:hover {
+	opacity: 0.8;
+}
+
+
+.welcome button:hover {
+	opacity: 0.8;
+}
+.display p {
+	padding-left: 10px;
+}
+
+
+/* Media query for responsive menu */
+@media screen and (max-width: 969px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+@media screen and (max-width: 969px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+/* Media query for other page elements */
+@media (min-width: 272px) and (max-width: 969px) {
+	.wrapper {
+	display: flex;
+	justify-content: normal;
+	align-items: center;
+	flex-direction: column;
+	min-height: 100vh;
+	}
+	
+	
+	.welcome button {
+		width: 84%;
+		height: 46px;
+	}
+
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+footer {
+	color: white;
+	background-color: black;
+	bottom: 0;
+	padding: 10px;
+	text-align: center;
+}
+footer a {
+	text-decoration: none;
+	color: #ddd;
+}
