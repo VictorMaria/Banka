@@ -1,5 +1,5 @@
 const signUpButton = document.getElementById('sign-up-btn');
-const urlToReach = 'http://hibanka.herokuapp.com/api/v1/auth/signup';
+const urlToReach = 'https://hibanka.herokuapp.com/api/v1/auth/signup';
 const responseTag = document.getElementById('response-tag');
 
 const validator = () => {
