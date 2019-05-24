@@ -15,10 +15,11 @@
 		<div class = 'sign-in'>
 			<form onsubmit = "event.preventDefault(); return signIn()">
 			<h2 id = 'h2-text'>Sign In here</h2>
-			<input type = 'email' placeholder = 'Email' id = 'email' required><br><br>
-			<input type = 'password' placeholder = 'Password' required minlength = '6'><br><br>
+			<input type = 'email' id = 'email' placeholder = 'Email' id = 'email' required><br><br>
+			<input type = 'password' id = 'password' placeholder = 'Password' required minlength = '6'><br><br>
+			<p id = 'response-tag'></p>
   			<div class = 'submit-div'>
-  				<button class = 'submit'>Sign In</button><br>
+  				<button class = 'submit' id = 'sign-in-btn'>Sign In</button><br>
 			</div><br>
   			<p>New Here?<a href = 'index.html'> Sign Up</a></p>
   			<p>Forgot your password?<a href = 'reset-password.html'> Reset Password</a></p>
