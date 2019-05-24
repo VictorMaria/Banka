@@ -126,6 +126,9 @@ a.active {
 img {
 	border-radius: 10px;
 }
+.toast {
+	text-align: center;
+}
 
 /* user accounts, transactions, bank accounts */
 .transactions, .bank-accounts, .user-accounts {
