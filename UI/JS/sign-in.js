@@ -7,7 +7,7 @@ const validator = () => {
     const emailEntered = document.getElementById('email').value;
     const passwordEntered = document.getElementById('password').value;
 
-    const emailPattern = /^[a-zA-Z._]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+    const emailPattern = /^[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z]+$/;
     
     if (!emailEntered.match(emailPattern) || !emailEntered) {
         setTimeout(() => {    
