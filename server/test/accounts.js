@@ -482,12 +482,12 @@ describe('Fetching bank accounts owned by one user', () => {
         done();
       });
   });
-  it('Attempts for a user with no bank account should throw a 404', (done) => {
+  it('Attempts for a user with no bank account should throw a 200', (done) => {
     chai.request(app)
       .get('/api/v1/user/sophi.kamali@outlook.com/accounts')
       .set('x-access-token', adminToken)
       .end((err, res) => {
-        assert.equal((res.body.status), 404);
+        assert.equal((res.body.status), 200);
         assert.equal((res.body.error), 'This User has no bank account');
         done();
       });

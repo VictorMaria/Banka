@@ -1,5 +1,6 @@
 import helper from '../helpers/helpers';
 import userQueries from '../models/user';
+import accountQueries from '../models/account';
 import db from '../db/index';
 import refine from '../helpers/refine';
 
@@ -101,6 +102,19 @@ class User {
       res.status(500).send(error);
     }
     return true;
+  }
+
+  static async getAllMyBankAccounts(req, res) {
+    try {
+      const { rows } = await db.query(accountQueries.getAllBankAccountsForOneUserQuery,
+        [req.params.email]);
+      if (!rows[0]) {
+        return res.status(200).send({ status: 200, error: 'This User has no bank account' });
+      }
+      return res.status(200).send({ status: 200, data: rows });
+    } catch (error) {
+      return res.status(500).send(error);
+    }
   }
 }
 export default User;
