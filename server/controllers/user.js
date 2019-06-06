@@ -109,7 +109,7 @@ class User {
       const { rows } = await db.query(accountQueries.getAllBankAccountsForOneUserQuery,
         [req.params.email]);
       if (!rows[0]) {
-        return res.status(200).send({ status: 200, error: 'This User has no bank account' });
+        return res.status(200).send({ status: 200, error: 'You have no bank account' });
       }
       return res.status(200).send({ status: 200, data: rows });
     } catch (error) {
