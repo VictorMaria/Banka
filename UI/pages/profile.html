@@ -7,7 +7,7 @@
      	<link rel = 'stylesheet' type = 'text/css' href = '../styles/styles.css'>
      	<link rel = 'stylesheet' href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 	</head>
-	<body>
+	<body onload = 'populateProfile()'>
 		<div class = 'topnav' id = 'myTopnav'>
 			<a id = 'logo' href = 'index.html'>BANKA</a>
 			<a href = 'profile.html' class = 'active' >Profile</a>
@@ -16,23 +16,21 @@
     			<i class = 'fa fa-bars'></i>
 			  </a>
 		</div>
-		<h1 class = 'toast'>Hello John</h1>
+		<h1 id = 'profile-msg'></h1>
 		<div class = 'wrapper'>
 			<div class = 'tabs'>
-					    <div class = 'avi'><img src = '../images/ninja-avi.jpg'></img></div><br><br>
-						<button id = 'basic-info' onclick = 'myBasicInfo()'>Basic Info</button><br>
-						<button id = 'banking-info' onclick = 'myBankingInfo()'>Bank Info</button><br>
-			    </div>
+						<div class = 'avi'><img src = '../images/ninja-avi.jpg'></img></div><br><br>
+						<button id = 'basic-info'>Basic Info</button><br>
+						<button id = 'banking-info'>Accounts</button><br>
+			    </div><br>
   				<div class = 'display' id = 'display'>
-						<div class = 'main-body'>	
-							
-			    		</div>
+						<div class = 'main-body'></div>
 			</div>
 		</div>
 		<footer>
 			</p>Copyright 2019</p>
 		</footer>
-		<script src = '../JS/banka.js'></script>
+		<script src = '../JS/profile.js'></script>
 		<script src  = '../JS/responsive-nav-bar.js'></script>
 	</body>
 </html>
