@@ -11,7 +11,7 @@ const validator = () => {
     const confirmPassword = document.getElementById('confirm-password').value;
 
     const namePattern = /^[a-zA-Z]+$/;
-    const emailPattern = /^[a-zA-Z._]+@[a-zA-Z]+\.[a-zA-Z]+$/
+    const emailPattern = /^[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z]+$/
     
     if (!firstnameEntered.match(namePattern) || !firstnameEntered || firstnameEntered.length < 2) {
         setTimeout(() => {
