@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Profile</title>
+		<title>Your Bank Account</title>
 	 	<meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
      	<link rel = 'icon' type= 'image/ico' href = '../images/banka-icon.png' />
-     	<link rel = 'stylesheet' type = 'text/css' href = '../styles/styles.css'>
+     	<link rel = 'stylesheet' type = 'text/css' href = '../styles/own-account.css'>
      	<link rel = 'stylesheet' href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 	</head>
-	<body onload = 'populateProfile()'>
+	<body>
 		<div class = 'topnav' id = 'myTopnav'>
 			<a id = 'logo' href = 'index.html'>BANKA</a>
             <a href = 'profile-admin-view.html' class = 'active' >Profile</a>
-            <a href = 'all-users.html'>Users</a>
-            <a href = 'all-bank-accounts-admin-view.html'>Bank Accounts</a>
+            <a href = 'all-users.html'>User Accounts</a>
+			<a href ='all-bank-accounts-admin-view.html'>Bank Accounts</a>
 			<a href = 'sign-in.html'>Sign Out</a>
 			<a href = 'javascript:void(0);' class = 'icon' onclick = 'myFunction()'>
     			<i class = 'fa fa-bars'></i>
-  			</a>
+			  </a>
 		</div>
 		<h1 id = 'profile-msg'></h1>
 		<div class = 'wrapper'>
-			<div class = 'tabs'>
-						<div class = 'avi'><img src = '../images/ninja-avi.jpg'></img></div><br><br>
-						<button id = 'basic-info'>Basic Info</button><br>
-						<button id = 'banking-info'>Accounts</button><br>
-			    </div><br>
+			<div class = 'info'>
+						<img src = '../images/chased-medium.gif'>
+                </div><br>
   				<div class = 'display' id = 'display'>
-						<div class = 'main-body'></div>
+						<div class = 'main-body'><img src = '../images/fading.gif'></div>
 			</div>
 		</div>
 		<footer>
 			</p>Copyright 2019</p>
-		</footer>
-		<script src = '../JS/profile-admin-view.js'></script>
+        </footer>
+        <script src = '../JS/own-account.js'></script>
 		<script src  = '../JS/responsive-nav-bar.js'></script>
 	</body>
 </html>

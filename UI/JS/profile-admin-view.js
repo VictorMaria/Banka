@@ -41,7 +41,7 @@ const getAccounts = async () => {
         displayDiv.innerHTML = '';    
         jsonResponse.data.map(bankAccount => {
             displayDiv.innerHTML += `<div class = 'main-body'>
-                                    <a  href = 'own-account.html?ac=${bankAccount.account_number}'>
+                                    <a  href = 'own-account-admin-view.html?ac=${bankAccount.account_number}'>
                                     <em>Account No.</em><br>
                                     <strong>${bankAccount.account_number}</strong><br><br>
                                     <em>Account Name</em><br>
