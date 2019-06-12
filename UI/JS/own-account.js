@@ -49,7 +49,7 @@ const getBankAccountHistory = async () => {
                                                                             }});
             const jsonResponse = await response.json();   
             if (!jsonResponse.error){
-                displayDiv.innerHTML = '';
+                displayDiv.innerHTML = `<h1>Transaction History</h1>`;
                 jsonResponse.data.map(transaction => {
                     displayDiv.innerHTML += `<div class = 'main-body'><br>
                                             <strong>${transaction.transaction_date.slice(0, 19)}</strong><br>
@@ -60,7 +60,6 @@ const getBankAccountHistory = async () => {
                                             <br>
                                             </div>`;
                 })
-                console.log(jsonResponse)
             } else if (jsonResponse.error && jsonResponse.status === 200) {
                 displayDiv.innerHTML = `<div class = 'main-body'>${jsonResponse.error}</div>`;
             } else if (jsonResponse.status === 403) {
