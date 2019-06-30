@@ -4,7 +4,7 @@
 		<title>Bank Account</title>
 	 	<meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
      	<link rel= 'icon' type= 'image/ico' href = '../images/banka-icon.png' />
-     	<link rel= 'stylesheet' type = 'text/css' href = '../styles/styles.css'>
+     	<link rel= 'stylesheet' type = 'text/css' href = '../styles/one-bank-account.css'>
      	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
@@ -22,34 +22,54 @@
 			<a href = 'new-transaction.html'>New Transaction</a>
 		</div>
 		<div class = 'wrapper'>
-			<div class = 'tabs'>
-					<button id = 'basic-info' onclick = 'basicBankAccountInfo()'>Basic Info</button><br>
-					<button id = 'transaction-history' onclick = 'transactionHistory()'>Transactions</button><br>
-					<button id = 'manage-bank-account' onclick = 'manageBankAccount()'>Manage</button>
-			</div>
-			<div class = 'display' id = 'display'>
-				<h1>John Kamali</h1>
-				<div class = 'main-body'>
-					<p>Savings Account Number<br>
-						<strong>20190300001</strong><br><br>
-						Balance<br>
-						<strong>N2, 400, 000</strong><br><br>
-						Firstname<br>
-						<strong>John</strong><br><br>
-						Lastname<br>
-						<strong>Kamali</strong><br><br>
-						Email<br>
-						<strong>jkamali@mail.com</strong><br><br>
-						Status<br>	
-						<strong>Active</strong>
-					</p>
-				</div>
+				<div class = 'tabs'>
+						<div class = 'avi'><img src = '../images/ninja-avi.jpg'></img></div><br><br>
+						<button id = 'details'>Details</button><br>
+						<button id = 'transact'>Transact</button><br>
+						<button id = 'history'>History</button><br>
+						<button id = 'manage'>Manage</button><br>
+			    </div><br>
+  				<div class = 'display' id = 'display'>
+						<div class = 'main-body'></div>
 			</div>
 		</div><br>
+		<div class = 'modal'>
+			<span class  = 'close'>&times</span>
+			<p>Are you sure you want to finish this transaction?</p>
+			<div class = 'content'>
+			  <div class = 'decisions'>
+				<button id = 'no'>No</button>&ensp;&ensp;
+				<button id = 'yes'>Yes</button>
+			  </div>
+			  <br>
+			</div>  
+		  </div>
+		  <div class = 'delete-modal'>
+				<span class  = 'close-delete'>&times</span>
+				<p>Are you sure you want to Delete this account?</p>
+				<div class = 'content'>
+				  <div class = 'decisions'>
+					<button id = 'delete-no'>No</button>&ensp;&ensp;
+					<button id = 'delete-yes'>Yes</button>
+				  </div>
+				  <br>
+				</div>  
+			  </div>
+			  <div class = 'status-modal'>
+					<span class  = 'close-status'>&times</span>
+					<p>Are you sure you want change account status?</p>
+					<div class = 'content'>
+					  <div class = 'decisions'>
+						<button id = 'status-no'>No</button>&ensp;&ensp;
+						<button id = 'status-yes'>Yes</button>
+					  </div>
+					  <br>
+					</div>  
+				  </div>				  
 		<footer>
 			</p>Copyright 2019</p>
 		</footer>
-		<script src = '../JS/banka.js'></script>
+		<script src = '../JS/one-bank-account.js'></script>
 		<script src  = '../JS/responsive-nav-bar.js'></script>
 	</body>
 </html>
