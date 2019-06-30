@@ -18,6 +18,7 @@ router.post('/auth/signup', validator(signUpDetails), checkEmail, User.signUp);
 router.post('/auth/signin', validator(signInDetails), User.signIn);
 router.get('/self/:email/accounts', verifyToken, userCheck, User.getAllMyBankAccounts);
 router.get('/users', verifyToken, checkIfAdmin, User.getAllUsers);
+router.get('/users/:id', verifyToken, checkIfAdmin, User.getUser);
 router.get('/accounts/:accountNumber/transactions', verifyToken, checkBankAccount, userStaffAdmin, User.myTransactionHistory);
 router.post('/users/:id/profilephotos', verifyToken, quickCheck, upload.single('profilePhoto'), User.uploadProfilePhoto);
 export default router;
