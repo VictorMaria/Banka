@@ -128,5 +128,27 @@ class User {
       return res.status(500).send(error);
     }
   }
+
+  static async getUser(req, res) {
+    try {
+      const { rows } = await db.query(userQueries.oneUser, [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).send({ status: 404, error: 'User not found' });
+      }
+      const user = {
+        id: rows[0].id,
+        firstName: rows[0].first_name,
+        lastName: rows[0].lastName,
+        email: rows[0].email,
+        type: rows[0].type,
+        isAdmin: rows[0].is_admin,
+        isStaff: rows[0].is_staff,
+        profilePhoto: rows[0].profile_photo,
+      };
+      return res.status(200).send({ status: 200, data: user });
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  }
 }
 export default User;
