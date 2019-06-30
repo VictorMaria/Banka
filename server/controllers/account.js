@@ -62,6 +62,7 @@ class Account {
           type: rows[0].type,
           openingBalance: rows[0].opening_balance,
           balance: rows[0].balance,
+          status: rows[0].status,
         },
       };
       return res.status(200).send(response);
