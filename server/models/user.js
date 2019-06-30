@@ -11,6 +11,8 @@ const userQueries = {
   myAccountQuery: 'SELECT * FROM accounts WHERE account_number = $1',
   getUserQuery: 'SELECT * FROM users WHERE id = $1',
   uploadPhotoQuery: 'UPDATE users SET profile_photo = $1 WHERE id = $2 returning id, email, profile_photo',
+  allUsers: 'SELECT id, first_name, last_name, email, profile_photo FROM users',
+  oneUser: 'SELECT id, first_name, last_name, email, type, is_admin, is_staff, profile_photo FROM users WHERE id = $1',
 };
 
 export default userQueries;

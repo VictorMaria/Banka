@@ -116,5 +116,17 @@ class User {
       return res.status(500).send(error);
     }
   }
+
+  static async getAllUsers(req, res) {
+    try {
+      const { rows } = await db.query(userQueries.allUsers);
+      if (!rows[0]) {
+        return res.status(200).send({ status: 200, error: 'There is no one here yet' });
+      }
+      return res.status(200).send({ status: 200, data: rows });
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  }
 }
 export default User;
