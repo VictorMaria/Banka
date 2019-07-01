@@ -1,10 +1,10 @@
 const userToken = localStorage.getItem('token');
-const urlToReach = `https://hibanka.herokuapp.com/api/v1/accounts`;
-const accountsDiv = document.querySelector('.all-bank-accounts');
+const urlToReach = `https://hibanka.herokuapp.com/api/v1/users`;
+const usersDiv = document.querySelector('.all-users');
 
 
 
-const getAllBankAccounts = async () => {
+const getAllUsers = async () => {
     if (!userToken) {
         location.href = '../UI/pages/sign-in.html';
     } else {
@@ -14,27 +14,27 @@ const getAllBankAccounts = async () => {
                                                                             }});
             const jsonResponse = await response.json();    
             if (jsonResponse.status === 200){
-                accountsDiv.innerHTML = '';
-                jsonResponse.data.map(bankAccount => {
-                    accountsDiv.innerHTML += `<div class = 'bank-account'><br>
-                                            <a  href = 'one-bank-account.html?ac=${bankAccount.account_number}'>
-                                            <em>Account No.</em><br>
-                                            <strong>${bankAccount.account_number}</strong><br><br>
-                                            <em>Account Name</em><br>
-                                            <strong>${bankAccount.first_name} ${bankAccount.last_name}</strong><br><br>
+                usersDiv.innerHTML = '';
+                jsonResponse.data.map(oneUser => {
+                    usersDiv.innerHTML += `<div class = 'user'><br>
+                                            <a  href = 'one-user.html?id=${oneUser.id}'>
+                                            <em>Email/Username</em><br>
+                                            <strong>${oneUser.email}</strong><br><br>
+                                            <em>Full Name</em><br>
+                                            <strong>${oneUser.first_name} ${oneUser.last_name}</strong><br><br>
                                             </a><br>
                                             </div>`;                                              
                 })
             } else if (jsonResponse.status === 404){
-                accountsDiv.innerHTML = jsonResponse.error;
+                usersDiv.innerHTML = `<div class = 'error'><h4>${jsonResponse.error}</h4></div>`;
             }  else if (jsonResponse.status === 403) {
                 location.href = '../pages/sign-in.html'
             }                                                             
         
         } catch (error) {
-            accountsDiv.innerHTML = `<div class = 'error'><h4>Connection error, please try again</h4></div>`;
+            usersDiv.innerHTML = `<div class = 'error'><h4>Connection error, please try again</h4></div>`;
         }
     }
 }
 
-getAllBankAccounts();
+getAllUsers();
