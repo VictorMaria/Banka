@@ -138,7 +138,7 @@ class User {
       const user = {
         id: rows[0].id,
         firstName: rows[0].first_name,
-        lastName: rows[0].lastName,
+        lastName: rows[0].last_name,
         email: rows[0].email,
         type: rows[0].type,
         isAdmin: rows[0].is_admin,
