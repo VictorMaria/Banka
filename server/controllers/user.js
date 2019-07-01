@@ -150,5 +150,41 @@ class User {
       return res.status(500).send(error);
     }
   }
+
+  static async makeUserAStaff(req, res) {
+    try {
+      const { rows } = await db.query(userQueries.oneUser, [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).send({ status: 404, error: 'User not found' });
+      }
+      if (rows[0].type === 'client') {
+        const staffValues = [
+          'staff',
+          true,
+          req.params.id,
+        ];
+        const makeStaff = await db.query(userQueries.staffStatusQuery, staffValues);
+        const response = {
+          type: makeStaff.rows[0].type,
+          isStaff: makeStaff.rows[0].is_staff,
+        };
+        return res.status(200).send({ status: 200, data: response });
+      }
+      const clientValues = [
+        'client',
+        false,
+        req.params.id,
+      ];
+      const makeClient = await db.query(userQueries.staffStatusQuery, clientValues);
+      const response = {
+        type: makeClient.rows[0].type,
+        isStaff: makeClient.rows[0].is_staff,
+      };
+      return res.status(200).send({ status: 200, data: response });
+    } catch (error) {
+      res.status(500).send(error);
+    }
+    return true;
+  }
 }
 export default User;
