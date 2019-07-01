@@ -186,5 +186,41 @@ class User {
     }
     return true;
   }
+
+  static async makeUserAnAdmin(req, res) {
+    try {
+      const { rows } = await db.query(userQueries.oneUser, [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).send({ status: 404, error: 'User not found' });
+      }
+      if (rows[0].type === 'client') {
+        const adminValues = [
+          'admin',
+          true,
+          req.params.id,
+        ];
+        const makeAdmin = await db.query(userQueries.adminStatusQuery, adminValues);
+        const response = {
+          type: makeAdmin.rows[0].type,
+          isAdmin: makeAdmin.rows[0].is_admin,
+        };
+        return res.status(200).send({ status: 200, data: response });
+      }
+      const clientValues = [
+        'client',
+        false,
+        req.params.id,
+      ];
+      const makeClient = await db.query(userQueries.adminStatusQuery, clientValues);
+      const response = {
+        type: makeClient.rows[0].type,
+        isAdmin: makeClient.rows[0].is_admin,
+      };
+      return res.status(200).send({ status: 200, data: response });
+    } catch (error) {
+      res.status(500).send(error);
+    }
+    return true;
+  }
 }
 export default User;

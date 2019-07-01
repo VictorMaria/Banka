@@ -20,6 +20,7 @@ router.get('/self/:email/accounts', verifyToken, userCheck, User.getAllMyBankAcc
 router.get('/users', verifyToken, checkIfAdmin, User.getAllUsers);
 router.get('/users/:id', verifyToken, checkIfAdmin, User.getUser);
 router.patch('/users/:id/staff', verifyToken, checkIfAdmin, User.makeUserAStaff);
+router.patch('/users/:id/admin', verifyToken, checkIfAdmin, User.makeUserAnAdmin);
 router.get('/accounts/:accountNumber/transactions', verifyToken, checkBankAccount, userStaffAdmin, User.myTransactionHistory);
 router.post('/users/:id/profilephotos', verifyToken, quickCheck, upload.single('profilePhoto'), User.uploadProfilePhoto);
 export default router;
