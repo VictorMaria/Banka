@@ -42,7 +42,7 @@ body {
   font-size: 30px;
   border-radius: 5px;
   }
- a:hover, .bank-account a:hover {
+ a:hover, .bank-account a:hover, .user a:hover {
  	color: #de4f4f;
  } 
 #logo:hover {
@@ -86,7 +86,7 @@ a.active {
 
 
 /* user accounts, transactions, bank accounts */
-.all-transactions, .all-bank-accounts, .all-accounts {
+.all-transactions, .all-bank-accounts, .all-users {
 	display: flex;
   flex-wrap: wrap;
   padding-left: 3%;
@@ -94,7 +94,7 @@ a.active {
 .top-text {
     text-align: center;
 }
-.transaction, .bank-account, .account {
+.transaction, .bank-account, .user {
 	border-left: solid 7px #de4f4f;
 	color: black;
   margin: 1rem;
@@ -116,7 +116,7 @@ a.active {
 }
 
 
-.divlink, .bank-account a {
+.divlink, .bank-account a, .user a {
 	text-decoration: none;
 	color: black;
 }
@@ -165,10 +165,10 @@ footer a {
 
 /* Media query for other page elements */
 @media (min-width: 275px) and (max-width: 554px) {
-.all-transactions, .all-bank-accounts, .all-accounts {
+.all-transactions, .all-bank-accounts, .all-users {
         padding-left: unset;
     }  
-.transaction, .bank-account, .account {
+.transaction, .bank-account, .user {
     flex: 1 1 calc(50% - 2rem);
 		padding: 5px;
     border-left: 10px solid #de4f4f;
