@@ -287,7 +287,7 @@ select {
 }
 
 
-#update-status, #delete {
+#update-status, #delete, #admin, #staff {
 	background-color: #de4f4f;
 	color: white;
 	border-radius: 5px;
@@ -302,7 +302,7 @@ select {
 	background-color: #ddd  
   }
   
-  .delete-modal, .modal, .status-modal {
+  .delete-modal, .modal, .status-modal, .staff-modal, .admin-modal {
 	display: none;
 	z-index: 1;
 	position: fixed;
@@ -316,7 +316,7 @@ select {
 	border: 3px solid #ed5565;
 	border-radius: 5px;
   }
-  .close, .close-status, .close-delete {
+  .close, .close-status, .close-delete, .close-staff, .close-admin {
 	color: black;
 	float: right;
 	font-size: 28px;
@@ -493,13 +493,13 @@ footer a {
 	h1, #unsuccessful {
 		padding-left: unset;
 	}
-	.delete-modal, .modal, .status-modal {
+	.delete-modal, .modal, .status-modal, .staff-modal, .admin-modal {
 		left: 10%;
 		width: 75%;
-		height: 15%;
+		height: 30%;
 	  }
 	  .decisions button {
-		width: 30%;
+		width: 35%;
 		font-size: 30px;
 		background-color: black;
 		color: white;
@@ -527,7 +527,7 @@ button:hover, #thanks:hover {
 .second-bar a:hover {
 	opacity: 0.8;
 }
-.close:hover, .close-status:hover, .close-delete {
+.close:hover, .close-status:hover, .close-delete, .close-admin, .close-staff {
 	opacity: 0.5;
 }
 
