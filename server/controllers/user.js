@@ -166,6 +166,7 @@ class User {
         const makeStaff = await db.query(userQueries.staffStatusQuery, staffValues);
         const response = {
           type: makeStaff.rows[0].type,
+          isAdmin: makeStaff.rows[0].is_admin,
           isStaff: makeStaff.rows[0].is_staff,
         };
         return res.status(200).send({ status: 200, data: response });
@@ -178,6 +179,7 @@ class User {
       const makeClient = await db.query(userQueries.staffStatusQuery, clientValues);
       const response = {
         type: makeClient.rows[0].type,
+        isAdmin: makeClient.rows[0].is_admin,
         isStaff: makeClient.rows[0].is_staff,
       };
       return res.status(200).send({ status: 200, data: response });
@@ -203,6 +205,7 @@ class User {
         const response = {
           type: makeAdmin.rows[0].type,
           isAdmin: makeAdmin.rows[0].is_admin,
+          isStaff: makeAdmin.rows[0].is_staff,
         };
         return res.status(200).send({ status: 200, data: response });
       }
@@ -215,6 +218,7 @@ class User {
       const response = {
         type: makeClient.rows[0].type,
         isAdmin: makeClient.rows[0].is_admin,
+        isStaff: makeClient.rows[0].is_staff,
       };
       return res.status(200).send({ status: 200, data: response });
     } catch (error) {
