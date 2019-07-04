@@ -26,7 +26,7 @@ const getAllTransactions = async () => {
                                                     <td>${transaction.transaction_date.slice(0, 19)}</td>
                                                     <td>${transaction.account_number}</td>
                                                     <td>
-                                                        <button onclick = "location.href = 'one-transaction.html?tId=${transaction.transaction_id}.html'">More</button></td>
+                                                        <button onclick = "location.href = 'one-transaction.html?tId=${transaction.transaction_id}'">More</button></td>
                                                 </tr>`;                                              
                 })
             }  else if (jsonResponse.status === 403) {
