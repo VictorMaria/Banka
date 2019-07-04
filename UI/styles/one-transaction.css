@@ -67,7 +67,7 @@ a.active {
 .second-bar a:hover {
 	opacity: 0.8;
 }
-.transaction-wrapper {
+.wrapper {
 	display: flex;
 	align-items: center;
 	min-height: 100vh;	
@@ -127,7 +127,7 @@ footer a {
 
 /* Media query for other page elements */
 @media (min-width: 275px) and (max-width: 554px) {
-	.transaction-wrapper {
+	.wrapper {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
