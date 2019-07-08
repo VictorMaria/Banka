@@ -14,20 +14,21 @@
 		<div class = 'wrapper'>
 			<div class = 'new-bank-account'>
 				<h2 id = 'h2-text'>Open a Bank Account here</h2>
-				<input type = 'text' placeholder = 'Opening Balance'><br><br>
-  				<select name = 'user type'>
-					<option value = 'Select Account Type'>Self-Account Type</option>  
+				<input type = 'text' id = 'openingBalance' placeholder = 'Opening Balance'><br>
+				<p>Select an Account Type</p>
+  				<select id = 'options' name = 'user type'>  
   					<option value = 'Savings'>Savings</option>
   					<option value = 'Current'>Current</option>
-  				</select><br><br>
+  				</select><br>
+				<p id = 'response-tag'></p>
   				<div class = 'submit-div'>
-  					<button class = 'submit'>Create Bank Account</button>
+  					<button class = 'submit' id = 'submit'>Create Bank Account</button>
   				</div><br>
 			</div>
 		</div><br>
 		<footer>
 			</p>Copyright 2019</p>
 		</footer>
-		<script src = '../JS/banka.js'></script>
+		<script src = '../JS/new-bank-account.js'></script>
 	</body>
 </html>

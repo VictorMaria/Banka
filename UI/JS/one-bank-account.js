@@ -126,9 +126,10 @@ const showModal = () => {
     const selectedOption = options.value;
     const responseTag = document.getElementById('response-tag');
     const amountPattern = /^[0-9]+$/;
+    const amountPatternTwo = /^[0-9]+\.[0-9]{2}$/
     responseTag.innerHTML = '';
-    if (!amount.match(amountPattern)){
-        responseTag.innerHTML = `<strong>Amount must be a number</strong>`;
+    if (!amount.match(amountPattern) && !amount.match(amountPatternTwo)){
+        responseTag.innerHTML = `<strong>Amount must be valid</strong>`;
     }
     else if (!amount || amount < 50 ) {
         responseTag.innerHTML = `<strong>Amount must be up to N50</strong>`;
