@@ -15,6 +15,10 @@ const verifyToken = async (req, res, next) => {
     }
     req.user = {
       id: decoded.userId,
+      first_name: decoded.firstName,
+      last_name: decoded.lastName,
+      email: decoded.email,
+      type: decoded.type,
       is_admin: decoded.admin,
       is_staff: decoded.staff,
     };

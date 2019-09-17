@@ -19,7 +19,15 @@ class User {
     ];
     try {
       const { rows } = await db.query(userQueries.newUserQuery, values);
-      const userToken = helper.generateToken(rows[0].id, rows[0].is_admin, rows[0].is_staff);
+      const userToken = helper.generateToken(
+        rows[0].id,
+        rows[0].first_name,
+        rows[0].last_name,
+        rows[0].email,
+        rows[0].type,
+        rows[0].is_admin,
+        rows[0].is_staff,
+      );
       const response = {
         status: 200,
         data: {
@@ -46,7 +54,15 @@ class User {
       if (!helper.comparePassword(rows[0].password, req.body.password)) {
         return res.status(401).send({ status: 401, error: 'Incorrect Credentials' });
       }
-      const userToken = helper.generateToken(rows[0].id, rows[0].is_admin, rows[0].is_staff);
+      const userToken = helper.generateToken(
+        rows[0].id,
+        rows[0].first_name,
+        rows[0].last_name,
+        rows[0].email,
+        rows[0].type,
+        rows[0].is_admin,
+        rows[0].is_staff,
+      );
       const response = {
         status: 200,
         data: {
